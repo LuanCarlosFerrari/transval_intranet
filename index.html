@@ -107,11 +107,11 @@
 
   <section id="contato" class="py-12 px-4 bg-gray-100 text-center">
     <div class="max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold mb-4 text-gray-800">Vamos acelerar sua logística?</h2>
-      <p class="mb-6 text-gray-700">Converse com nossos especialistas e descubra a solução ideal para o seu negócio.</p>
-      <a href="mailto:comercial@transval.com.br?subject=Solicitar%20Cotacao"
-        class="inline-block bg-[#01a1ef] text-white px-6 py-3 rounded hover:bg-[#008bd1] font-bold text-base">Solicitar
-        Cotação</a>
+      <h2 id="contact-title" class="text-3xl font-bold mb-4 text-gray-800"></h2>
+      <p id="contact-description" class="mb-6 text-gray-700"></p>
+      <button id="contact-button"
+        class="inline-block bg-[#01a1ef] text-white px-6 py-3 rounded hover:bg-[#008bd1] font-bold text-base"></button>
+      <div id="contact-form-container" class="hidden mt-8"></div>
     </div>
   </section>
 
@@ -199,6 +199,7 @@
   <script type="module">
     import { initFiliaisMap } from './src/scripts/mapa-filiais.js';
     import { aboutContent } from './src/scripts/presentation.js';
+    import { contactContent } from './src/scripts/contact.js';
 
     initFiliaisMap();
 
@@ -222,6 +223,42 @@
           expandableContentDiv.classList.toggle('hidden');
           toggleButton.setAttribute('aria-expanded', !isExpanded);
           toggleButton.textContent = isExpanded ? 'Leia mais sobre a Transval' : 'Mostrar menos';
+        });
+      }
+    }
+
+    // Inserir conteúdo da seção de Contato
+    const contactTitle = document.getElementById('contact-title');
+    const contactDescription = document.getElementById('contact-description');
+    const contactButton = document.getElementById('contact-button');
+    const contactFormContainer = document.getElementById('contact-form-container');
+
+    if (contactTitle && contactDescription && contactButton && contactFormContainer) {
+      contactTitle.textContent = contactContent.title;
+      contactDescription.textContent = contactContent.description;
+      contactButton.textContent = contactContent.buttonTextOpen;
+      contactFormContainer.innerHTML = contactContent.formHtml;
+
+      contactButton.addEventListener('click', () => {
+        const isFormVisible = !contactFormContainer.classList.contains('hidden');
+        contactFormContainer.classList.toggle('hidden');
+        contactButton.textContent = isFormVisible ? contactContent.buttonTextOpen : contactContent.buttonTextClose;
+        if (!isFormVisible) {
+          // Optionally, scroll to the form or button
+          contactFormContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      const cotacaoForm = document.getElementById('cotacao-form');
+      if (cotacaoForm) {
+        cotacaoForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          // Basic form submission alert, replace with actual submission logic
+          alert('Formulário enviado! Entraremos em contato em breve.');
+          // Optionally, hide the form and reset button text after submission
+          contactFormContainer.classList.add('hidden');
+          contactButton.textContent = contactContent.buttonTextOpen;
+          cotacaoForm.reset(); // Reset form fields
         });
       }
     }
