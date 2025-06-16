@@ -66,8 +66,7 @@
   <section id="sobre" class="py-12 px-4 bg-gray-100">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6">Sobre a Transval</h2>
-      <p class="text-gray-700">A Transval é especializada em soluções logísticas integradas, oferecendo serviços de
-        transporte com excelência e comprometimento.</p>
+      <!-- Conteúdo de apresentação será inserido aqui pelo JavaScript -->
     </div>
   </section>
 
@@ -316,7 +315,23 @@
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script type="module">
     import { initFiliaisMap } from './src/scripts/mapa-filiais.js';
+    import { aboutContent } from './src/scripts/presentation.js';
+
     initFiliaisMap();
+
+    // Inserir conteúdo da apresentação na seção Sobre
+    const sobreSection = document.getElementById('sobre');
+    if (sobreSection) {
+      const contentDiv = sobreSection.querySelector('.max-w-5xl'); // Encontra o div onde o conteúdo deve ser inserido
+      if (contentDiv) {
+        // Remove o parágrafo existente se necessário, ou ajusta para adicionar o novo conteúdo
+        const existingParagraph = contentDiv.querySelector('p.text-gray-700');
+        if (existingParagraph) {
+          existingParagraph.remove(); // Remove o parágrafo placeholder
+        }
+        contentDiv.innerHTML += aboutContent.presentation; // Adiciona o novo conteúdo
+      }
+    }
   </script>
 </body>
 
