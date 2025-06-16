@@ -2,7 +2,9 @@
 
 export function initFiliaisMap() {
     const mapContainer = document.getElementById('map');
-    if (!mapContainer) return;    // --- Filtros UI ---
+    if (!mapContainer || mapContainer._leaflet_id) return;
+
+    // --- Filtros UI ---
     const coverageFilters = document.querySelector('.coverage-filters');
     if (!coverageFilters) {
         // Criar container dos filtros
