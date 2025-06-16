@@ -35,35 +35,42 @@
 
 <body class="font-sans text-base text-gray-800 text-center">
 
-  <header class="bg-blue-950 text-white py-4 relative">
-    <div class="container mx-auto flex justify-center items-center px-4">
-      <div class="flex items-center">
-        <button class="md:hidden text-base font-bold">
-          <i class="fas fa-bars"></i>
-        </button>
-        <nav class="hidden md:flex space-x-6">
-          <a href="#sobre" class="hover:text-[#ff5d29] font-bold text-base">Sobre nós</a>
-          <a href="#clientes" class="hover:text-[#ff5d29] font-bold text-base">Clientes</a>
-          <a href="#contato" class="hover:text-[#ff5d29] font-bold text-base">Contato</a>
-          <a href="#cobertura" class="hover:text-[#ff5d29] font-bold text-base">Cobertura</a>
-          <a href="#segmentos" class="hover:text-[#ff5d29] font-bold text-base">Segmentos</a>
-        </nav>
+  <div class="relative"> <!-- Novo wrapper para header e hero -->
+    <header class="bg-blue-950 text-white py-4 relative z-40"> <!-- Header com z-40 -->
+      <div class="container mx-auto flex justify-center items-center px-4">
+        <div class="flex items-center">
+          <button class="md:hidden text-base font-bold">
+            <i class="fas fa-bars"></i>
+          </button>
+          <nav class="hidden md:flex space-x-6">
+            <a href="#sobre" class="hover:text-[#ff5d29] font-bold text-base">Sobre nós</a>
+            <a href="#clientes" class="hover:text-[#ff5d29] font-bold text-base">Clientes</a>
+            <a href="#contato" class="hover:text-[#ff5d29] font-bold text-base">Contato</a>
+            <a href="#cobertura" class="hover:text-[#ff5d29] font-bold text-base">Cobertura</a>
+            <a href="#segmentos" class="hover:text-[#ff5d29] font-bold text-base">Segmentos</a>
+          </nav>
+        </div>
       </div>
-    </div>
-    <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
-      <button id="login-btn"
-        class="bg-[#01a1ef] text-white px-4 py-2 rounded hover:bg-[#008bd1] font-bold text-base">Login</button>
-    </div>
-  </header>
+      <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+        <button id="login-btn"
+          class="bg-[#01a1ef] text-white px-4 py-2 rounded hover:bg-[#008bd1] font-bold text-base">Login</button>
+      </div>
+    </header>
 
-  <section class="relative h-64 md:h-96 lg:h-[700px]">
-    <img src="Assets/background_Image.jpg" alt="Background" class="absolute inset-0 w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
-      <h1 class="text-white text-4xl md:text-5xl font-bold">Excelência em Transporte e Logística</h1>
-    </div>
+    <section class="relative h-64 md:h-96 lg:h-[700px]">
+      <img src="Assets/background_Image.jpg" alt="Background" class="absolute inset-0 w-full h-full object-cover z-0" />
+      <!-- Imagem de fundo da Hero, z-0 -->
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+        <!-- Overlay e texto da Hero, z-10 -->
+        <h1 class="text-white text-4xl md:text-5xl font-bold">Excelência em Transporte e Logística</h1>
+      </div>
+    </section>
+
     <img src="Assets/banner.svg" alt="Banner Transval"
-      class="absolute top-0 right-0 h-full object-contain object-right-top z-20" />
-  </section>
+      class="fixed top-0 right-0 w-auto h-auto max-h-[700px] object-contain object-right-top z-50" />
+    <!-- banner.svg com z-50, fixed, max-h-[700px] -->
+
+  </div> <!-- Fim do novo wrapper -->
 
   <section id="sobre" class="py-12 px-4 bg-blue-950">
     <div class="max-w-5xl mx-auto text-center">
