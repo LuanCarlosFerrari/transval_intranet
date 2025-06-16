@@ -68,7 +68,6 @@ export const aboutContent = {
     get presentation() { // Alterado para um getter
         return `
         <div class="flex flex-col items-center text-center">
-            <img src="${baseUrl}/Assets/logo-branca-transval.png" alt="Logo Transval" class="mx-auto block max-w-[200px] h-auto mb-4">
             <p class="text-lg font-bold mb-2">NOSSA HISTÓRIA:</p>
             <p class="text-gray-700 mb-6 text-center">
                 Desde 1987, construímos uma trajetória pautada na solidez e na evolução contínua. Sediados em Rinópolis (SP), expandimos de forma estruturada, incorporando unidades operacionais em Rondonópolis (MT) e Sumaré (SP) para aprimorar a cobertura nacional e otimizar o fluxo de cargas.<br><br> A constituição de frota própria e a oferta de serviços de agenciamento reforçam nosso controle sobre os processos logísticos, assegurando maior agilidade, segurança e eficiência. Guiados pelos valores que originaram a companhia, mantemos o propósito de oferecer soluções completas e personalizadas, preservando a confiança de nossos clientes e o comprometimento com a excelência que norteia cada etapa de nossas operações.
