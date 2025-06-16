@@ -6,13 +6,13 @@ const baseUrl = window.location.hostname === 'luancarlosferrari.github.io'
 export const aboutContent = {
     _eventsData: [ // Store event data centrally
         { year: "1987", title: "Fundação", details: "Criação da empresa familiar por Onevaldo e Valmir, em Rinópolis – SP.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-flag" },
-        { year: "2000", title: "Frota própria", details: "Consolidação de frota própria, garantindo agilidade, controle e segurança.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700", icon: "fas fa-truck" },
-        { year: "2010", title: "Unidade Rondonópolis", details: "Abertura da unidade em Rondonópolis – MT para apoiar nossa operação no Centro-Oeste.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-map-marker-alt" },
+        { year: "2000", title: "Unidade Rondonópolis", details: "Abertura da unidade em Rondonópolis – MT para apoiar nossa operação no Centro-Oeste.",             bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700", icon: "fas fa-truck" },
+        { year: "2005", title: "Expansão da Frota própria", details: "Consolidação de frota própria, garantindo agilidade, controle e segurança.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-map-marker-alt" },
         { year: "2014", title: "Agenciamento de Cargas", details: "Início do serviço de agenciamento, conectando soluções logísticas em todo o Brasil.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700", icon: "fas fa-handshake" },
-        { year: "2018", title: "Unidade Sumaré", details: "Implantação da unidade em Sumaré – SP, reforçando a presença no Sudeste.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-map-marker-alt" },
+        { year: "2017", title: "Unidade Sumaré", details: "Implantação da unidade em Sumaré – SP, reforçando a presença no Sudeste.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-map-marker-alt" },
         { year: "Hoje", title: "Excelência Contínua", details: "Seguimos evoluindo para oferecer as melhores soluções em transporte e logística.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700", icon: "fas fa-star" }
     ],
-
+    
     generateTimelineEventsHtml(isCarousel = true) {
         return this._eventsData.map(event => {
             const eventDetailsOuterClass = `${event.bgColor} p-3 rounded-lg shadow-lg mx-auto min-h-[160px]`;
@@ -67,90 +67,90 @@ export const aboutContent = {
 
     get presentation() { // Alterado para um getter
         return `
-        <div class="flex flex-col items-center text-center">
-            <p class="text-lg font-bold mb-2">NOSSA HISTÓRIA:</p>
-            <p class="text-gray-700 mb-6 text-center">
-                Desde 1987, construímos uma trajetória pautada na solidez e na evolução contínua. Sediados em Rinópolis (SP), expandimos de forma estruturada, incorporando unidades operacionais em Rondonópolis (MT) e Sumaré (SP) para aprimorar a cobertura nacional e otimizar o fluxo de cargas.<br><br> A constituição de frota própria e a oferta de serviços de agenciamento reforçam nosso controle sobre os processos logísticos, assegurando maior agilidade, segurança e eficiência. Guiados pelos valores que originaram a companhia, mantemos o propósito de oferecer soluções completas e personalizadas, preservando a confiança de nossos clientes e o comprometimento com a excelência que norteia cada etapa de nossas operações.
-            </p>
-            
-            <div class="text-lg font-bold mb-8 text-center">LINHA DO TEMPO:</div>
-            <div class="container mx-auto px-2 py-4 sm:px-4">
-                <div class="relative">
-                    <!-- Linha Horizontal Central (mantém para sm e acima) -->
-                    <div class="hidden sm:block absolute top-1/2 left-0 right-0 h-1 bg-blue-500 transform -translate-y-1/2"></div>
+    <div class="flex flex-col items-center text-center">
+        <p class="text-lg font-bold mb-2">NOSSA HISTÓRIA:</p>
+        <p class="text-gray-700 mb-6 text-center">
+            Desde 1987, construímos uma trajetória pautada na solidez e na evolução contínua.<br> Sediados em Rinópolis (SP), expandimos de forma estruturada, incorporando unidades operacionais em Rondonópolis (MT) e Sumaré (SP) <br> para aprimorar a cobertura nacional e otimizar o fluxo de cargas.<br><br> A constituição de frota própria e a oferta de serviços de agenciamento reforçam nosso controle sobre os processos logísticos, <br> assegurando maior agilidade, segurança e eficiência. <br> Guiados pelos valores que originaram a companhia, mantemos o propósito de oferecer soluções completas e personalizadas, <br> preservando a confiança de nossos clientes e o comprometimento com a excelência que norteia cada etapa de nossas operações.
+        </p>
+        
+        <div class="text-lg font-bold mb-8 text-center">LINHA DO TEMPO:</div>
+        <div class="container mx-auto px-2 py-4 sm:px-4">
+            <div class="relative">
+                <!-- Linha Horizontal Central (mantém para sm e acima) -->
+                <div class="hidden sm:block absolute top-1/2 left-0 right-0 h-1 bg-blue-500 transform -translate-y-1/2"></div>
 
-                    <!-- Carrossel para Telas Pequenas (Mobile) -->
-                    <div id="timeline-carousel-container" class="sm:hidden relative overflow-hidden w-full group">
-                        <div id="timeline-carousel-track" class="flex">
-                            ${this.generateTimelineEventsHtml(true)}
-                        </div>
-                        <button id="prev-slide" aria-label="Anterior" class="absolute top-1/2 left-1 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 rounded-full z-20 hover:bg-opacity-50 transition-opacity opacity-0 group-hover:opacity-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
-                        </button>
-                        <button id="next-slide" aria-label="Próximo" class="absolute top-1/2 right-1 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 rounded-full z-20 hover:bg-opacity-50 transition-opacity opacity-0 group-hover:opacity-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-                        </button>
+                <!-- Carrossel para Telas Pequenas (Mobile) -->
+                <div id="timeline-carousel-container" class="sm:hidden relative overflow-hidden w-full group">
+                    <div id="timeline-carousel-track" class="flex">
+                        ${this.generateTimelineEventsHtml(true)}
                     </div>
-
-                    <!-- Timeline Horizontal para Telas Maiores (sm e acima) -->
-                    <div id="desktop-timeline-events" class="hidden sm:flex sm:flex-row sm:justify-center items-stretch text-center relative sm:space-x-6 md:space-x-8">
-                        ${this.generateTimelineEventsHtml(false)}
-                    </div>
+                    <button id="prev-slide" aria-label="Anterior" class="absolute top-1/2 left-1 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 rounded-full z-20 hover:bg-opacity-50 transition-opacity opacity-0 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                    </button>
+                    <button id="next-slide" aria-label="Próximo" class="absolute top-1/2 right-1 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 rounded-full z-20 hover:bg-opacity-50 transition-opacity opacity-0 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                    </button>
                 </div>
-            </div>
-            <!-- Fim da Nova Linha do Tempo -->
 
-            <p class="text-lg font-bold mb-2 mt-8">NOSSO PROPÓSITO:</p>
-            <p class="text-gray-700 mb-6 text-left md:text-center">Ser um parceiro estratégico dos nossos clientes e transformar a logística nacional com soluções eficientes, transparentes e seguras. Nosso compromisso é entregar qualidade, pontualidade e inovação, atender às necessidades específicas de cada cliente e promover a sustentabilidade, contribuindo ativamente para o avanço do agronegócio e da indústria.</p>
-            
-            <p class="text-lg font-bold mb-4 mt-10 text-center">NOSSOS PRINCÍPIOS:</p>
-            <div class="w-full max-w-5xl mx-auto px-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-                    <!-- Princípio 1 -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
-                        <i class="fas fa-bullseye text-blue-500 text-3xl mb-3"></i>
-                        <strong class="block text-lg font-semibold text-blue-600 mb-2">FOCO NO CLIENTE E NOS RESULTADOS</strong>
-                        <span class="block text-gray-700 text-sm">Priorizar as necessidades dos clientes, buscando sempre entregar soluções ágeis, eficazes e com resultados positivos.</span>
-                    </div>
-                    <!-- Princípio 2 -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
-                        <i class="fas fa-shipping-fast text-blue-500 text-3xl mb-3"></i>
-                        <strong class="block text-lg font-semibold text-blue-600 mb-2">AGILIDADE E RAPIDEZ</strong>
-                        <span class="block text-gray-700 text-sm">Responder de forma célere e eficiente, reconhecendo a importância do tempo na construção de relações de sucesso.</span>
-                    </div>
-                    <!-- Princípio 3 -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
-                        <i class="fas fa-medal text-blue-500 text-3xl mb-3"></i>
-                        <strong class="block text-lg font-semibold text-blue-600 mb-2">QUALIDADE E EXCELÊNCIA</strong>
-                        <span class="block text-gray-700 text-sm">Garantir processos e entregas de alta qualidade, desenvolvendo com precisão o que foi proposto.</span>
-                    </div>
-                    <!-- Princípio 4 -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
-                        <i class="fas fa-shield-alt text-blue-500 text-3xl mb-3"></i>
-                        <strong class="block text-lg font-semibold text-blue-600 mb-2">RESPONSABILIDADE E COMPROMISSO</strong>
-                        <span class="block text-gray-700 text-sm">Assumir responsabilidades, agir com ética, transparência e dedicação em todas as ações e decisões.</span>
-                    </div>
-                    <!-- Princípio 5 -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
-                        <i class="fas fa-comments text-blue-500 text-3xl mb-3"></i>
-                        <strong class="block text-lg font-semibold text-blue-600 mb-2">COMUNICAÇÃO E COLABORAÇÃO</strong>
-                        <span class="block text-gray-700 text-sm">Promover integração entre as áreas, garantindo uma comunicação clara e eficaz para alcançar objetivos comuns.</span>
-                    </div>
-                    <!-- Princípio 6 -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
-                        <i class="fas fa-lock text-blue-500 text-3xl mb-3"></i>
-                        <strong class="block text-lg font-semibold text-blue-600 mb-2">SEGURANÇA E CONFIABILIDADE</strong>
-                        <span class="block text-gray-700 text-sm">Assegurar a execução segura de todas as atividades, conectando pessoas e negócios com confiança.</span>
-                    </div>
-                    <!-- Princípio 7 -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center sm:col-span-2 lg:col-span-1 lg:col-start-2 hover:shadow-xl transition-shadow duration-300">
-                        <i class="fas fa-users text-blue-500 text-3xl mb-3"></i>
-                        <strong class="block text-lg font-semibold text-blue-600 mb-2">TRABALHO EM EQUIPE E INTEGRAÇÃO</strong>
-                        <span class="block text-gray-700 text-sm">Valorizar o espírito colaborativo, unindo esforços para superar desafios e alcançar metas com eficiência.</span>
-                    </div>
+                <!-- Timeline Horizontal para Telas Maiores (sm e acima) -->
+                <div id="desktop-timeline-events" class="hidden sm:flex sm:flex-row sm:justify-center items-stretch text-center relative sm:space-x-6 md:space-x-8">
+                    ${this.generateTimelineEventsHtml(false)}
                 </div>
             </div>
         </div>
+        <!-- Fim da Nova Linha do Tempo -->
+
+        <p class="text-lg font-bold mb-2 mt-8">NOSSO PROPÓSITO:</p>
+        <p class="text-gray-700 mb-6 text-left md:text-center">Ser um parceiro estratégico dos nossos clientes e transformar a logística nacional com soluções eficientes, transparentes e seguras. <br> Nosso compromisso é entregar qualidade, pontualidade e inovação, <br> atender às necessidades específicas de cada cliente e promover a sustentabilidade, <br> contribuindo ativamente para o avanço do agronegócio e da indústria.</p>
+        
+        <p class="text-lg font-bold mb-4 mt-10 text-center">NOSSOS PRINCÍPIOS:</p>
+        <div class="w-full max-w-5xl mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+                <!-- Princípio 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                    <i class="fas fa-bullseye text-blue-500 text-3xl mb-3"></i>
+                    <strong class="block text-lg font-semibold text-blue-600 mb-2">FOCO NO CLIENTE E NOS RESULTADOS</strong>
+                    <span class="block text-gray-700 text-sm">Priorizar as necessidades dos clientes, buscando sempre entregar soluções ágeis, eficazes e com resultados positivos.</span>
+                </div>
+                <!-- Princípio 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                    <i class="fas fa-shipping-fast text-blue-500 text-3xl mb-3"></i>
+                    <strong class="block text-lg font-semibold text-blue-600 mb-2">AGILIDADE E RAPIDEZ</strong>
+                    <span class="block text-gray-700 text-sm">Responder de forma célere e eficiente, reconhecendo a importância do tempo na construção de relações de sucesso.</span>
+                </div>
+                <!-- Princípio 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                    <i class="fas fa-medal text-blue-500 text-3xl mb-3"></i>
+                    <strong class="block text-lg font-semibold text-blue-600 mb-2">QUALIDADE E EXCELÊNCIA</strong>
+                    <span class="block text-gray-700 text-sm">Garantir processos e entregas de alta qualidade, desenvolvendo com precisão o que foi proposto.</span>
+                </div>
+                <!-- Princípio 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                    <i class="fas fa-shield-alt text-blue-500 text-3xl mb-3"></i>
+                    <strong class="block text-lg font-semibold text-blue-600 mb-2">RESPONSABILIDADE E COMPROMISSO</strong>
+                    <span class="block text-gray-700 text-sm">Assumir responsabilidades, agir com ética, transparência e dedicação em todas as ações e decisões.</span>
+                </div>
+                <!-- Princípio 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                    <i class="fas fa-comments text-blue-500 text-3xl mb-3"></i>
+                    <strong class="block text-lg font-semibold text-blue-600 mb-2">COMUNICAÇÃO E COLABORAÇÃO</strong>
+                    <span class="block text-gray-700 text-sm">Promover integração entre as áreas, garantindo uma comunicação clara e eficaz para alcançar objetivos comuns.</span>
+                </div>
+                <!-- Princípio 6 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                    <i class="fas fa-lock text-blue-500 text-3xl mb-3"></i>
+                    <strong class="block text-lg font-semibold text-blue-600 mb-2">SEGURANÇA E CONFIABILIDADE</strong>
+                    <span class="block text-gray-700 text-sm">Assegurar a execução segura de todas as atividades, conectando pessoas e negócios com confiança.</span>
+                </div>
+                <!-- Princípio 7 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center sm:col-span-2 lg:col-span-1 lg:col-start-2 hover:shadow-xl transition-shadow duration-300">
+                    <i class="fas fa-users text-blue-500 text-3xl mb-3"></i>
+                    <strong class="block text-lg font-semibold text-blue-600 mb-2">TRABALHO EM EQUIPE E INTEGRAÇÃO</strong>
+                    <span class="block text-gray-700 text-sm">Valorizar o espírito colaborativo, unindo esforços para superar desafios e alcançar metas com eficiência.</span>
+                </div>
+            </div>
+        </div>
+    </div>
     `;
     }
 };
