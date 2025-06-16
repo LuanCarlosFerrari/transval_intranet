@@ -175,6 +175,12 @@ export function initFiliaisMap() {
         filiaisFiltradas.forEach(f => {
             const marker = L.marker([f.lat, f.lng]);
             marker.bindPopup(createPopupContent(f));
+
+            // Adicionar evento de clique para zoom
+            marker.on('click', function () {
+                map.setView([f.lat, f.lng], 12); // Zoom para nível 12 ao clicar
+            });
+
             if (markerClusterGroup) markerClusterGroup.addLayer(marker);
             else marker.addTo(map);
             markers.push(marker);
