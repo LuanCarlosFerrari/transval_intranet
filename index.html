@@ -35,24 +35,24 @@
 
 <body class="font-sans text-base text-gray-800 text-center">
 
-  <header class="bg-gray-800 text-white py-4 relative">
+  <header class="bg-blue-950 text-white py-4 relative">
     <div class="container mx-auto flex justify-center items-center px-4">
       <div class="flex items-center">
         <button class="md:hidden text-base font-bold">
           <i class="fas fa-bars"></i>
         </button>
         <nav class="hidden md:flex space-x-6">
-          <a href="#sobre" class="hover:text-yellow-400 font-bold text-base">Sobre nós</a>
-          <a href="#clientes" class="hover:text-yellow-400 font-bold text-base">Clientes</a>
-          <a href="#contato" class="hover:text-yellow-400 font-bold text-base">Contato</a>
-          <a href="#cobertura" class="hover:text-yellow-400 font-bold text-base">Cobertura</a>
-          <a href="#segmentos" class="hover:text-yellow-400 font-bold text-base">Segmentos</a>
+          <a href="#sobre" class="hover:text-[#ff5d29] font-bold text-base">Sobre nós</a>
+          <a href="#clientes" class="hover:text-[#ff5d29] font-bold text-base">Clientes</a>
+          <a href="#contato" class="hover:text-[#ff5d29] font-bold text-base">Contato</a>
+          <a href="#cobertura" class="hover:text-[#ff5d29] font-bold text-base">Cobertura</a>
+          <a href="#segmentos" class="hover:text-[#ff5d29] font-bold text-base">Segmentos</a>
         </nav>
       </div>
     </div>
     <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
       <button id="login-btn"
-        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-bold text-base">Login</button>
+        class="bg-[#01a1ef] text-white px-4 py-2 rounded hover:bg-[#008bd1] font-bold text-base">Login</button>
     </div>
   </header>
 
@@ -68,15 +68,17 @@
   <section id="sobre" class="py-12 px-4 bg-gray-100">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6">Sobre a Transval</h2>
-      <img src="Assets/logo-branca-transval.png" alt="Logo Transval" class="mx-auto block max-w-[200px] h-auto mb-4"
-        id="logo-sobre">
+      <!-- <img src="Assets/logo-branca-transval.png" alt="Logo Transval" class="mx-auto block max-w-[200px] h-auto mb-4"
+        id="logo-sobre"> --> <!-- Logo removido -->
+      <!-- Div para a timeline inserida aqui -->
+      <div id="timeline-container" class="mb-4"></div>
       <button id="toggle-sobre-content"
-        class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded mt-2 mb-4 text-base"
+        class="bg-[#01a1ef] hover:bg-[#008bd1] text-white font-bold px-6 py-3 rounded mt-2 mb-4 text-base"
         aria-expanded="false" aria-controls="expandable-transval-content">
         Leia mais sobre a Transval
       </button>
       <div id="expandable-transval-content" class="hidden">
-        <!-- Conteúdo de presentation.js será inserido aqui pelo script -->
+        <!-- Conteúdo de presentation.js (sem a timeline) será inserido aqui pelo script -->
       </div>
     </div>
   </section>
@@ -89,7 +91,7 @@
     </div>
   </section>
 
-  <section id="clientes" class="py-12 px-4 bg-gray-800 overflow-hidden">
+  <section id="clientes" class="py-12 px-4 bg-blue-950 overflow-hidden">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6 text-white">Nossos Clientes</h2>
       <div class="w-full inline-flex flex-nowrap">
@@ -106,25 +108,25 @@
       <h2 class="text-3xl font-bold mb-4">Vamos acelerar sua logística?</h2>
       <p class="mb-6 text-gray-700">Converse com nossos especialistas e descubra a solução ideal para o seu negócio.</p>
       <a href="mailto:comercial@transval.com.br?subject=Solicitar%20Cotacao"
-        class="inline-block bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 font-bold text-base">Solicitar
+        class="inline-block bg-[#01a1ef] text-white px-6 py-3 rounded hover:bg-[#008bd1] font-bold text-base">Solicitar
         Cotação</a>
     </div>
   </section>
 
-  <section id="metricas" class="py-12 px-4 bg-gray-800">
+  <section id="metricas" class="py-12 px-4 bg-blue-950">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6 text-white">Indicadores e Certificações</h2>
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 text-white">
-        <div><i class="fas fa-truck text-3xl text-blue-600"></i>
+        <div><i class="fas fa-truck text-3xl text-[#01a1ef]"></i>
           <p class="mt-2 font-bold text-base">+200 Caminhões</p>
         </div>
-        <div><i class="fas fa-shopping-cart text-3xl text-blue-600"></i>
+        <div><i class="fas fa-shopping-cart text-3xl text-[#01a1ef]"></i>
           <p class="mt-2 font-bold text-base">+10.000 Veículos</p>
         </div>
-        <div><i class="fas fa-map-marker-alt text-3xl text-blue-600"></i>
+        <div><i class="fas fa-map-marker-alt text-3xl text-[#01a1ef]"></i>
           <p class="mt-2 font-bold text-base">12 Estados</p>
         </div>
-        <div><i class="fas fa-users text-3xl text-blue-600"></i>
+        <div><i class="fas fa-users text-3xl text-[#01a1ef]"></i>
           <p class="mt-2 font-bold text-base">+600 Colaboradores</p>
         </div>
       </div>
@@ -135,23 +137,23 @@
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6">Segmentos Atendidos</h2>
       <ul class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <li><i class="fas fa-tractor text-3xl text-blue-600"></i>
+        <li><i class="fas fa-tractor text-3xl text-[#01a1ef]"></i>
           <p class="font-bold text-base">Agronegócio</p>
         </li>
-        <li><i class="fas fa-flask text-3xl text-blue-600"></i>
+        <li><i class="fas fa-flask text-3xl text-[#01a1ef]"></i>
           <p class="font-bold text-base">Químico</p>
         </li>
-        <li><i class="fas fa-utensils text-3xl text-blue-600"></i>
+        <li><i class="fas fa-utensils text-3xl text-[#01a1ef]"></i>
           <p class="font-bold text-base">Alimentício</p>
         </li>
-        <li><i class="fas fa-shopping-cart text-3xl text-blue-600"></i>
+        <li><i class="fas fa-shopping-cart text-3xl text-[#01a1ef]"></i>
           <p class="font-bold text-base">Varejo</p>
         </li>
       </ul>
     </div>
   </section>
 
-  <footer class="bg-gray-900 text-gray-300 py-6">
+  <footer class="bg-blue-950 text-gray-300 py-6">
     <div class="container mx-auto grid md:grid-cols-3 gap-6 px-4">
       <div>
         <h3 class="text-xl font-bold mb-2">Sobre nós</h3>
@@ -201,10 +203,16 @@
     // Inserir conteúdo da apresentação na seção Sobre
     const sobreSection = document.getElementById('sobre');
     if (sobreSection) {
+      const timelineContainer = document.getElementById('timeline-container'); // Container para a timeline
       const expandableContentDiv = document.getElementById('expandable-transval-content');
       const toggleButton = document.getElementById('toggle-sobre-content');
 
+      if (timelineContainer) { // Carrega a timeline diretamente
+        timelineContainer.innerHTML = aboutContent.timelineHtml;
+      }
+
       if (expandableContentDiv && toggleButton) {
+        // Carrega o restante do conteúdo (sem a timeline) no div expansível
         expandableContentDiv.innerHTML = aboutContent.presentation;
 
         toggleButton.addEventListener('click', () => {
