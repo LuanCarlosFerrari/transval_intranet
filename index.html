@@ -36,8 +36,9 @@
 <body class="font-sans text-base text-gray-800 text-center bg-blue-950">
 
   <div class="relative"> <!-- Novo wrapper para header e hero -->
-    <header class="bg-transparent text-white py-4 relative z-[51]"> <!-- Fundo do header alterado para transparente -->
-      <div class="container mx-auto flex justify-center items-center px-4">
+    <header class="bg-transparent text-white py-4 relative z-40"> <!-- z-index do header ajustado -->
+      <div class="container mx-auto flex justify-center items-center px-4 relative z-10">
+        <!-- Nav container com relative z-10 -->
         <div class="flex items-center">
           <button class="md:hidden text-base font-bold">
             <i class="fas fa-bars"></i>
@@ -51,10 +52,13 @@
           </nav>
         </div>
       </div>
-      <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+      <div class="absolute left-4 top-1/2 transform -translate-y-1/2 z-10"> <!-- Botão de login com z-10 -->
         <button id="login-btn"
           class="bg-[#01a1ef] text-white px-4 py-2 rounded hover:bg-[#008bd1] font-bold text-base">Login</button>
       </div>
+      <img src="Assets/banner.svg" alt="Banner Transval"
+        class="absolute top-0 right-0 h-full w-auto max-w-[180px] object-contain object-right-top z-0" />
+      <!-- Banner movido para dentro do header, no fundo (z-0) -->
     </header>
 
     <section class="relative h-64 md:h-96 lg:h-[700px]">
@@ -65,10 +69,6 @@
         <h1 class="text-white text-4xl md:text-5xl font-bold">Excelência em Transporte e Logística</h1>
       </div>
     </section>
-
-    <img src="Assets/banner.svg" alt="Banner Transval"
-      class="absolute top-0 right-0 w-auto h-auto max-h-[700px] object-contain object-right-top z-50" />
-    <!-- banner.svg com position: absolute, z-50 -->
 
   </div> <!-- Fim do novo wrapper -->
 
