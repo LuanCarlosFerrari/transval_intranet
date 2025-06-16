@@ -66,7 +66,14 @@
   <section id="sobre" class="py-12 px-4 bg-gray-100">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6">Sobre a Transval</h2>
-      <!-- Conteúdo de apresentação será inserido aqui pelo JavaScript -->
+      <button id="toggle-sobre-content"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 mb-4" aria-expanded="false"
+        aria-controls="expandable-transval-content">
+        Leia mais sobre a Transval
+      </button>
+      <div id="expandable-transval-content" class="hidden">
+        <!-- Conteúdo de presentation.js será inserido aqui pelo script -->
+      </div>
     </div>
   </section>
 
@@ -322,14 +329,18 @@
     // Inserir conteúdo da apresentação na seção Sobre
     const sobreSection = document.getElementById('sobre');
     if (sobreSection) {
-      const contentDiv = sobreSection.querySelector('.max-w-5xl'); // Encontra o div onde o conteúdo deve ser inserido
-      if (contentDiv) {
-        // Remove o parágrafo existente se necessário, ou ajusta para adicionar o novo conteúdo
-        const existingParagraph = contentDiv.querySelector('p.text-gray-700');
-        if (existingParagraph) {
-          existingParagraph.remove(); // Remove o parágrafo placeholder
-        }
-        contentDiv.innerHTML += aboutContent.presentation; // Adiciona o novo conteúdo
+      const expandableContentDiv = document.getElementById('expandable-transval-content');
+      const toggleButton = document.getElementById('toggle-sobre-content');
+
+      if (expandableContentDiv && toggleButton) {
+        expandableContentDiv.innerHTML = aboutContent.presentation;
+
+        toggleButton.addEventListener('click', () => {
+          const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+          expandableContentDiv.classList.toggle('hidden');
+          toggleButton.setAttribute('aria-expanded', !isExpanded);
+          toggleButton.textContent = isExpanded ? 'Leia mais sobre a Transval' : 'Mostrar menos';
+        });
       }
     }
   </script>
