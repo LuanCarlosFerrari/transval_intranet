@@ -4,7 +4,66 @@ const baseUrl = window.location.hostname === 'luancarlosferrari.github.io'
     : '';
 
 export const aboutContent = {
-    presentation: `
+    _eventsData: [ // Store event data centrally
+        { year: "1987", title: "Fundação", details: "Criação da empresa familiar por Onevaldo e Valmir, em Rinópolis – SP.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100" },
+        { year: "2000", title: "Frota própria", details: "Consolidação de frota própria, garantindo agilidade, controle e segurança.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700" },
+        { year: "2010", title: "Unidade Rondonópolis", details: "Abertura da unidade em Rondonópolis – MT para apoiar nossa operação no Centro-Oeste.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100" },
+        { year: "2014", title: "Agenciamento de Cargas", details: "Início do serviço de agenciamento, conectando soluções logísticas em todo o Brasil.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700" },
+        { year: "2018", title: "Unidade Sumaré", details: "Implantação da unidade em Sumaré – SP, reforçando a presença no Sudeste.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100" },
+        { year: "Hoje", title: "Excelência Contínua", details: "Seguimos evoluindo para oferecer as melhores soluções em transporte e logística.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700" }
+    ],
+
+    generateTimelineEventsHtml(isCarousel = true) {
+        return this._eventsData.map(event => {
+            const eventDetailsOuterClass = `${event.bgColor} p-3 rounded-lg shadow-lg mx-auto min-h-[160px]`;
+            const eventDetailsInnerClass = isCarousel
+                ? 'w-full' // Carousel items take full width of their slot
+                : 'sm:w-44 md:w-48'; // Desktop items have fixed widths
+            const titleClass = `text-md sm:text-lg font-semibold ${event.titleColor || event.textColor}`;
+            const detailsPClass = `text-xs ${event.detailsColor || event.textColor} mt-1`;
+            const yearPClass = `text-xl font-bold ${event.yearColor}`;
+
+            if (isCarousel) {
+                return `
+                    <div class="flex-shrink-0 w-full p-2 timeline-event-carousel-item">
+                        <div class="${eventDetailsOuterClass} ${eventDetailsInnerClass} ${event.textColor}">
+                            <h3 class="${titleClass}">${event.title}</h3>
+                            <p class="${detailsPClass}">${event.details}</p>
+                        </div>
+                        <div class="mt-2 text-center">
+                            <p class="${yearPClass}">${event.year}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Existing structure for sm+ screens (desktop timeline)
+                const contentWrapper = `
+                    <div class="sm:event-content-wrapper sm:relative ${event.contentAbove ? 'sm:mb-2 sm:pt-4' : 'sm:mt-2 sm:pb-4'}">
+                        ${!event.contentAbove ? '<div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 -translate-y-full"></div>' : ''}
+                        <div class="${eventDetailsOuterClass} ${eventDetailsInnerClass} ${event.textColor}">
+                            <h3 class="${titleClass}">${event.title}</h3>
+                            <p class="${detailsPClass}">${event.details}</p>
+                        </div>
+                        ${event.contentAbove ? '<div class="hidden sm:block absolute bottom-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 translate-y-full"></div>' : ''}
+                    </div>
+                `;
+                const yearAndDot = `
+                    <div class="hidden sm:block w-4 h-4 ${event.dotColor} rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
+                    <div class="year-label ${event.contentAbove ? 'sm:mt-2' : 'sm:mb-2'}">
+                        <p class="${yearPClass}">${event.year}</p>
+                    </div>
+                `;
+                return `
+                    <div class="flex-1 timeline-event-horizontal group sm:text-center">
+                        ${event.contentAbove ? contentWrapper + yearAndDot : yearAndDot + contentWrapper}
+                    </div>
+                `;
+            }
+        }).join('');
+    },
+
+    get presentation() { // Alterado para um getter
+        return `
         <div class="flex flex-col items-center text-center">
             <img src="${baseUrl}/Assets/logo-branca-transval.png" alt="Logo Transval" class="mx-auto block max-w-[200px] h-auto mb-4">
             <p class="text-lg font-bold mb-2">NOSSA HISTÓRIA:</p>
@@ -12,110 +71,32 @@ export const aboutContent = {
                 Desde 1987, construímos uma trajetória pautada na solidez e na evolução contínua. Sediados em Rinópolis (SP), expandimos de forma estruturada, incorporando unidades operacionais em Rondonópolis (MT) e Sumaré (SP) para aprimorar a cobertura nacional e otimizar o fluxo de cargas.<br><br> A constituição de frota própria e a oferta de serviços de agenciamento reforçam nosso controle sobre os processos logísticos, assegurando maior agilidade, segurança e eficiência. Guiados pelos valores que originaram a companhia, mantemos o propósito de oferecer soluções completas e personalizadas, preservando a confiança de nossos clientes e o comprometimento com a excelência que norteia cada etapa de nossas operações.
             </p>
             
-            <!-- Nova Linha do Tempo Horizontal -->
-            <div class="text-lg font-bold mb-8 text-center">NOSSA HISTÓRIA:</div>
+            <div class="text-lg font-bold mb-8 text-center">LINHA DO TEMPO:</div>
             <div class="container mx-auto px-2 py-4 sm:px-4">
                 <div class="relative">
-                    <!-- Linha Horizontal Central -->
+                    <!-- Linha Horizontal Central (mantém para sm e acima) -->
                     <div class="hidden sm:block absolute top-1/2 left-0 right-0 h-1 bg-blue-500 transform -translate-y-1/2"></div>
 
-                    <!-- Container de Eventos (Flex para Desktop, Bloco para Mobile) -->
-                    <div class="flex flex-col sm:flex-row sm:justify-center items-stretch text-center relative space-y-8 sm:space-y-0 sm:space-x-6 md:space-x-8">
-
-                        <!-- Evento 1: 1987 (Conteúdo Acima no Desktop) -->
-                        <div class="flex-1 timeline-event-horizontal group sm:text-center">
-                            <div class="sm:event-content-wrapper sm:mb-2 sm:relative sm:pt-4">
-                                <div class="event-details bg-blue-600 text-white p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
-                                    <h3 class="text-md sm:text-lg font-semibold">Fundação</h3>
-                                    <p class="text-xs text-blue-100 mt-1">Criação da empresa familiar por Onevaldo e Valmir, em Rinópolis – SP.</p>
-                                </div>
-                                <div class="hidden sm:block absolute bottom-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 translate-y-full"></div>
-                            </div>
-                            <div class="hidden sm:block w-4 h-4 bg-blue-600 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
-                            <div class="year-label sm:mt-2">
-                                <p class="text-xl font-bold text-blue-600">1987</p>
-                            </div>
+                    <!-- Carrossel para Telas Pequenas (Mobile) -->
+                    <div id="timeline-carousel-container" class="sm:hidden relative overflow-hidden w-full group">
+                        <div id="timeline-carousel-track" class="flex">
+                            ${this.generateTimelineEventsHtml(true)}
                         </div>
+                        <button id="prev-slide" aria-label="Anterior" class="absolute top-1/2 left-1 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 rounded-full z-20 hover:bg-opacity-50 transition-opacity opacity-0 group-hover:opacity-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                        </button>
+                        <button id="next-slide" aria-label="Próximo" class="absolute top-1/2 right-1 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 rounded-full z-20 hover:bg-opacity-50 transition-opacity opacity-0 group-hover:opacity-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                        </button>
+                    </div>
 
-                        <!-- Evento 2: 2000 (Conteúdo Abaixo no Desktop) -->
-                        <div class="flex-1 timeline-event-horizontal group sm:text-center">
-                            <div class="year-label sm:mb-2">
-                                <p class="text-xl font-bold text-blue-700">2000</p>
-                            </div>
-                            <div class="hidden sm:block w-4 h-4 bg-blue-400 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
-                            <div class="sm:event-content-wrapper sm:mt-2 sm:relative sm:pb-4">
-                                <div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 -translate-y-full"></div>
-                                <div class="event-details bg-blue-200 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
-                                    <h3 class="text-md sm:text-lg font-semibold text-blue-800">Frota própria</h3>
-                                    <p class="text-xs text-blue-700 mt-1">Consolidação de frota própria, garantindo agilidade, controle e segurança.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Evento 3: 2010 (Conteúdo Acima no Desktop) -->
-                        <div class="flex-1 timeline-event-horizontal group sm:text-center">
-                            <div class="sm:event-content-wrapper sm:mb-2 sm:relative sm:pt-4">
-                                <div class="event-details bg-blue-600 text-white p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
-                                    <h3 class="text-md sm:text-lg font-semibold">Unidade Rondonópolis</h3>
-                                    <p class="text-xs text-blue-100 mt-1">Abertura da unidade em Rondonópolis – MT para apoiar nossa operação no Centro-Oeste.</p>
-                                </div>
-                                <div class="hidden sm:block absolute bottom-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 translate-y-full"></div>
-                            </div>
-                            <div class="hidden sm:block w-4 h-4 bg-blue-600 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
-                            <div class="year-label sm:mt-2">
-                                <p class="text-xl font-bold text-blue-600">2010</p>
-                            </div>
-                        </div>
-
-                        <!-- Evento 4: 2014 (Conteúdo Abaixo no Desktop) -->
-                        <div class="flex-1 timeline-event-horizontal group sm:text-center">
-                            <div class="year-label sm:mb-2">
-                                <p class="text-xl font-bold text-blue-700">2014</p>
-                            </div>
-                            <div class="hidden sm:block w-4 h-4 bg-blue-400 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
-                            <div class="sm:event-content-wrapper sm:mt-2 sm:relative sm:pb-4">
-                                <div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 -translate-y-full"></div>
-                                <div class="event-details bg-blue-200 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
-                                    <h3 class="text-md sm:text-lg font-semibold text-blue-800">Agenciamento de Cargas</h3>
-                                    <p class="text-xs text-blue-700 mt-1">Início do serviço de agenciamento, conectando soluções logísticas em todo o Brasil.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Evento 5: 2018 (Conteúdo Acima no Desktop) -->
-                        <div class="flex-1 timeline-event-horizontal group sm:text-center">
-                            <div class="sm:event-content-wrapper sm:mb-2 sm:relative sm:pt-4">
-                                <div class="event-details bg-blue-600 text-white p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
-                                    <h3 class="text-md sm:text-lg font-semibold">Unidade Sumaré</h3>
-                                    <p class="text-xs text-blue-100 mt-1">Implantação da unidade em Sumaré – SP, reforçando a presença no Sudeste.</p>
-                                </div>
-                                <div class="hidden sm:block absolute bottom-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 translate-y-full"></div>
-                            </div>
-                            <div class="hidden sm:block w-4 h-4 bg-blue-600 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
-                            <div class="year-label sm:mt-2">
-                                <p class="text-xl font-bold text-blue-600">2018</p>
-                            </div>
-                        </div>
-
-                        <!-- Evento 6: Hoje (Conteúdo Abaixo no Desktop) -->
-                        <div class="flex-1 timeline-event-horizontal group sm:text-center">
-                            <div class="year-label sm:mb-2">
-                                <p class="text-xl font-bold text-blue-700">Hoje</p>
-                            </div>
-                            <div class="hidden sm:block w-4 h-4 bg-blue-400 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
-                            <div class="sm:event-content-wrapper sm:mt-2 sm:relative sm:pb-4">
-                                <div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 -translate-y-full"></div>
-                                <div class="event-details bg-blue-200 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
-                                    <h3 class="text-md sm:text-lg font-semibold text-blue-800">Excelência Contínua</h3>
-                                    <p class="text-xs text-blue-700 mt-1">Seguimos evoluindo para oferecer as melhores soluções em transporte e logística.</p>
-                                </div>
-                            </div>
-                        </div>
-
+                    <!-- Timeline Horizontal para Telas Maiores (sm e acima) -->
+                    <div id="desktop-timeline-events" class="hidden sm:flex sm:flex-row sm:justify-center items-stretch text-center relative sm:space-x-6 md:space-x-8">
+                        ${this.generateTimelineEventsHtml(false)}
                     </div>
                 </div>
             </div>
-            <!-- Fim da Nova Linha do Tempo Horizontal -->
+            <!-- Fim da Nova Linha do Tempo -->
 
             <p class="text-lg font-bold mb-2 mt-8">NOSSO PROPÓSITO:</p>
             <p class="text-gray-700 mb-6 text-left md:text-center">Ser um parceiro estratégico dos nossos clientes e transformar a logística nacional com soluções eficientes, transparentes e seguras. Nosso compromisso é entregar qualidade, pontualidade e inovação, atender às necessidades específicas de cada cliente e promover a sustentabilidade, contribuindo ativamente para o avanço do agronegócio e da indústria.</p>
@@ -161,15 +142,158 @@ export const aboutContent = {
                 </div>
             </div>
         </div>
-    `
+    `;
+    }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Código para inicializar outras partes da página pode ir aqui, se necessário.
-    // Por exemplo, o código que carrega o aboutContent na div #about-transval
-    // Se o seu script principal (main.js ou similar) já faz isso, pode não ser necessário aqui.
+    function setupEventListeners() {
+        const timelineCarouselContainer = document.getElementById('timeline-carousel-container');
+        const timelineCarouselTrack = document.getElementById('timeline-carousel-track');
+        const prevButton = document.getElementById('prev-slide');
+        const nextButton = document.getElementById('next-slide');
+        const desktopTimeline = document.getElementById('desktop-timeline-events');
 
-    // Verifique se a função para carregar o conteúdo da apresentação ainda é necessária
-    // e se está sendo chamada corretamente em seu arquivo HTML principal ou main.js.
-    // Exemplo: if (typeof loadAboutContent === 'function') { loadAboutContent(); }
+        if (!timelineCarouselContainer || !timelineCarouselTrack || !prevButton || !nextButton || !desktopTimeline) {
+            setTimeout(setupEventListeners, 200);
+            return;
+        }
+
+        let currentIndex = 0;
+        let items = [];
+        let itemWidth = 0;
+        let originalItemCount = 0;
+        let totalVisibleItems = 0;
+        let isCarouselActive = false;
+
+        function setupCarouselSizingAndClones() {
+            if (!timelineCarouselTrack || !timelineCarouselContainer) return false;
+
+            if (originalItemCount > 0 && timelineCarouselTrack.children.length > originalItemCount) {
+                while (timelineCarouselTrack.children.length > originalItemCount) {
+                    timelineCarouselTrack.removeChild(timelineCarouselTrack.lastChild);
+                }
+            }
+
+            items = Array.from(timelineCarouselTrack.children).filter(item => item.classList.contains('timeline-event-carousel-item'));
+            originalItemCount = items.length;
+
+            if (originalItemCount === 0) return false;
+
+            items.forEach(item => {
+                timelineCarouselTrack.appendChild(item.cloneNode(true));
+            });
+            items = Array.from(timelineCarouselTrack.children).filter(item => item.classList.contains('timeline-event-carousel-item'));
+            totalVisibleItems = items.length;
+
+            const containerWidth = timelineCarouselContainer.offsetWidth;
+            if (containerWidth === 0) return false;
+
+            itemWidth = containerWidth;
+            items.forEach(item => {
+                item.style.width = itemWidth + 'px';
+            });
+
+            return true;
+        }
+
+        function updateCarouselTransform(animate = true) {
+            if (!timelineCarouselTrack) return;
+            timelineCarouselTrack.style.transition = animate ? 'transform 0.5s ease-in-out' : 'none';
+            timelineCarouselTrack.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+        }
+
+        function initCarousel() {
+            if (!timelineCarouselContainer || !prevButton || !nextButton || !timelineCarouselTrack) return;
+
+            if (!setupCarouselSizingAndClones()) {
+                setTimeout(initCarousel, 100);
+                return;
+            }
+
+            currentIndex = 0;
+            updateCarouselTransform(false);
+
+            nextButton.onclick = () => {
+                currentIndex++;
+                updateCarouselTransform();
+
+                if (currentIndex >= originalItemCount) {
+                    setTimeout(() => {
+                        currentIndex = currentIndex % originalItemCount;
+                        updateCarouselTransform(false);
+                    }, 500);
+                }
+            };
+
+            prevButton.onclick = () => {
+                if (currentIndex === 0) {
+                    currentIndex = originalItemCount;
+                    updateCarouselTransform(false);
+                }
+
+                requestAnimationFrame(() => {
+                    currentIndex--;
+                    updateCarouselTransform();
+                });
+            };
+
+            isCarouselActive = true;
+            if (timelineCarouselContainer) timelineCarouselContainer.classList.add('carousel-active');
+        }
+
+        function destroyCarousel() {
+            if (!timelineCarouselContainer || !prevButton || !nextButton || !timelineCarouselTrack) return;
+
+            prevButton.onclick = null;
+            nextButton.onclick = null;
+
+            if (originalItemCount > 0 && timelineCarouselTrack.children.length > originalItemCount) {
+                while (timelineCarouselTrack.children.length > originalItemCount) {
+                    timelineCarouselTrack.removeChild(timelineCarouselTrack.lastChild);
+                }
+            }
+            items = Array.from(timelineCarouselTrack.children).filter(item => item.classList.contains('timeline-event-carousel-item'));
+            items.forEach(item => item.style.width = '');
+
+            timelineCarouselTrack.style.transform = 'translateX(0px)';
+            timelineCarouselTrack.style.transition = 'none';
+
+            originalItemCount = 0;
+            isCarouselActive = false;
+            if (timelineCarouselContainer) timelineCarouselContainer.classList.remove('carousel-active');
+        }
+
+        function handleCarouselLayout() {
+            const isSmallScreen = window.innerWidth < 640; // Tailwind's 'sm' breakpoint
+
+            if (isSmallScreen) {
+                if (timelineCarouselContainer) timelineCarouselContainer.style.display = 'block';
+                if (desktopTimeline) desktopTimeline.style.display = 'none';
+                if (!isCarouselActive) {
+                    initCarousel();
+                } else {
+                    if (setupCarouselSizingAndClones()) {
+                        currentIndex = currentIndex % originalItemCount;
+                        updateCarouselTransform(false);
+                    }
+                }
+            } else {
+                if (timelineCarouselContainer) timelineCarouselContainer.style.display = 'none';
+                if (desktopTimeline) desktopTimeline.style.display = 'flex';
+                if (isCarouselActive) {
+                    destroyCarousel();
+                }
+            }
+        }
+
+        handleCarouselLayout();
+        window.addEventListener('resize', handleCarouselLayout);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupEventListeners);
+    } else {
+        setupEventListeners();
+    }
 });
