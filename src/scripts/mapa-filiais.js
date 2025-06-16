@@ -7,7 +7,8 @@ export function initFiliaisMap() {
     if (!coverageFilters) {
         // Criar container dos filtros
         const controls = document.createElement('div');
-        controls.className = 'coverage-filters flex space-x-2 mb-4 justify-center'; // Added Tailwind classes
+        // Classes para responsividade: coluna em telas pequenas, linha em sm+
+        controls.className = 'coverage-filters flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2 mb-4 w-full sm:w-auto justify-center items-center px-4 sm:px-0';
         controls.setAttribute('role', 'group');
         controls.setAttribute('aria-label', 'Filtros de cobertura');
 
@@ -21,7 +22,8 @@ export function initFiliaisMap() {
         selectsConfig.forEach(config => {
             const select = document.createElement('select');
             select.id = config.id;
-            select.className = 'p-2 border rounded bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'; // Added Tailwind classes
+            // Classes para responsividade: largura total em telas pequenas, auto em sm+
+            select.className = 'w-full sm:w-auto p-2 border rounded bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500';
             select.setAttribute('aria-label', config.label);
             select.innerHTML = `<option value="">${config.placeholder}</option>`;
             controls.appendChild(select);
