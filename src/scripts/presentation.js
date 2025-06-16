@@ -120,37 +120,46 @@ export const aboutContent = {
             <p class="text-lg font-bold mb-2 mt-8">NOSSO PROPÓSITO:</p>
             <p class="text-gray-700 mb-6 text-left md:text-center">Ser um parceiro estratégico dos nossos clientes e transformar a logística nacional com soluções eficientes, transparentes e seguras. Nosso compromisso é entregar qualidade, pontualidade e inovação, atender às necessidades específicas de cada cliente e promover a sustentabilidade, contribuindo ativamente para o avanço do agronegócio e da indústria.</p>
             
-            <p class="text-lg font-bold mb-2">NOSSOS PRINCÍPIOS:</p>
-            <ul class="list-none p-0 space-y-4 text-left md:text-center">
-                <li class="mb-2">
-                    <strong class="block text-md font-semibold text-gray-800">FOCO NO CLIENTE E NOS RESULTADOS</strong>
-                    <span class="block text-gray-600">Priorizar as necessidades dos clientes, buscando sempre entregar soluções ágeis, eficazes e com resultados positivos.</span>
-                </li>
-                <li class="mb-2">
-                    <strong class="block text-md font-semibold text-gray-800">AGILIDADE E RAPIDEZ</strong>
-                    <span class="block text-gray-600">Responder de forma célere e eficiente, reconhecendo a importância do tempo na construção de relações de sucesso.</span>
-                </li>
-                <li class="mb-2">
-                    <strong class="block text-md font-semibold text-gray-800">QUALIDADE E EXCELÊNCIA</strong>
-                    <span class="block text-gray-600">Garantir processos e entregas de alta qualidade, desenvolvendo com precisão o que foi proposto.</span>
-                </li>
-                <li class="mb-2">
-                    <strong class="block text-md font-semibold text-gray-800">RESPONSABILIDADE E COMPROMISSO</strong>
-                    <span class="block text-gray-600">Assumir responsabilidades, agir com ética, transparência e dedicação em todas as ações e decisões.</span>
-                </li>
-                <li class="mb-2">
-                    <strong class="block text-md font-semibold text-gray-800">COMUNICAÇÃO E COLABORAÇÃO</strong>
-                    <span class="block text-gray-600">Promover integração entre as áreas, garantindo uma comunicação clara e eficaz para alcançar objetivos comuns.</span>
-                </li>
-                <li class="mb-2">
-                    <strong class="block text-md font-semibold text-gray-800">SEGURANÇA E CONFIABILIDADE</strong>
-                    <span class="block text-gray-600">Assegurar a execução segura de todas as atividades, conectando pessoas e negócios com confiança.</span>
-                </li>
-                <li class="mb-2">
-                    <strong class="block text-md font-semibold text-gray-800">TRABALHO EM EQUIPE E INTEGRAÇÃO</strong>
-                    <span class="block text-gray-600">Valorizar o espírito colaborativo, unindo esforços para superar desafios e alcançar metas com eficiência.</span>
-                </li>
-            </ul>
+            <p class="text-lg font-bold mb-4 mt-10 text-center">NOSSOS PRINCÍPIOS:</p>
+            <div class="w-full max-w-5xl mx-auto px-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+                    <!-- Princípio 1 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                        <strong class="block text-lg font-semibold text-blue-600 mb-2">FOCO NO CLIENTE E NOS RESULTADOS</strong>
+                        <span class="block text-gray-700 text-sm">Priorizar as necessidades dos clientes, buscando sempre entregar soluções ágeis, eficazes e com resultados positivos.</span>
+                    </div>
+                    <!-- Princípio 2 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                        <strong class="block text-lg font-semibold text-blue-600 mb-2">AGILIDADE E RAPIDEZ</strong>
+                        <span class="block text-gray-700 text-sm">Responder de forma célere e eficiente, reconhecendo a importância do tempo na construção de relações de sucesso.</span>
+                    </div>
+                    <!-- Princípio 3 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                        <strong class="block text-lg font-semibold text-blue-600 mb-2">QUALIDADE E EXCELÊNCIA</strong>
+                        <span class="block text-gray-700 text-sm">Garantir processos e entregas de alta qualidade, desenvolvendo com precisão o que foi proposto.</span>
+                    </div>
+                    <!-- Princípio 4 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                        <strong class="block text-lg font-semibold text-blue-600 mb-2">RESPONSABILIDADE E COMPROMISSO</strong>
+                        <span class="block text-gray-700 text-sm">Assumir responsabilidades, agir com ética, transparência e dedicação em todas as ações e decisões.</span>
+                    </div>
+                    <!-- Princípio 5 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                        <strong class="block text-lg font-semibold text-blue-600 mb-2">COMUNICAÇÃO E COLABORAÇÃO</strong>
+                        <span class="block text-gray-700 text-sm">Promover integração entre as áreas, garantindo uma comunicação clara e eficaz para alcançar objetivos comuns.</span>
+                    </div>
+                    <!-- Princípio 6 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
+                        <strong class="block text-lg font-semibold text-blue-600 mb-2">SEGURANÇA E CONFIABILIDADE</strong>
+                        <span class="block text-gray-700 text-sm">Assegurar a execução segura de todas as atividades, conectando pessoas e negócios com confiança.</span>
+                    </div>
+                    <!-- Princípio 7 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center sm:col-span-2 lg:col-span-1 lg:col-start-2 hover:shadow-xl transition-shadow duration-300">
+                        <strong class="block text-lg font-semibold text-blue-600 mb-2">TRABALHO EM EQUIPE E INTEGRAÇÃO</strong>
+                        <span class="block text-gray-700 text-sm">Valorizar o espírito colaborativo, unindo esforços para superar desafios e alcançar metas com eficiência.</span>
+                    </div>
+                </div>
+            </div>
         </div>
     `
 };
