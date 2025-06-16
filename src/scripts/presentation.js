@@ -107,8 +107,8 @@ export const aboutContent = {
         
         <p class="text-lg font-bold mb-2 mt-8 text-white">NOSSO PROPÓSITO:</p>
         <p class="text-gray-300 mb-6 text-left md:text-center">Ser um parceiro estratégico dos nossos clientes e transformar a logística nacional com soluções eficientes, transparentes e seguras. <br> Nosso compromisso é entregar qualidade, pontualidade e inovação, <br> atender às necessidades específicas de cada cliente e promover a sustentabilidade, <br> contribuindo ativamente para o avanço do agronegócio e da indústria.</p>
-        
-        <p class="text-lg font-bold mb-4 mt-10 text-center text-white">NOSSOS PRINCÍPIIS:</p>
+
+        <p class="text-lg font-bold mb-4 mt-10 text-center text-white">NOSSOS PRINCÍPIOS:</p>
         <div class="w-full max-w-5xl mx-auto px-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                 <!-- Princípio 1 -->
