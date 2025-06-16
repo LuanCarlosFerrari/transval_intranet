@@ -5,12 +5,12 @@ const baseUrl = window.location.hostname === 'luancarlosferrari.github.io'
 
 export const aboutContent = {
     _eventsData: [ // Store event data centrally
-        { year: "1987", title: "Fundação", details: "Criação da empresa familiar por Onevaldo e Valmir, em Rinópolis – SP.", bgColor: "bg-blue-950", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-flag" },
-        { year: "2000", title: "Unidade Rondonópolis", details: "Abertura da unidade em Rondonópolis – MT para apoiar nossa operação no Centro-Oeste.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700", icon: "fas fa-truck" },
-        { year: "2005", title: "Expansão da Frota própria", details: "Consolidação de frota própria, garantindo agilidade, controle e segurança.", bgColor: "bg-blue-950", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-map-marker-alt" },
-        { year: "2014", title: "Agenciamento de Cargas", details: "Início do serviço de agenciamento, conectando soluções logísticas em todo o Brasil.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700", icon: "fas fa-handshake" },
-        { year: "2017", title: "Unidade Sumaré", details: "Implantação da unidade em Sumaré – SP, reforçando a presença no Sudeste.", bgColor: "bg-blue-950", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-map-marker-alt" },
-        { year: "Hoje", title: "Excelência Contínua", details: "Seguimos evoluindo para oferecer as melhores soluções em transporte e logística.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700", icon: "fas fa-star" }
+        { year: "1987", title: "Fundação", details: "Criação da empresa familiar por Onevaldo e Valmir, em Rinópolis – SP.", bgColor: "bg-[#01a1ef]", textColor: "text-blue-950", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-950", icon: "fas fa-flag", iconColor: "text-blue-950" },
+        { year: "2000", title: "Unidade Rondonópolis", details: "Abertura da unidade em Rondonópolis – MT para apoiar nossa operação no Centro-Oeste.", bgColor: "bg-blue-200", textColor: "text-blue-950", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-950", contentAbove: false, detailsColor: "text-blue-950", icon: "fas fa-truck", iconColor: "text-blue-950" },
+        { year: "2005", title: "Expansão da Frota própria", details: "Consolidação de frota própria, garantindo agilidade, controle e segurança.", bgColor: "bg-[#01a1ef]", textColor: "text-blue-950", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-950", icon: "fas fa-map-marker-alt", iconColor: "text-blue-950" },
+        { year: "2014", title: "Agenciamento de Cargas", details: "Início do serviço de agenciamento, conectando soluções logísticas em todo o Brasil.", bgColor: "bg-blue-200", textColor: "text-blue-950", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-950", contentAbove: false, detailsColor: "text-blue-950", icon: "fas fa-handshake", iconColor: "text-blue-950" },
+        { year: "2017", title: "Unidade Sumaré", details: "Implantação da unidade em Sumaré – SP, reforçando a presença no Sudeste.", bgColor: "bg-[#01a1ef]", textColor: "text-blue-950", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-950", icon: "fas fa-map-marker-alt", iconColor: "text-blue-950" },
+        { year: "Hoje", title: "Excelência Contínua", details: "Seguimos evoluindo para oferecer as melhores soluções em transporte e logística.", bgColor: "bg-blue-200", textColor: "text-blue-950", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-950", contentAbove: false, detailsColor: "text-blue-950", icon: "fas fa-star", iconColor: "text-blue-950" }
     ],
 
     generateTimelineEventsHtml(isCarousel = true) {
@@ -22,7 +22,8 @@ export const aboutContent = {
             const titleClass = `text-md sm:text-lg font-semibold ${event.titleColor || event.textColor}`;
             const detailsPClass = `text-xs ${event.detailsColor || event.textColor} mt-1`;
             const yearPClass = `text-xl font-bold ${event.yearColor}`;
-            const iconHtml = event.icon ? `<i class="${event.icon} ${event.textColor} text-2xl mb-2"></i><br>` : '';
+            const iconColorClass = event.iconColor || event.textColor; // Use iconColor if available, otherwise fallback to textColor
+            const iconHtml = event.icon ? `<i class="${event.icon} ${iconColorClass} text-2xl mb-2"></i><br>` : '';
 
             if (isCarousel) {
                 return `
@@ -67,7 +68,7 @@ export const aboutContent = {
 
     get timelineHtml() { // Novo getter para o HTML da timeline
         return `
-        <div class="text-lg font-bold mb-8 text-center">LINHA DO TEMPO:</div>
+        <div class="text-lg font-bold mb-8 text-center text-white">LINHA DO TEMPO:</div>
         <div class="container mx-auto px-2 py-4 sm:px-4">
             <div class="relative">
                 <!-- Linha Horizontal Central (mantém para sm e acima) -->
@@ -99,15 +100,15 @@ export const aboutContent = {
     get presentation() { // Alterado para um getter
         return `
     <div class="flex flex-col items-center text-center">
-        <p class="text-lg font-bold mb-2">NOSSA HISTÓRIA:</p>
-        <p class="text-gray-700 mb-6 text-center">
+        <p class="text-lg font-bold mb-2 text-white">NOSSA HISTÓRIA:</p>
+        <p class="text-gray-300 mb-6 text-center">
             Desde 1987, construímos uma trajetória pautada na solidez e na evolução contínua.<br> Sediados em Rinópolis (SP), expandimos de forma estruturada, incorporando unidades operacionais em Rondonópolis (MT) e Sumaré (SP) <br> para aprimorar a cobertura nacional e otimizar o fluxo de cargas.<br><br> A constituição de frota própria e a oferta de serviços de agenciamento reforçam nosso controle sobre os processos logísticos, <br> assegurando maior agilidade, segurança e eficiência. <br> Guiados pelos valores que originaram a companhia, mantemos o propósito de oferecer soluções completas e personalizadas, <br> preservando a confiança de nossos clientes e o comprometimento com a excelência que norteia cada etapa de nossas operações.
         </p>
         
-        <p class="text-lg font-bold mb-2 mt-8">NOSSO PROPÓSITO:</p>
-        <p class="text-gray-700 mb-6 text-left md:text-center">Ser um parceiro estratégico dos nossos clientes e transformar a logística nacional com soluções eficientes, transparentes e seguras. <br> Nosso compromisso é entregar qualidade, pontualidade e inovação, <br> atender às necessidades específicas de cada cliente e promover a sustentabilidade, <br> contribuindo ativamente para o avanço do agronegócio e da indústria.</p>
+        <p class="text-lg font-bold mb-2 mt-8 text-white">NOSSO PROPÓSITO:</p>
+        <p class="text-gray-300 mb-6 text-left md:text-center">Ser um parceiro estratégico dos nossos clientes e transformar a logística nacional com soluções eficientes, transparentes e seguras. <br> Nosso compromisso é entregar qualidade, pontualidade e inovação, <br> atender às necessidades específicas de cada cliente e promover a sustentabilidade, <br> contribuindo ativamente para o avanço do agronegócio e da indústria.</p>
         
-        <p class="text-lg font-bold mb-4 mt-10 text-center">NOSSOS PRINCÍPIOS:</p>
+        <p class="text-lg font-bold mb-4 mt-10 text-center text-white">NOSSOS PRINCÍPIIS:</p>
         <div class="w-full max-w-5xl mx-auto px-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                 <!-- Princípio 1 -->
