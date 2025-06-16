@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transval - Site com Tailwind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <style>
+    @keyframes marquee {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+
+      /* Move metade da largura total, pois o conteúdo será duplicado */
+    }
+
+    .animate-marquee {
+      animation: marquee 60s linear infinite;
+      display: flex;
+      /* Garante que os itens internos sejam dispostos em linha */
+    }
+  </style>
+</head>
+
+<body class="font-sans text-gray-800 text-center">
+
+  <header class="bg-gray-800 text-white py-4">
+    <div class="container mx-auto flex justify-center items-center px-4 relative">
+      <div class="flex items-center">
+        <button class="md:hidden text-2xl">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav class="hidden md:flex space-x-6">
+          <a href="#sobre" class="hover:text-yellow-400">Sobre nós</a>
+          <a href="#clientes" class="hover:text-yellow-400">Clientes</a>
+          <a href="#segmentos" class="hover:text-yellow-400">Segmentos</a>
+          <a href="#cobertura" class="hover:text-yellow-400">Cobertura</a>
+          <a href="#contato" class="hover:text-yellow-400">Contato</a>
+        </nav>
+      </div>
+      <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
+        <button class="bg-yellow-500 text-gray-900 px-4 py-2 rounded hover:bg-yellow-600">Login</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="relative h-64 md:h-96 lg:h-[700px]">
+    <img src="Assets/banner.svg" alt="Banner Transval" class="absolute inset-0 w-full h-full object-contain" />
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <h1 class="text-white text-3xl md:text-5xl font-bold">Excelência em Transporte e Logística</h1>
+    </div>
+  </section>
+
+  <section id="sobre" class="py-12 px-4 bg-gray-100">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Sobre a Transval</h2>
+      <p class="text-gray-700">A Transval é especializada em soluções logísticas integradas, oferecendo serviços de
+        transporte com excelência e comprometimento.</p>
+    </div>
+  </section>
+
+  <section id="clientes" class="py-12 px-4 bg-gray-800 overflow-hidden">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-white">Nossos Clientes</h2>
+      <div class="w-full inline-flex flex-nowrap">
+        <div class="animate-marquee whitespace-nowrap">
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/adufertil.png" alt="Adufertil Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/araguaia.png" alt="Araguaia Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/biosev.png" alt="Biosev Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/caramuru.png" alt="Caramuru Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/cargill.png" alt="Cargill Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/cibra.png" alt="Cibra Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/cofco.png" alt="Cofco Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/copersucar.png" alt="Copersucar Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/fertipar.png" alt="Fertipar Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/heringer.png" alt="Heringer Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/inpasa.png" alt="Inpasa Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/LDC.png" alt="LDC Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/mosaic.png" alt="Mosaic Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/nutrien.png" alt="Nutrien Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/raizen.png" alt="Raizen Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/Rumo-logistica-logo-clipart.png" alt="Rumo Logistica Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/viterra.png" alt="Viterra Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/yara.png" alt="Yara Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/adufertil.png" alt="Adufertil Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/araguaia.png" alt="Araguaia Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/biosev.png" alt="Biosev Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/caramuru.png" alt="Caramuru Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/cargill.png" alt="Cargill Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/cibra.png" alt="Cibra Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/cofco.png" alt="Cofco Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/copersucar.png" alt="Copersucar Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/fertipar.png" alt="Fertipar Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/heringer.png" alt="Heringer Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/inpasa.png" alt="Inpasa Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/LDC.png" alt="LDC Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/mosaic.png" alt="Mosaic Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/nutrien.png" alt="Nutrien Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/raizen.png" alt="Raizen Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/Rumo-logistica-logo-clipart.png" alt="Rumo Logistica Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/viterra.png" alt="Viterra Logo" class="max-h-24">
+          </div>
+          <div
+            class="bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center">
+            <img src="Assets/clients/yara.png" alt="Yara Logo" class="max-h-24">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="py-12 px-4 bg-gray-100 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold mb-4">Vamos acelerar sua logística?</h2>
+      <p class="mb-6 text-gray-700">Converse com nossos especialistas e descubra a solução ideal para o seu negócio.</p>
+      <a href="mailto:comercial@transval.com.br?subject=Solicitar%20Cotacao"
+        class="inline-block bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Solicitar Cotação</a>
+    </div>
+  </section>
+
+  <section id="metricas" class="py-12 px-4 bg-gray-800">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-white">Indicadores e Certificações</h2>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 text-white">
+        <div><i class="fas fa-truck text-3xl text-blue-400"></i>
+          <p class="mt-2">+200 Caminhões</p>
+        </div>
+        <div><i class="fas fa-shopping-cart text-3xl text-blue-400"></i>
+          <p class="mt-2">+10.000 Veículos</p>
+        </div>
+        <div><i class="fas fa-map-marker-alt text-3xl text-blue-400"></i>
+          <p class="mt-2">12 Estados</p>
+        </div>
+        <div><i class="fas fa-users text-3xl text-blue-400"></i>
+          <p class="mt-2">+600 Colaboradores</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cobertura" class="py-12 px-4">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Cobertura Nacional</h2>
+      <p class="text-gray-700 mb-4">Presença em 12 estados e mais de 200 rotas ativas.</p>
+      <div id="map" class="h-96 w-full bg-gray-300"></div>
+    </div>
+  </section>
+
+  <section id="segmentos" class="py-12 px-4">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Segmentos Atendidos</h2>
+      <ul class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <li><i class="fas fa-tractor text-3xl text-blue-400"></i>
+          <p>Agronegócio</p>
+        </li>
+        <li><i class="fas fa-flask text-3xl text-blue-400"></i>
+          <p>Químico</p>
+        </li>
+        <li><i class="fas fa-utensils text-3xl text-blue-400"></i>
+          <p>Alimentício</p>
+        </li>
+        <li><i class="fas fa-shopping-cart text-3xl text-blue-400"></i>
+          <p>Varejo</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-gray-300 py-6">
+    <div class="container mx-auto grid md:grid-cols-3 gap-6 px-4">
+      <div>
+        <h3 class="text-lg font-bold mb-2">Sobre nós</h3>
+        <p>A Transval oferece soluções logísticas integradas com excelência.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold mb-2">Contato</h3>
+        <p>Rua Luiz Wolff, 7 – Rinópolis/SP</p>
+        <p>(18) 3264-1181</p>
+        <p>contato@transval.com.br</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold mb-2 text-center">Redes Sociais</h3>
+        <div class="flex justify-center space-x-4">
+          <a href="#" class="bg-blue-400 rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-500">
+            <i class="fab fa-facebook-f text-white"></i>
+          </a>
+          <a href="#" class="bg-blue-400 rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-500">
+            <i class="fab fa-instagram text-white"></i>
+          </a>
+          <a href="#" class="bg-blue-400 rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-500">
+            <i class="fab fa-linkedin-in text-white"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 text-center text-sm">&copy; 2025 Transval Transportes LTDA</div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module">
+    import { initFiliaisMap } from './src/scripts/mapa-filiais.js';
+    initFiliaisMap();
+  </script>
+</body>
+
+</html>
