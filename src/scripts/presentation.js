@@ -5,12 +5,12 @@ const baseUrl = window.location.hostname === 'luancarlosferrari.github.io'
 
 export const aboutContent = {
     _eventsData: [ // Store event data centrally
-        { year: "1987", title: "Fundação", details: "Criação da empresa familiar por Onevaldo e Valmir, em Rinópolis – SP.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100" },
-        { year: "2000", title: "Frota própria", details: "Consolidação de frota própria, garantindo agilidade, controle e segurança.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700" },
-        { year: "2010", title: "Unidade Rondonópolis", details: "Abertura da unidade em Rondonópolis – MT para apoiar nossa operação no Centro-Oeste.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100" },
-        { year: "2014", title: "Agenciamento de Cargas", details: "Início do serviço de agenciamento, conectando soluções logísticas em todo o Brasil.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700" },
-        { year: "2018", title: "Unidade Sumaré", details: "Implantação da unidade em Sumaré – SP, reforçando a presença no Sudeste.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100" },
-        { year: "Hoje", title: "Excelência Contínua", details: "Seguimos evoluindo para oferecer as melhores soluções em transporte e logística.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700" }
+        { year: "1987", title: "Fundação", details: "Criação da empresa familiar por Onevaldo e Valmir, em Rinópolis – SP.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-flag" },
+        { year: "2000", title: "Frota própria", details: "Consolidação de frota própria, garantindo agilidade, controle e segurança.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700", icon: "fas fa-truck" },
+        { year: "2010", title: "Unidade Rondonópolis", details: "Abertura da unidade em Rondonópolis – MT para apoiar nossa operação no Centro-Oeste.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-map-marker-alt" },
+        { year: "2014", title: "Agenciamento de Cargas", details: "Início do serviço de agenciamento, conectando soluções logísticas em todo o Brasil.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700", icon: "fas fa-handshake" },
+        { year: "2018", title: "Unidade Sumaré", details: "Implantação da unidade em Sumaré – SP, reforçando a presença no Sudeste.", bgColor: "bg-blue-600", textColor: "text-white", yearColor: "text-blue-600", dotColor: "bg-blue-600", contentAbove: true, detailsColor: "text-blue-100", icon: "fas fa-map-marker-alt" },
+        { year: "Hoje", title: "Excelência Contínua", details: "Seguimos evoluindo para oferecer as melhores soluções em transporte e logística.", bgColor: "bg-blue-200", textColor: "text-blue-700", yearColor: "text-blue-700", dotColor: "bg-blue-400", titleColor: "text-blue-800", contentAbove: false, detailsColor: "text-blue-700", icon: "fas fa-star" }
     ],
 
     generateTimelineEventsHtml(isCarousel = true) {
@@ -22,11 +22,13 @@ export const aboutContent = {
             const titleClass = `text-md sm:text-lg font-semibold ${event.titleColor || event.textColor}`;
             const detailsPClass = `text-xs ${event.detailsColor || event.textColor} mt-1`;
             const yearPClass = `text-xl font-bold ${event.yearColor}`;
+            const iconHtml = event.icon ? `<i class="${event.icon} ${event.textColor} text-2xl mb-2"></i><br>` : '';
 
             if (isCarousel) {
                 return `
                     <div class="flex-shrink-0 w-full p-2 timeline-event-carousel-item">
-                        <div class="${eventDetailsOuterClass} ${eventDetailsInnerClass} ${event.textColor}">
+                        <div class="${eventDetailsOuterClass} ${eventDetailsInnerClass} ${event.textColor} text-center">
+                            ${iconHtml}
                             <h3 class="${titleClass}">${event.title}</h3>
                             <p class="${detailsPClass}">${event.details}</p>
                         </div>
@@ -40,7 +42,8 @@ export const aboutContent = {
                 const contentWrapper = `
                     <div class="sm:event-content-wrapper sm:relative ${event.contentAbove ? 'sm:mb-2 sm:pt-4' : 'sm:mt-2 sm:pb-4'}">
                         ${!event.contentAbove ? '<div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 -translate-y-full"></div>' : ''}
-                        <div class="${eventDetailsOuterClass} ${eventDetailsInnerClass} ${event.textColor}">
+                        <div class="${eventDetailsOuterClass} ${eventDetailsInnerClass} ${event.textColor} text-center">
+                            ${iconHtml}
                             <h3 class="${titleClass}">${event.title}</h3>
                             <p class="${detailsPClass}">${event.details}</p>
                         </div>
@@ -101,7 +104,7 @@ export const aboutContent = {
             <p class="text-lg font-bold mb-2 mt-8">NOSSO PROPÓSITO:</p>
             <p class="text-gray-700 mb-6 text-left md:text-center">Ser um parceiro estratégico dos nossos clientes e transformar a logística nacional com soluções eficientes, transparentes e seguras. Nosso compromisso é entregar qualidade, pontualidade e inovação, atender às necessidades específicas de cada cliente e promover a sustentabilidade, contribuindo ativamente para o avanço do agronegócio e da indústria.</p>
             
-            <p class="text-lg font-bold mb-4 mt-10 text-center">NOSSOS PRINCÍPIOS:</p>
+            <p class="text-lg font-bold mb-4 mt-10 text-center">NOSSOS PRINCÍPIS:</p>
             <div class="w-full max-w-5xl mx-auto px-4">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                     <!-- Princípio 1 -->
