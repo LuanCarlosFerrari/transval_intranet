@@ -25,29 +25,29 @@ export const aboutContent = {
                         <!-- Evento 1: 1987 (Conteúdo Acima no Desktop) -->
                         <div class="flex-1 timeline-event-horizontal group sm:text-center">
                             <div class="sm:event-content-wrapper sm:mb-2 sm:relative sm:pt-4">
-                                <div class="event-details bg-blue-100 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto">
-                                    <h3 class="text-md sm:text-lg font-semibold text-blue-700">Fundação</h3>
-                                    <p class="text-xs text-gray-700 mt-1">Criação da empresa familiar por Onevaldo e Valmir, em Rinópolis – SP.</p>
+                                <div class="event-details bg-blue-600 text-white p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
+                                    <h3 class="text-md sm:text-lg font-semibold">Fundação</h3>
+                                    <p class="text-xs text-blue-100 mt-1">Criação da empresa familiar por Onevaldo e Valmir, em Rinópolis – SP.</p>
                                 </div>
                                 <div class="hidden sm:block absolute bottom-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 translate-y-full"></div>
                             </div>
                             <div class="hidden sm:block w-4 h-4 bg-blue-600 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
                             <div class="year-label sm:mt-2">
-                                <p class="text-xl font-bold text-blue-700">1987</p>
+                                <p class="text-xl font-bold text-blue-600">1987</p>
                             </div>
                         </div>
 
                         <!-- Evento 2: 2000 (Conteúdo Abaixo no Desktop) -->
                         <div class="flex-1 timeline-event-horizontal group sm:text-center">
                             <div class="year-label sm:mb-2">
-                                <p class="text-xl font-bold text-gray-700">2000</p>
+                                <p class="text-xl font-bold text-blue-700">2000</p>
                             </div>
-                            <div class="hidden sm:block w-4 h-4 bg-gray-600 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
+                            <div class="hidden sm:block w-4 h-4 bg-blue-400 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
                             <div class="sm:event-content-wrapper sm:mt-2 sm:relative sm:pb-4">
-                                <div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-gray-500 transform -translate-x-1/2 -translate-y-full"></div>
-                                <div class="event-details bg-gray-100 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto">
-                                    <h3 class="text-md sm:text-lg font-semibold text-gray-800">Frota própria</h3>
-                                    <p class="text-xs text-gray-700 mt-1">Consolidação de frota própria, garantindo agilidade, controle e segurança.</p>
+                                <div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 -translate-y-full"></div>
+                                <div class="event-details bg-blue-200 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
+                                    <h3 class="text-md sm:text-lg font-semibold text-blue-800">Frota própria</h3>
+                                    <p class="text-xs text-blue-700 mt-1">Consolidação de frota própria, garantindo agilidade, controle e segurança.</p>
                                 </div>
                             </div>
                         </div>
@@ -55,29 +55,29 @@ export const aboutContent = {
                         <!-- Evento 3: 2010 (Conteúdo Acima no Desktop) -->
                         <div class="flex-1 timeline-event-horizontal group sm:text-center">
                             <div class="sm:event-content-wrapper sm:mb-2 sm:relative sm:pt-4">
-                                <div class="event-details bg-blue-100 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto">
-                                    <h3 class="text-md sm:text-lg font-semibold text-blue-700">Unidade Rondonópolis</h3>
-                                    <p class="text-xs text-gray-700 mt-1">Abertura da unidade em Rondonópolis – MT para apoiar nossa operação no Centro-Oeste.</p>
+                                <div class="event-details bg-blue-600 text-white p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
+                                    <h3 class="text-md sm:text-lg font-semibold">Unidade Rondonópolis</h3>
+                                    <p class="text-xs text-blue-100 mt-1">Abertura da unidade em Rondonópolis – MT para apoiar nossa operação no Centro-Oeste.</p>
                                 </div>
                                 <div class="hidden sm:block absolute bottom-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 translate-y-full"></div>
                             </div>
                             <div class="hidden sm:block w-4 h-4 bg-blue-600 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
                             <div class="year-label sm:mt-2">
-                                <p class="text-xl font-bold text-blue-700">2010</p>
+                                <p class="text-xl font-bold text-blue-600">2010</p>
                             </div>
                         </div>
 
                         <!-- Evento 4: 2014 (Conteúdo Abaixo no Desktop) -->
                         <div class="flex-1 timeline-event-horizontal group sm:text-center">
                             <div class="year-label sm:mb-2">
-                                <p class="text-xl font-bold text-gray-700">2014</p>
+                                <p class="text-xl font-bold text-blue-700">2014</p>
                             </div>
-                            <div class="hidden sm:block w-4 h-4 bg-gray-600 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
+                            <div class="hidden sm:block w-4 h-4 bg-blue-400 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
                             <div class="sm:event-content-wrapper sm:mt-2 sm:relative sm:pb-4">
-                                <div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-gray-500 transform -translate-x-1/2 -translate-y-full"></div>
-                                <div class="event-details bg-gray-100 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto">
-                                    <h3 class="text-md sm:text-lg font-semibold text-gray-800">Agenciamento de Cargas</h3>
-                                    <p class="text-xs text-gray-700 mt-1">Início do serviço de agenciamento, conectando soluções logísticas em todo o Brasil.</p>
+                                <div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 -translate-y-full"></div>
+                                <div class="event-details bg-blue-200 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
+                                    <h3 class="text-md sm:text-lg font-semibold text-blue-800">Agenciamento de Cargas</h3>
+                                    <p class="text-xs text-blue-700 mt-1">Início do serviço de agenciamento, conectando soluções logísticas em todo o Brasil.</p>
                                 </div>
                             </div>
                         </div>
@@ -85,29 +85,29 @@ export const aboutContent = {
                         <!-- Evento 5: 2018 (Conteúdo Acima no Desktop) -->
                         <div class="flex-1 timeline-event-horizontal group sm:text-center">
                             <div class="sm:event-content-wrapper sm:mb-2 sm:relative sm:pt-4">
-                                <div class="event-details bg-blue-100 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto">
-                                    <h3 class="text-md sm:text-lg font-semibold text-blue-700">Unidade Sumaré</h3>
-                                    <p class="text-xs text-gray-700 mt-1">Implantação da unidade em Sumaré – SP, reforçando a presença no Sudeste.</p>
+                                <div class="event-details bg-blue-600 text-white p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
+                                    <h3 class="text-md sm:text-lg font-semibold">Unidade Sumaré</h3>
+                                    <p class="text-xs text-blue-100 mt-1">Implantação da unidade em Sumaré – SP, reforçando a presença no Sudeste.</p>
                                 </div>
                                 <div class="hidden sm:block absolute bottom-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 translate-y-full"></div>
                             </div>
                             <div class="hidden sm:block w-4 h-4 bg-blue-600 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
                             <div class="year-label sm:mt-2">
-                                <p class="text-xl font-bold text-blue-700">2018</p>
+                                <p class="text-xl font-bold text-blue-600">2018</p>
                             </div>
                         </div>
 
                         <!-- Evento 6: Hoje (Conteúdo Abaixo no Desktop) -->
                         <div class="flex-1 timeline-event-horizontal group sm:text-center">
                             <div class="year-label sm:mb-2">
-                                <p class="text-xl font-bold text-gray-700">Hoje</p>
+                                <p class="text-xl font-bold text-blue-700">Hoje</p>
                             </div>
-                            <div class="hidden sm:block w-4 h-4 bg-gray-600 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
+                            <div class="hidden sm:block w-4 h-4 bg-blue-400 rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
                             <div class="sm:event-content-wrapper sm:mt-2 sm:relative sm:pb-4">
-                                <div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-gray-500 transform -translate-x-1/2 -translate-y-full"></div>
-                                <div class="event-details bg-gray-100 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto">
-                                    <h3 class="text-md sm:text-lg font-semibold text-gray-800">Excelência Contínua</h3>
-                                    <p class="text-xs text-gray-700 mt-1">Seguimos evoluindo para oferecer as melhores soluções em transporte e logística.</p>
+                                <div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 -translate-y-full"></div>
+                                <div class="event-details bg-blue-200 p-3 rounded-lg shadow-lg w-full sm:w-44 md:w-48 mx-auto min-h-[160px]">
+                                    <h3 class="text-md sm:text-lg font-semibold text-blue-800">Excelência Contínua</h3>
+                                    <p class="text-xs text-blue-700 mt-1">Seguimos evoluindo para oferecer as melhores soluções em transporte e logística.</p>
                                 </div>
                             </div>
                         </div>
