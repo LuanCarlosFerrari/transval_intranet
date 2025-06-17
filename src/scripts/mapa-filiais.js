@@ -148,7 +148,7 @@ export function initFiliaisMap() {
     });
 
     // --- Inicialização do mapa ---
-    var map = L.map('map').setView([-15.793889, -47.882778], 5);
+    var map = L.map('map', { zoomControl: false }).setView([-15.793889, -47.882778], 5);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);

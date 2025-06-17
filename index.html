@@ -41,16 +41,24 @@
       animation: marquee 60s linear infinite;
       display: flex;
     }
+
+    .leaflet-control-container {
+      z-index: 700 !important;
+    }
+
+    .leaflet-control-zoom {
+      z-index: 700 !important;
+    }
   </style>
 </head>
 
 <body class="font-sans text-base text-gray-800 bg-blue-950 pt-16 md:pt-20 relative">
   <!-- Adicionado padding-top para compensar header fixo e position relative para o banner -->
   <img src="Assets/banner.svg" alt="Banner Decorativo"
-    class="absolute top-0 right-0 w-[30rem] h-auto z-[60] opacity-50 md:opacity-100">
+    class="absolute top-0 right-0 w-[30rem] h-auto z-[702] opacity-50 md:opacity-100">
   <!-- HEADER MELHORADO -->
   <header
-    class="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-90 shadow-lg transition-all duration-300">
+    class="fixed top-0 left-0 w-full z-[701] bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-90 shadow-lg transition-all duration-300">
     <div class="container mx-auto flex justify-between items-center py-4 px-6">
       <div class="hidden md:flex">
         <a href="#login"
@@ -66,6 +74,7 @@
           class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">Cobertura</a>
         <a href="#segmentos"
           class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">Segmentos</a>
+        <a href="#" class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">LGPD</a>
       </nav>
 
       <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
@@ -80,6 +89,7 @@
       <a href="#contato" class="block hover:text-[#ff5d29]">Contato</a>
       <a href="#cobertura" class="block hover:text-[#ff5d29]">Cobertura</a>
       <a href="#segmentos" class="block hover:text-[#ff5d29]">Segmentos</a>
+      <a href="#" class="block hover:text-[#ff5d29]">LGPD</a>
       <a href="#login"
         class="block bg-[#01a1ef] hover:bg-[#008bd1] text-white px-4 py-2 rounded-full text-center font-bold">Login</a>
     </div>
@@ -94,8 +104,8 @@
   <section
     class="relative h-[700px] flex items-center justify-center overflow-hidden bg-gradient-to-r from-blue-800 via-blue-900 to-gray-900">
     <img src="Assets/background_Image.jpg" alt="Background"
-      class="absolute inset-0 w-full h-full object-cover opacity-40">
-    <div class="relative z-10 text-center px-4">
+      class="absolute inset-0 w-full h-full object-cover opacity-40 z-0">
+    <div class="relative z-[703] text-center px-4">
       <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 animate-fadeIn">Excelência em Transporte e
         Logística</h1>
       <p class="text-lg md:text-2xl text-gray-200 mb-6 animate-fadeIn delay-150">Conectando regiões, impulsionando o seu
@@ -191,19 +201,19 @@
   </section>
 
   <!-- RODAPÉ -->
-  <footer class="bg-blue-950 text-gray-300 py-10">
+  <footer class="bg-blue-950 text-gray-300 py-10 text-center">
     <div class="container mx-auto grid md:grid-cols-3 gap-8 px-6">
-      <div>
+      <div class="md:text-center">
         <h3 class="text-2xl font-bold mb-3">Sobre nós</h3>
         <p>A Transval oferece soluções logísticas integradas com excelência.</p>
       </div>
-      <div>
+      <div class="md:text-center">
         <h3 class="text-2xl font-bold mb-3">Contato</h3>
         <p>Rua Luiz Wolff, 7 – Rinópolis/SP</p>
         <p>(18) 3583-1016</p>
         <p>contato@transval.com.br</p>
       </div>
-      <div>
+      <div class="md:text-center">
         <h3 class="text-2xl font-bold mb-3">Redes Sociais</h3>
         <div class="flex space-x-4 justify-center">
           <a href="https://www.facebook.com/p/Transval-Transp-Valmir-100022314004814/" target="_blank"
