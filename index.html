@@ -273,6 +273,31 @@
         contactFormContainer.classList.toggle('hidden');
         contactButton.textContent = isFormVisible ? contactContent.buttonTextOpen : contactContent.buttonTextClose;
       });
+
+      // Adiciona o listener para o formulário de cotação APÓS ser injetado no DOM
+      const cotacaoForm = document.getElementById('cotacao-form');
+      if (cotacaoForm) {
+        cotacaoForm.addEventListener('submit', function (event) {
+          event.preventDefault(); // Previne o envio padrão do formulário
+
+          const nome = document.getElementById('nome').value;
+          const email = document.getElementById('email').value;
+          const telefone = document.getElementById('telefone').value;
+          const mensagemUsuario = document.getElementById('mensagem').value;
+
+          const numeroWhatsapp = "5518981850214"; // Seu número, sem o '+' e espaços
+
+          let mensagemWhatsapp = `Olá, Transval!\n\nGostaria de solicitar uma cotação com os seguintes dados:\n\n`;
+          mensagemWhatsapp += `*Nome:* ${nome}\n`;
+          mensagemWhatsapp += `*Email:* ${email}\n`;
+          mensagemWhatsapp += `*Telefone:* ${telefone}\n\n`;
+          mensagemWhatsapp += `*Mensagem:*\n${mensagemUsuario}`;
+
+          const urlWhatsapp = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensagemWhatsapp)}`;
+
+          window.open(urlWhatsapp, '_blank'); // Abre o WhatsApp em uma nova aba
+        });
+      }
     }
   </script>
 </body>
