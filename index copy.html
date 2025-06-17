@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transval - Site com Tailwind</title>
+  <link rel="icon" type="image/png" href="Assets/logo-branca-transval.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <style>
+    @keyframes marquee {
+      0% {
+        transform: translateX(-10%);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+
+      /* Move metade da largura total, pois o conteúdo será duplicado */
+    }
+
+    .animate-marquee {
+      animation: marquee 60s linear infinite;
+      display: flex;
+      /* Garante que os itens internos sejam dispostos em linha */
+    }
+  </style>
+</head>
+
+<body class="font-sans text-base text-gray-800 text-center bg-blue-950">
+
+  <div class="relative"> <!-- Novo wrapper para header e hero -->
+    <img src="Assets/banner.svg" alt="Banner"
+      class="absolute top-0 right-0 z-30 h-80 sm:h-48 md:h-[28rem] lg:h-[32rem] w-auto">
+    <header class="bg-transparent text-white py-4 relative z-40"> <!-- z-index do header ajustado -->
+      <div class="container mx-auto flex justify-center items-center px-4 relative z-10">
+        <!-- Nav container com relative z-10 -->
+        <div class="flex items-center">
+          <button class="md:hidden text-base font-bold">
+            <i class="fas fa-bars"></i>
+          </button>
+          <nav class="hidden md:flex space-x-6">
+            <a href="#sobre" class="hover:text-[#ff5d29] font-bold text-base">Sobre nós</a>
+            <a href="#clientes" class="hover:text-[#ff5d29] font-bold text-base">Clientes</a>
+            <a href="#contato" class="hover:text-[#ff5d29] font-bold text-base">Contato</a>
+            <a href="#cobertura" class="hover:text-[#ff5d29] font-bold text-base">Cobertura</a>
+            <a href="#segmentos" class="hover:text-[#ff5d29] font-bold text-base">Segmentos</a>
+          </nav>
+        </div>
+      </div>
+      <div class="absolute left-4 top-1/2 transform -translate-y-1/2 z-10"> <!-- Botão de login com z-10 -->
+        <button id="login-btn"
+          class="bg-[#01a1ef] text-white px-4 py-2 rounded hover:bg-[#008bd1] font-bold text-base">Login</button>
+      </div>
+    </header>
+
+    <section class="relative h-64 md:h-96 lg:h-[700px]">
+      <img src="Assets/background_Image.jpg" alt="Background" class="absolute inset-0 w-full h-full object-cover z-0" />
+      <!-- Imagem de fundo da Hero, z-0 -->
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+        <!-- Overlay e texto da Hero, z-10 -->
+        <h1 class="text-white text-4xl md:text-5xl font-bold hidden lg:block">Excelência em Transporte e Logística</h1>
+      </div>
+    </section>
+
+  </div> <!-- Fim do novo wrapper -->
+
+  <section id="sobre" class="py-12 px-4 bg-blue-950">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-white">Sobre a Transval</h2>
+      <!-- Div para a timeline inserida aqui -->
+      <div id="timeline-container" class="mb-4"></div>
+      <button id="toggle-sobre-content"
+        class="bg-[#01a1ef] hover:bg-[#008bd1] text-white font-bold px-6 py-3 rounded mt-2 mb-4 text-base"
+        aria-expanded="false" aria-controls="expandable-transval-content">
+        Leia mais sobre a Transval
+      </button>
+      <div id="expandable-transval-content" class="hidden text-white">
+        <!-- Conteúdo de presentation.js (sem a timeline) será inserido aqui pelo script -->
+      </div>
+    </div>
+  </section>
+
+  <section id="cobertura" class="py-12 px-4 bg-gray-100">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-gray-800">Cobertura Nacional</h2>
+      <p class="text-gray-700 mb-4">Presença em 12 estados e mais de 200 rotas ativas.</p>
+      <div id="map" class="h-96 w-full bg-gray-300"></div>
+    </div>
+  </section>
+
+  <section id="clientes" class="py-12 px-4 bg-blue-950 overflow-hidden">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-white">Nossos Clientes</h2>
+      <div class="w-full inline-flex flex-nowrap">
+        <div id="marquee-content" class="animate-marquee whitespace-nowrap">
+          <!-- Os cards de clientes serão gerados dinamicamente aqui -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="src/scripts/clientes.js"></script>
+
+  <section id="contato" class="py-12 px-4 bg-gray-100 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h2 id="contact-title" class="text-3xl font-bold mb-4 text-gray-800"></h2>
+      <p id="contact-description" class="mb-6 text-gray-700"></p>
+      <button id="contact-button"
+        class="inline-block bg-[#01a1ef] text-white px-6 py-3 rounded hover:bg-[#008bd1] font-bold text-base"></button>
+      <div id="contact-form-container" class="hidden mt-8"></div>
+    </div>
+  </section>
+
+  <section id="metricas" class="py-12 px-4 bg-blue-950">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-white">Indicadores e Certificações</h2>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 text-white">
+        <div>
+          <p class="mt-2 font-bold text-xl">+200 Caminhões</p>
+        </div>
+        <div>
+          <p class="mt-2 font-bold text-xl">+10.000 Veículos</p>
+        </div>
+        <div>
+          <p class="mt-2 font-bold text-xl">12 Estados</p>
+        </div>
+        <div>
+          <p class="mt-2 font-bold text-xl">+600 Colaboradores</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="segmentos" class="py-12 px-4 bg-gray-100">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-gray-800">Segmentos Atendidos</h2>
+      <ul class="grid grid-cols-2 md:grid-cols-4 gap-4 text-gray-800">
+        <li><i class="fas fa-tractor text-3xl text-[#01a1ef]"></i>
+          <p class="font-bold text-base">Agronegócio</p>
+        </li>
+        <li><i class="fas fa-flask text-3xl text-[#01a1ef]"></i>
+          <p class="font-bold text-base">Químico</p>
+        </li>
+        <li><i class="fas fa-utensils text-3xl text-[#01a1ef]"></i>
+          <p class="font-bold text-base">Alimentício</p>
+        </li>
+        <li><i class="fas fa-shopping-cart text-3xl text-[#01a1ef]"></i>
+          <p class="font-bold text-base">Varejo</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="bg-blue-950 text-gray-300 py-6">
+    <div class="container mx-auto grid md:grid-cols-3 gap-6 px-4">
+      <div>
+        <h3 class="text-xl font-bold mb-2">Sobre nós</h3>
+        <p>A Transval oferece soluções logísticas integradas com excelência.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-2">Contato</h3>
+        <p>Rua Luiz Wolff, 7 – Rinópolis/SP</p>
+        <p>(18) 3583-1016</p>
+        <p>contato@transval.com.br</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-2 text-center">Redes Sociais</h3>
+        <div class="flex justify-center space-x-4">
+          <a href="https://www.facebook.com/p/Transval-Transp-Valmir-100022314004814/" target="_blank"
+            rel="noopener noreferrer"
+            class="bg-[#1877F2] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#166FE5]">
+            <i class="fab fa-facebook-f text-white"></i>
+          </a>
+          <a href="https://www.instagram.com/transvaltransp/" target="_blank" rel="noopener noreferrer"
+            class="bg-[#E4405F] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#DD2A7B]">
+            <i class="fab fa-instagram text-white"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/transval-transportadora-valmir-ltda/" target="_blank"
+            rel="noopener noreferrer"
+            class="bg-[#0A66C2] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#004182]">
+            <i class="fab fa-linkedin-in text-white"></i>
+          </a>
+          <a href="https://api.whatsapp.com/send?phone=5518997105537" target="_blank" rel="noopener noreferrer"
+            class="bg-[#25D366] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#1DA851]">
+            <i class="fab fa-whatsapp text-white"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 text-center text-sm">&copy; 2025 Transval Transportes LTDA</div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module">
+    import { initFiliaisMap } from './src/scripts/mapa-filiais.js';
+    import { aboutContent } from './src/scripts/presentation.js';
+    import { contactContent } from './src/scripts/contact.js';
+
+    initFiliaisMap();
+
+    // Inserir conteúdo da apresentação na seção Sobre
+    const sobreSection = document.getElementById('sobre');
+    if (sobreSection) {
+      const timelineContainer = document.getElementById('timeline-container'); // Container para a timeline
+      const expandableContentDiv = document.getElementById('expandable-transval-content');
+      const toggleButton = document.getElementById('toggle-sobre-content');
+
+      if (timelineContainer) { // Carrega a timeline diretamente
+        timelineContainer.innerHTML = aboutContent.timelineHtml;
+      }
+
+      if (expandableContentDiv && toggleButton) {
+        // Carrega o restante do conteúdo (sem a timeline) no div expansível
+        expandableContentDiv.innerHTML = aboutContent.presentation;
+
+        toggleButton.addEventListener('click', () => {
+          const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+          expandableContentDiv.classList.toggle('hidden');
+          toggleButton.setAttribute('aria-expanded', !isExpanded);
+          toggleButton.textContent = isExpanded ? 'Leia mais sobre a Transval' : 'Mostrar menos';
+        });
+      }
+    }
+
+    // Inserir conteúdo da seção de Contato
+    const contactTitle = document.getElementById('contact-title');
+    const contactDescription = document.getElementById('contact-description');
+    const contactButton = document.getElementById('contact-button');
+    const contactFormContainer = document.getElementById('contact-form-container');
+
+    if (contactTitle && contactDescription && contactButton && contactFormContainer) {
+      contactTitle.textContent = contactContent.title;
+      contactDescription.textContent = contactContent.description;
+      contactButton.textContent = contactContent.buttonTextOpen;
+      contactFormContainer.innerHTML = contactContent.formHtml;
+
+      contactButton.addEventListener('click', () => {
+        const isFormVisible = !contactFormContainer.classList.contains('hidden');
+        contactFormContainer.classList.toggle('hidden');
+        contactButton.textContent = isFormVisible ? contactContent.buttonTextOpen : contactContent.buttonTextClose;
+        if (!isFormVisible) {
+          // Optionally, scroll to the form or button
+          contactFormContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      const cotacaoForm = document.getElementById('cotacao-form');
+      if (cotacaoForm) {
+        cotacaoForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          // Basic form submission alert, replace with actual submission logic
+          alert('Formulário enviado! Entraremos em contato em breve.');
+          // Optionally, hide the form and reset button text after submission
+          contactFormContainer.classList.add('hidden');
+          contactButton.textContent = contactContent.buttonTextOpen;
+          cotacaoForm.reset(); // Reset form fields
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>
