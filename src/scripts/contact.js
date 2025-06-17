@@ -1,6 +1,6 @@
 export const contactContent = {
     title: "Vamos acelerar sua logística?",
-    description: "Converse com nossos especialistas e descubra a solução ideal para o seu negócio.",
+    description: "Juntos, encontramos a rota ideal para o seu sucesso. Fale com nossos especialistas!",
     buttonTextOpen: "Solicitar Cotação",
     buttonTextClose: "Fechar Formulário",
     formHtml: `
