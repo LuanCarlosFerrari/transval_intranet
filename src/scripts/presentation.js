@@ -14,7 +14,7 @@ export const aboutContent = {
     ],
 
     generateTimelineEventsHtml(isCarousel = true) {
-        return this._eventsData.map(event => {
+        return this._eventsData.map((event, idx) => { // <-- adicionado idx
             const eventDetailsOuterClass = `${event.bgColor} p-3 rounded-lg shadow-lg mx-auto min-h-[160px]`;
             const eventDetailsInnerClass = isCarousel
                 ? 'w-full' // Carousel items take full width of their slot
@@ -39,7 +39,9 @@ export const aboutContent = {
                     </div>
                 `;
             } else {
-                // Existing structure for sm+ screens (desktop timeline)
+                // Alternar bolinha acima/abaixo do número usando o índice
+                const dotHtml = `<div class="hidden sm:block w-4 h-4 ${event.dotColor} rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>`;
+                const yearHtml = `<div class="year-label ${event.contentAbove ? 'sm:mt-2' : 'sm:mb-2'}"><p class="${yearPClass}">${event.year}</p></div>`;
                 const contentWrapper = `
                     <div class="sm:event-content-wrapper sm:relative ${event.contentAbove ? 'sm:mb-2 sm:pt-4' : 'sm:mt-2 sm:pb-4'}">
                         ${!event.contentAbove ? '<div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 -translate-y-full"></div>' : ''}
@@ -51,12 +53,10 @@ export const aboutContent = {
                         ${event.contentAbove ? '<div class="hidden sm:block absolute bottom-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 translate-y-full"></div>' : ''}
                     </div>
                 `;
-                const yearAndDot = `
-                    <div class="hidden sm:block w-4 h-4 ${event.dotColor} rounded-full mx-auto relative z-10 border-2 border-white my-2"></div>
-                    <div class="year-label ${event.contentAbove ? 'sm:mt-2' : 'sm:mb-2'}">
-                        <p class="${yearPClass}">${event.year}</p>
-                    </div>
-                `;
+                // Se idx par: bolinha acima, se ímpar: bolinha abaixo
+                const yearAndDot = idx % 2 === 0
+                    ? dotHtml + yearHtml
+                    : yearHtml + dotHtml;
                 return `
                     <div class="flex-1 timeline-event-horizontal group sm:text-center">
                         ${event.contentAbove ? contentWrapper + yearAndDot : yearAndDot + contentWrapper}
