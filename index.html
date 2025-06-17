@@ -53,15 +53,16 @@
 </head>
 
 <body class="font-sans text-base text-gray-800 bg-blue-950 pt-16 md:pt-20 relative">
-  <img src="Assets/banner.svg" alt="Banner Decorativo"
-    class="absolute top-0 right-0 h-auto z-[703] hidden sm:block lg:opacity-100 w-[10rem] md:w-[16rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[30rem] transition-all duration-500">
+  <!-- HEADER START -->
   <header
     class="fixed top-0 left-0 w-full z-[702] bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-90 shadow-lg transition-all duration-300">
+    <!-- Login Button (Left) -->
     <div class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 pl-4 z-50">
       <a href="#login"
         class="bg-[#01a1ef] hover:bg-[#008bd1] text-white px-4 py-2 rounded-full font-bold transition-all duration-300">Login</a>
     </div>
     <div class="container mx-auto flex justify-center items-center py-4 px-6 relative">
+      <!-- Navigation Menu (Center) -->
       <nav class="hidden md:flex justify-center space-x-8">
         <a href="#sobre" class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">Sobre nós</a>
         <a href="#cobertura"
@@ -74,12 +75,13 @@
         <a href="Assets/lgpd.pdf" download="lgpd.pdf"
           class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">LGPD</a>
       </nav>
-
+      <!-- Hamburger Menu Button (Mobile, Centered) -->
       <button id="mobile-menu-btn"
         class="md:hidden text-white text-2xl focus:outline-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <i class="fas fa-bars"></i>
       </button>
     </div>
+    <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden bg-blue-950 text-white px-6 py-4 space-y-4">
       <a href="#sobre" class="block hover:text-[#ff5d29]">Sobre nós</a>
       <a href="#cobertura" class="block hover:text-[#ff5d29]">Cobertura</a>
@@ -96,6 +98,14 @@
       });
     </script>
   </header>
+  <!-- HEADER END -->
+
+  <!-- BANNER START -->
+  <img src="Assets/banner.svg" alt="Banner Decorativo"
+    class="absolute top-0 right-0 h-auto z-[703] hidden sm:block lg:opacity-100 w-[10rem] md:w-[16rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[30rem] transition-all duration-500">
+  <!-- BANNER END -->
+
+  <!-- HERO SECTION START -->
   <section
     class="relative h-[700px] flex items-center justify-center overflow-hidden bg-gradient-to-r from-blue-800 via-blue-900 to-gray-900">
     <img src="Assets/background_Image.jpg" alt="Background"
@@ -110,6 +120,9 @@
         Cotação</a>
     </div>
   </section>
+  <!-- HERO SECTION END -->
+
+  <!-- ABOUT SECTION START -->
   <section id="sobre" class="py-20 px-6 bg-blue-950 text-white">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-10 tracking-wide">Sobre a Transval</h2>
@@ -120,6 +133,9 @@
       <div id="expandable-transval-content" class="hidden mt-6"></div>
     </div>
   </section>
+  <!-- ABOUT SECTION END -->
+
+  <!-- COVERAGE SECTION START -->
   <section id="cobertura" class="py-20 px-6 bg-gray-100">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-6 tracking-wide">Cobertura Nacional</h2>
@@ -127,6 +143,9 @@
       <div id="map" class="h-96 w-full rounded-lg shadow-lg bg-gray-300"></div>
     </div>
   </section>
+  <!-- COVERAGE SECTION END -->
+
+  <!-- CLIENTS SECTION START -->
   <section id="clientes" class="py-20 px-6 bg-blue-950 text-white overflow-hidden">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-10 tracking-wide">Nossos Clientes</h2>
@@ -135,6 +154,9 @@
       </div>
     </div>
   </section>
+  <!-- CLIENTS SECTION END -->
+
+  <!-- CONTACT SECTION START -->
   <section id="contato" class="py-20 px-6 bg-gray-100 text-center">
     <div class="max-w-3xl mx-auto">
       <h2 id="contact-title" class="text-4xl font-bold mb-4 text-gray-800"></h2>
@@ -144,6 +166,9 @@
       <div id="contact-form-container" class="hidden mt-8"></div>
     </div>
   </section>
+  <!-- CONTACT SECTION END -->
+
+  <!-- METRICS SECTION START -->
   <section id="metricas" class="py-20 px-6 bg-blue-950 text-white">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-10 tracking-wide">Indicadores e Certificações</h2>
@@ -163,6 +188,9 @@
       </div>
     </div>
   </section>
+  <!-- METRICS SECTION END -->
+
+  <!-- SEGMENTS SECTION START -->
   <section id="segmentos" class="py-20 px-6 bg-gray-100">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-10 tracking-wide">Segmentos Atendidos</h2>
@@ -182,6 +210,9 @@
       </ul>
     </div>
   </section>
+  <!-- SEGMENTS SECTION END -->
+
+  <!-- FOOTER START -->
   <footer class="bg-blue-950 text-gray-300 py-10 text-center">
     <div class="container mx-auto grid md:grid-cols-3 gap-8 px-6">
       <div class="md:text-center">
@@ -218,6 +249,8 @@
     Desenvolvido por <span class="font-semibold">Luan Carlos Ferrari</span> | Contato do desenvolvedor: <a
       href="https://wa.me/5518997901991" class="underline hover:text-blue-300">(18) 99790-1991</a>
   </footer>
+  <!-- FOOTER END -->
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="src/scripts/clientes.js"></script>
   <script type="module">
