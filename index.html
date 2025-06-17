@@ -53,10 +53,8 @@
 </head>
 
 <body class="font-sans text-base text-gray-800 bg-blue-950 pt-16 md:pt-20 relative">
-  <!-- Adicionado padding-top para compensar header fixo e position relative para o banner -->
   <img src="Assets/banner.svg" alt="Banner Decorativo"
     class="absolute top-0 right-0 w-[30rem] h-auto z-[703] hidden lg:block lg:opacity-100">
-  <!-- HEADER MELHORADO -->
   <header
     class="fixed top-0 left-0 w-full z-[702] bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-90 shadow-lg transition-all duration-300">
     <div class="container mx-auto flex justify-center items-center py-4 px-6 relative">
@@ -99,12 +97,10 @@
       });
     </script>
   </header>
-
-  <!-- HERO SECTION -->
   <section
     class="relative h-[700px] flex items-center justify-center overflow-hidden bg-gradient-to-r from-blue-800 via-blue-900 to-gray-900">
     <img src="Assets/background_Image.jpg" alt="Background"
-      class="absolute inset-0 w-full h-full object-cover opacity-60 z-0"> <!-- MODIFIED: opacity-40 to opacity-60 -->
+      class="absolute inset-0 w-full h-full object-cover opacity-60 z-0">
     <div class="relative z-[701] text-center px-4">
       <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 animate-fadeIn">Excelência em Transporte e
         Logística</h1>
@@ -115,8 +111,6 @@
         Cotação</a>
     </div>
   </section>
-
-  <!-- SOBRE -->
   <section id="sobre" class="py-20 px-6 bg-blue-950 text-white">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-10 tracking-wide">Sobre a Transval</h2>
@@ -127,8 +121,6 @@
       <div id="expandable-transval-content" class="hidden mt-6"></div>
     </div>
   </section>
-
-  <!-- COBERTURA -->
   <section id="cobertura" class="py-20 px-6 bg-gray-100">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-6 tracking-wide">Cobertura Nacional</h2>
@@ -136,8 +128,6 @@
       <div id="map" class="h-96 w-full rounded-lg shadow-lg bg-gray-300"></div>
     </div>
   </section>
-
-  <!-- CLIENTES -->
   <section id="clientes" class="py-20 px-6 bg-blue-950 text-white overflow-hidden">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-10 tracking-wide">Nossos Clientes</h2>
@@ -146,8 +136,6 @@
       </div>
     </div>
   </section>
-
-  <!-- CONTATO -->
   <section id="contato" class="py-20 px-6 bg-gray-100 text-center">
     <div class="max-w-3xl mx-auto">
       <h2 id="contact-title" class="text-4xl font-bold mb-4 text-gray-800"></h2>
@@ -157,8 +145,6 @@
       <div id="contact-form-container" class="hidden mt-8"></div>
     </div>
   </section>
-
-  <!-- INDICADORES -->
   <section id="metricas" class="py-20 px-6 bg-blue-950 text-white">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-10 tracking-wide">Indicadores e Certificações</h2>
@@ -178,8 +164,6 @@
       </div>
     </div>
   </section>
-
-  <!-- SEGMENTOS -->
   <section id="segmentos" class="py-20 px-6 bg-gray-100">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-10 tracking-wide">Segmentos Atendidos</h2>
@@ -199,8 +183,6 @@
       </ul>
     </div>
   </section>
-
-  <!-- RODAPÉ -->
   <footer class="bg-blue-950 text-gray-300 py-10 text-center">
     <div class="container mx-auto grid md:grid-cols-3 gap-8 px-6">
       <div class="md:text-center">
@@ -234,9 +216,9 @@
     <div class="mt-6 text-center text-sm">&copy; 2025 Transval Transportes LTDA</div>
   </footer>
   <footer class="bg-blue-900 text-white py-4 mt-10 text-center text-sm">
-    Desenvolvido por <span class="font-semibold">Luan Ferrari</span> | Contato do desenvolvedor: <a href="https://wa.me/5518997901991" class="underline hover:text-blue-300">18 99790-1991</a>
+    Desenvolvido por <span class="font-semibold">Luan Ferrari</span> | Contato do desenvolvedor: <a
+      href="https://wa.me/5518997901991" class="underline hover:text-blue-300">18 99790-1991</a>
   </footer>
-
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="src/scripts/clientes.js"></script>
   <script type="module">
@@ -277,18 +259,17 @@
         contactButton.textContent = isFormVisible ? contactContent.buttonTextOpen : contactContent.buttonTextClose;
       });
 
-      // Adiciona o listener para o formulário de cotação APÓS ser injetado no DOM
       const cotacaoForm = document.getElementById('cotacao-form');
       if (cotacaoForm) {
         cotacaoForm.addEventListener('submit', function (event) {
-          event.preventDefault(); // Previne o envio padrão do formulário
+          event.preventDefault();
 
           const nome = document.getElementById('nome').value;
           const email = document.getElementById('email').value;
           const telefone = document.getElementById('telefone').value;
           const mensagemUsuario = document.getElementById('mensagem').value;
 
-          const numeroWhatsapp = "5518981850214"; // Seu número, sem o '+' e espaços
+          const numeroWhatsapp = "5518981850214";
 
           let mensagemWhatsapp = `Olá, Transval!\n\nGostaria de solicitar uma cotação com os seguintes dados:\n\n`;
           mensagemWhatsapp += `*Nome:* ${nome}\n`;
@@ -298,7 +279,7 @@
 
           const urlWhatsapp = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensagemWhatsapp)}`;
 
-          window.open(urlWhatsapp, '_blank'); // Abre o WhatsApp em uma nova aba
+          window.open(urlWhatsapp, '_blank');
         });
       }
     }
