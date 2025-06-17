@@ -4,19 +4,26 @@ const clientLogos = [
     'biosev.png',
     'caramuru.png',
     'cargill.png',
+    'castrolanda.png',
     'cibra.png',
     'cofco.png',
     'copersucar.png',
+    'cutrale.png',
     'fertipar.png',
     'heringer.png',
     'inpasa.png',
     'LDC.png',
+    'lhgmining.png',
     'mosaic.png',
     'nutrien.png',
+    'piracanjuba.png',
     'raizen.png',
     'Rumo-logistica-logo-clipart.png',
+    'seara.png',
+    'syngenta.png',
     'viterra.png',
-    'yara.png'
+    'yara.png',
+    'ype.png'
 ];
 
 function generateClientCards() {
@@ -35,7 +42,7 @@ function generateClientCards() {
         const img = document.createElement('img');
         img.src = `Assets/clients/${logo}`;
         img.alt = `${logo.split('.')[0]} Logo`;
-        img.className = 'max-h-24';
+        img.className = 'max-h-24 max-w-[230px]'; // Alterado para padronizar o tamanho
         card.appendChild(img);
         return card;
     };
