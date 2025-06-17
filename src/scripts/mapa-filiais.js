@@ -1,41 +1,29 @@
-// src/scripts/mapa-filiais.js
-
 export function initFiliaisMap() {
     const mapContainer = document.getElementById('map');
     if (!mapContainer || mapContainer._leaflet_id) return;
 
-    // --- Filtros UI ---
     const coverageFilters = document.querySelector('.coverage-filters');
     if (!coverageFilters) {
-        // Criar container dos filtros
         const controls = document.createElement('div');
-        // Classes para responsividade: coluna em telas pequenas, linha em sm+
         controls.className = 'coverage-filters flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2 mb-4 w-full sm:w-auto justify-center items-center px-4 sm:px-0';
         controls.setAttribute('role', 'group');
         controls.setAttribute('aria-label', 'Filtros de cobertura');
-
-        // Criar os selects com as classes e atributos corretos
         const selectsConfig = [
             { id: 'regiao', label: 'Selecione a região', placeholder: 'Região' },
             { id: 'estado', label: 'Selecione o estado', placeholder: 'Estado' },
             { id: 'unidade', label: 'Selecione a unidade', placeholder: 'Unidade' }
         ];
-
         selectsConfig.forEach(config => {
             const select = document.createElement('select');
             select.id = config.id;
-            // Classes para responsividade: largura total em telas pequenas, auto em sm+
             select.className = 'w-full sm:w-auto p-2 border rounded bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500';
             select.setAttribute('aria-label', config.label);
             select.innerHTML = `<option value="">${config.placeholder}</option>`;
             controls.appendChild(select);
         });
-
-        // Inserir antes do mapa
         mapContainer.parentNode.insertBefore(controls, mapContainer);
     }
 
-    // --- Dados das filiais ---
     var filiais = [
         { lat: -23.1066, lng: -55.2250, title: 'Amambai-MS' },
         { lat: -16.3266, lng: -48.9534, title: 'Anápolis-GO' },
@@ -108,7 +96,6 @@ export function initFiliaisMap() {
         { lat: -16.7405, lng: -48.5155, title: 'Vianópolis-GO' }
     ];
 
-    // --- Utilitários para regiões e estados ---
     const regioes = {
         'Norte': ['RO', 'AC', 'AM', 'RR', 'PA', 'AP', 'TO'],
         'Nordeste': ['MA', 'PI', 'CE', 'RN', 'PB', 'PE', 'AL', 'SE', 'BA'],
@@ -127,7 +114,6 @@ export function initFiliaisMap() {
         return '';
     }
 
-    // --- Preencher filtros ---
     const estadosSet = new Set();
     const regioesSet = new Set();
     filiais.forEach(f => {
@@ -147,44 +133,33 @@ export function initFiliaisMap() {
         filtroUnidade.innerHTML += `<option value="${f.title}">${f.title}</option>`;
     });
 
-    // --- Inicialização do mapa ---
     var map = L.map('map', { zoomControl: false, attributionControl: false }).setView([-15.793889, -47.882778], 5);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        // attribution: '© OpenStreetMap contributors' // Comentado para remover a atribuição padrão
     }).addTo(map);
 
-    // --- Clusterização (se disponível) ---
     var markerClusterGroup = window.L && L.markerClusterGroup ? L.markerClusterGroup() : null;
     var markers = [];
 
-    // --- Função para criar popup ---
     function createPopupContent(filial) {
-        // Aplicando classes Tailwind para estilizar o popup
         return `<div class="p-2 bg-white rounded shadow-lg">
                     <strong class="text-lg font-semibold text-gray-800">${filial.title}</strong><br>
                     <span class="text-sm text-gray-600">Lat: ${filial.lat.toFixed(4)}, Lng: ${filial.lng.toFixed(4)}</span>
                 </div>`;
     }
 
-    // --- Renderizar marcadores ---
     function renderMarkers(filiaisFiltradas) {
-        // Remover marcadores antigos
         if (markerClusterGroup) markerClusterGroup.clearLayers();
         markers.forEach(m => map.removeLayer(m));
         markers = [];
         (markerClusterGroup ? markerClusterGroup : map).eachLayer(function (layer) {
             if (layer instanceof L.Marker) map.removeLayer(layer);
         });
-        // Adicionar novos marcadores
         filiaisFiltradas.forEach(f => {
             const marker = L.marker([f.lat, f.lng]);
             marker.bindPopup(createPopupContent(f));
-
-            // Adicionar evento de clique para zoom
             marker.on('click', function () {
-                map.setView([f.lat, f.lng], 12); // Zoom para nível 12 ao clicar
+                map.setView([f.lat, f.lng], 12);
             });
-
             if (markerClusterGroup) markerClusterGroup.addLayer(marker);
             else marker.addTo(map);
             markers.push(marker);
@@ -192,7 +167,6 @@ export function initFiliaisMap() {
         if (markerClusterGroup && !map.hasLayer(markerClusterGroup)) map.addLayer(markerClusterGroup);
     }
 
-    // --- Lógica de filtro ---
     function filtrar() {
         const regiao = filtroRegiao.value;
         const estado = filtroEstado.value;
@@ -208,7 +182,6 @@ export function initFiliaisMap() {
             filtradas = filtradas.filter(f => f.title === unidade);
         }
         renderMarkers(filtradas);
-        // Centralizar e abrir popup se unidade selecionada
         if (unidade && filtradas.length === 1) {
             const f = filtradas[0];
             map.setView([f.lat, f.lng], 10);
@@ -216,7 +189,6 @@ export function initFiliaisMap() {
                 markers[0].openPopup();
             }, 300);
         } else {
-            // Em vez de centralizar em um ponto fixo, ajustar para mostrar todas as filiais filtradas
             ajustarVisualizacaoParaTodosMarcadores();
         }
     }
@@ -234,29 +206,19 @@ export function initFiliaisMap() {
         filtroRegiao.value = '';
         filtroEstado.value = '';
         filtrar();
-    });    // --- Função para ajustar visualização para incluir todos os marcadores ---
+    });
     function ajustarVisualizacaoParaTodosMarcadores() {
         if (filiais.length === 0) return;
-
-        // Criar um bounds que incluirá todas as filiais
         var bounds = L.latLngBounds();
-
-        // Adicionar cada localização ao bounds
         filiais.forEach(function (filial) {
             bounds.extend([filial.lat, filial.lng]);
         });
-
-        // Ajustar o mapa para mostrar todos os marcadores com um pequeno padding
         map.fitBounds(bounds, {
             padding: [30, 30],
             maxZoom: 12
         });
     }
-
-    // --- Primeira renderização ---
     renderMarkers(filiais);
-
-    // Ajustar a visualização após um pequeno delay para garantir que os marcadores estejam carregados
     setTimeout(function () {
         ajustarVisualizacaoParaTodosMarcadores();
     }, 300);

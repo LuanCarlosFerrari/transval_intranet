@@ -33,7 +33,6 @@ function generateClientCards() {
         return;
     }
 
-    // Clear existing static content if any, before generating dynamic cards
     marqueeContent.innerHTML = '';
 
     const createCard = (logo) => {
@@ -42,7 +41,7 @@ function generateClientCards() {
         const img = document.createElement('img');
         img.src = `Assets/clients/${logo}`;
         img.alt = `${logo.split('.')[0]} Logo`;
-        img.className = 'max-h-24 max-w-[230px]'; // Alterado para padronizar o tamanho
+        img.className = 'max-h-24 max-w-[230px]';
         card.appendChild(img);
         return card;
     };
@@ -51,11 +50,9 @@ function generateClientCards() {
         marqueeContent.appendChild(createCard(logo));
     });
 
-    // Duplicate logos for infinite scroll effect
     clientLogos.forEach(logo => {
         marqueeContent.appendChild(createCard(logo));
     });
 }
 
-// Generate cards when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', generateClientCards);
