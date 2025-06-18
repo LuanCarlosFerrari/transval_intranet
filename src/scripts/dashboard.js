@@ -60,11 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
         modalContent.innerHTML = ''; // Limpa o conteúdo anterior
 
         const fileListContainer = document.createElement('div');
-        fileListContainer.className = 'space-y-3';
-
-        files.forEach(file => {
+        fileListContainer.className = 'space-y-3'; files.forEach(file => {
             const fileItem = document.createElement('div');
-            fileItem.className = 'bg-white p-4 rounded-lg shadow-sm flex items-center space-x-4 hover:bg-blue-50 transition-colors duration-200 cursor-pointer';
+            fileItem.className = 'bg-white p-4 rounded-lg shadow-sm flex items-center justify-between hover:bg-blue-50 transition-colors duration-200';
+
+            const fileInfo = document.createElement('div');
+            fileInfo.className = 'flex items-center space-x-4';
 
             const icon = document.createElement('i');
             icon.className = `${getFileIconClass(file.name)} fa-2x`; // Aumenta o tamanho do ícone
@@ -73,8 +74,23 @@ document.addEventListener('DOMContentLoaded', () => {
             fileName.className = 'text-gray-800 font-medium';
             fileName.textContent = file.name;
 
-            fileItem.appendChild(icon);
-            fileItem.appendChild(fileName);
+            const downloadBtn = document.createElement('button');
+            downloadBtn.className = 'bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200';
+            downloadBtn.innerHTML = '<i class="fas fa-download"></i><span>Download</span>';
+            downloadBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Simula o download - em um app real, isso faria uma requisição ao servidor
+                const link = document.createElement('a');
+                link.href = `#`; // Em um app real, seria o caminho real do arquivo
+                link.download = file.name;
+                link.click();
+                console.log(`Download iniciado para: ${file.name}`);
+            });
+
+            fileInfo.appendChild(icon);
+            fileInfo.appendChild(fileName);
+            fileItem.appendChild(fileInfo);
+            fileItem.appendChild(downloadBtn);
             fileListContainer.appendChild(fileItem);
         });
 
