@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentos - Transval</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Documentos - Transval</title>    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
@@ -25,6 +24,14 @@
 
         <div id="file-browser" class="mt-8">
             <!-- As pastas e arquivos serão inseridos aqui via JavaScript -->
+            <noscript>
+                <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
+                    <strong>Aviso:</strong> JavaScript está desabilitado ou não está funcionando. Os documentos não serão exibidos.
+                </div>
+            </noscript>
+            <div id="loading-indicator" class="text-center text-white">
+                <i class="fas fa-spinner fa-spin"></i> Carregando documentos...
+            </div>
         </div>
     </div>
 

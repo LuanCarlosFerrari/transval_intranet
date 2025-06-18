@@ -1,9 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Dashboard script loaded successfully!');
+    
     const fileBrowser = document.getElementById('file-browser');
     const folderModal = document.getElementById('folder-modal');
     const modalTitle = document.getElementById('modal-title');
     const modalContent = document.getElementById('modal-content');
     const closeModalBtn = document.getElementById('close-folder-modal-btn');
+
+    // Verificar se os elementos existem
+    if (!fileBrowser) {
+        console.error('Element with ID "file-browser" not found');
+        return;
+    }
+    if (!folderModal) {
+        console.error('Element with ID "folder-modal" not found');
+        return;
+    }
 
     // Esta é uma estrutura de exemplo. Em um aplicativo real, 
     // você buscaria esses dados de um servidor.
@@ -77,6 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderBrowser(data) {
+        // Remove o indicador de carregamento
+        const loadingIndicator = document.getElementById('loading-indicator');
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'none';
+        }
+        
         fileBrowser.innerHTML = '';
         for (const folder in data) {
             const folderEl = document.createElement('div');
@@ -99,6 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
             folderEl.appendChild(openButton);
             fileBrowser.appendChild(folderEl);
         }
+        
+        console.log('Cards rendered successfully!');
     }
 
     closeModalBtn.addEventListener('click', closeModal);
