@@ -32,3 +32,30 @@ export const contactContent = {
         </form>
     `
 };
+
+export function initContact() {
+    const titleEl = document.getElementById('contact-title');
+    const descriptionEl = document.getElementById('contact-description');
+    const buttonEl = document.getElementById('contact-button');
+    const formContainerEl = document.getElementById('contact-form-container');
+
+    if (!titleEl || !descriptionEl || !buttonEl || !formContainerEl) {
+        return;
+    }
+
+    titleEl.textContent = contactContent.title;
+    descriptionEl.textContent = contactContent.description;
+    buttonEl.textContent = contactContent.buttonTextOpen;
+
+    buttonEl.addEventListener('click', () => {
+        const isHidden = formContainerEl.classList.contains('hidden');
+        if (isHidden) {
+            formContainerEl.innerHTML = contactContent.formHtml;
+            formContainerEl.classList.remove('hidden');
+        } else {
+            formContainerEl.innerHTML = '';
+            formContainerEl.classList.add('hidden');
+        }
+        buttonEl.textContent = isHidden ? contactContent.buttonTextClose : contactContent.buttonTextOpen;
+    });
+}

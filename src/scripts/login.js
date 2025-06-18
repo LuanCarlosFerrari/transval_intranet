@@ -1,37 +1,35 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const loginBtnDesktop = document.getElementById('login-btn-desktop');
-    const loginBtnMobile = document.getElementById('login-btn-mobile');
-    const loginModal = document.getElementById('login-modal');
-    const closeModalBtn = document.getElementById('close-modal-btn');
+const loginBtnDesktop = document.getElementById('login-btn-desktop');
+const loginBtnMobile = document.getElementById('login-btn-mobile');
+const loginModal = document.getElementById('login-modal');
+const closeModalBtn = document.getElementById('close-modal-btn');
 
-    const openModal = () => {
-        loginModal.classList.remove('hidden');
-        loginModal.classList.add('flex');
-    };
+const openModal = () => {
+    loginModal.classList.remove('hidden');
+    loginModal.classList.add('flex');
+};
 
-    const closeModal = () => {
-        loginModal.classList.add('hidden');
-        loginModal.classList.remove('flex');
-    };
+const closeModal = () => {
+    loginModal.classList.add('hidden');
+    loginModal.classList.remove('flex');
+};
 
-    loginBtnDesktop.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
-    });
+loginBtnDesktop.addEventListener('click', (e) => {
+    e.preventDefault();
+    openModal();
+});
 
-    loginBtnMobile.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
-    });
+loginBtnMobile.addEventListener('click', (e) => {
+    e.preventDefault();
+    openModal();
+});
 
-    closeModalBtn.addEventListener('click', () => {
+closeModalBtn.addEventListener('click', () => {
+    closeModal();
+});
+
+// Optional: Close modal by clicking outside of it
+loginModal.addEventListener('click', (e) => {
+    if (e.target === loginModal) {
         closeModal();
-    });
-
-    // Optional: Close modal by clicking outside of it
-    loginModal.addEventListener('click', (e) => {
-        if (e.target === loginModal) {
-            closeModal();
-        }
-    });
+    }
 });

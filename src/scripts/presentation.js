@@ -138,6 +138,63 @@ export const aboutContent = {
     }
 };
 
+export function initPresentation() {
+    const timelineContainer = document.getElementById('timeline-container');
+    if (timelineContainer) {
+        timelineContainer.innerHTML = aboutContent.timelineHtml;
+        // After inserting HTML, add event listeners for carousel
+        const prevButton = document.getElementById('prev-slide');
+        const nextButton = document.getElementById('next-slide');
+        const track = document.getElementById('timeline-carousel-track');
+
+        if (prevButton && nextButton && track) {
+            let currentIndex = 0;
+
+            const updateCarouselPosition = () => {
+                const slides = Array.from(track.children);
+                if (slides.length === 0) return;
+                const slideWidth = slides[0].getBoundingClientRect().width;
+                if (slideWidth === 0) return; // Or some other fallback
+                track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            };
+
+            nextButton.addEventListener('click', () => {
+                const slides = Array.from(track.children);
+                const totalSlides = slides.length;
+                if (totalSlides === 0) return;
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateCarouselPosition();
+            });
+
+            prevButton.addEventListener('click', () => {
+                const slides = Array.from(track.children);
+                const totalSlides = slides.length;
+                if (totalSlides === 0) return;
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateCarouselPosition();
+            });
+
+            window.addEventListener('resize', updateCarouselPosition);
+            // Initial call
+            setTimeout(updateCarouselPosition, 100);
+        }
+    }
+
+    const expandableContent = document.getElementById('expandable-transval-content');
+    if (expandableContent) {
+        expandableContent.innerHTML = aboutContent.presentation;
+    }
+
+    const toggleButton = document.getElementById('toggle-sobre-content');
+    if (toggleButton && expandableContent) {
+        toggleButton.addEventListener('click', () => {
+            const isHidden = expandableContent.classList.contains('hidden');
+            expandableContent.classList.toggle('hidden');
+            toggleButton.textContent = isHidden ? 'Mostrar menos' : 'Leia mais sobre a Transval';
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     function setupEventListeners() {
         const timelineCarouselContainer = document.getElementById('timeline-carousel-container');

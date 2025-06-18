@@ -26,7 +26,7 @@ const clientLogos = [
     'ype.png'
 ];
 
-function generateClientCards() {
+export function generateClientCards() {
     const marqueeContent = document.getElementById('marquee-content');
     if (!marqueeContent) {
         console.error('Marquee content element not found!');
@@ -54,5 +54,3 @@ function generateClientCards() {
         marqueeContent.appendChild(createCard(logo));
     });
 }
-
-document.addEventListener('DOMContentLoaded', generateClientCards);
