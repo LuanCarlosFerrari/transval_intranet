@@ -1,3 +1,32 @@
+// Função para injetar estilos CSS dinamicamente
+function injectStyles(css, id) {
+    // Verifica se o estilo já foi injetado
+    if (document.getElementById(id)) return;
+
+    const style = document.createElement('style');
+    style.id = id;
+    style.textContent = css;
+    document.head.appendChild(style);
+}
+
+// Injetar estilos específicos para animações de fadeIn
+injectStyles(`
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fadeIn {
+        animation: fadeIn 1s ease-out forwards;
+    }
+`, 'fadeIn-styles');
+
 const baseUrl = window.location.hostname === 'luancarlosferrari.github.io'
     ? '/transval-intranet-New'
     : '';

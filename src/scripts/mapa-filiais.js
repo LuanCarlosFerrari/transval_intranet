@@ -1,3 +1,25 @@
+// Função para injetar estilos CSS dinamicamente
+function injectStyles(css, id) {
+    // Verifica se o estilo já foi injetado
+    if (document.getElementById(id)) return;
+
+    const style = document.createElement('style');
+    style.id = id;
+    style.textContent = css;
+    document.head.appendChild(style);
+}
+
+// Injetar estilos específicos para controles do Leaflet
+injectStyles(`
+    .leaflet-control-container {
+        z-index: 700 !important;
+    }
+
+    .leaflet-control-zoom {
+        z-index: 700 !important;
+    }
+`, 'leaflet-styles');
+
 export function initFiliaisMap() {
     const mapContainer = document.getElementById('map');
     if (!mapContainer || mapContainer._leaflet_id) return;

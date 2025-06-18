@@ -1,3 +1,31 @@
+// Função para injetar estilos CSS dinamicamente
+function injectStyles(css, id) {
+    // Verifica se o estilo já foi injetado
+    if (document.getElementById(id)) return;
+
+    const style = document.createElement('style');
+    style.id = id;
+    style.textContent = css;
+    document.head.appendChild(style);
+}
+
+// Injetar estilos específicos para animação de marquee
+injectStyles(`
+    @keyframes marquee {
+        0% {
+            transform: translateX(-5%);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .animate-marquee {
+        animation: marquee 60s linear infinite;
+        display: flex;
+    }
+`, 'marquee-styles');
+
 const clientLogos = [
     'adufertil.png',
     'araguaia.png',
