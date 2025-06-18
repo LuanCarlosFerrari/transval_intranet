@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Dashboard script loaded successfully!');
-    
+
     const fileBrowser = document.getElementById('file-browser');
     const folderModal = document.getElementById('folder-modal');
     const modalTitle = document.getElementById('modal-title');
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (loadingIndicator) {
             loadingIndicator.style.display = 'none';
         }
-        
+
         fileBrowser.innerHTML = '';
         for (const folder in data) {
             const folderEl = document.createElement('div');
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             folderEl.appendChild(openButton);
             fileBrowser.appendChild(folderEl);
         }
-        
+
         console.log('Cards rendered successfully!');
     }
 
