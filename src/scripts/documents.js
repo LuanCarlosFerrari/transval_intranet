@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         lastModified: file.updated_at || file.created_at,
                         bucketName: bucket.name,
                         fullPath: file.name
-                    }));                    console.log(`📁 Arquivos processados do bucket ${bucket.name}:`, fileItems);
+                    })); console.log(`📁 Arquivos processados do bucket ${bucket.name}:`, fileItems);
 
                     // Sempre incluir o bucket, mesmo se parecer vazio
                     // Isso permite que o usuário explore buckets que podem ter subpastas
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         bucketsData[bucket.name] = fileItems;
                     } else {
                         // Incluir bucket "vazio" com placeholder para exploração
-                        bucketsData[bucket.name] = []; 
+                        bucketsData[bucket.name] = [];
                         console.warn(`⚠️ Bucket ${bucket.name} tem ${files.length} itens, mas nenhum passou no filtro de arquivos`);
 
                         // Se há itens mas nenhum passou no filtro, mostrar detalhes
@@ -410,7 +410,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             `;
         }
-    }    async function openModal(folderName, files) {
+    } async function openModal(folderName, files) {
         modalTitle.textContent = `${folderName.toUpperCase()} (${files.length} arquivo${files.length !== 1 ? 's' : ''})`;
         modalContent.innerHTML = ''; // Limpa o conteúdo anterior
 
@@ -494,10 +494,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             const folderIcon = document.createElement('div');
             folderIcon.className = 'mb-4';
             folderIcon.innerHTML = '<i class="fas fa-folder text-blue-500 text-4xl"></i>';
-            folderEl.appendChild(folderIcon);            const folderTitle = document.createElement('h2');
+            folderEl.appendChild(folderIcon); const folderTitle = document.createElement('h2');
             folderTitle.className = 'text-xl font-bold text-gray-800 mb-2 text-center';
             folderTitle.textContent = folder.toUpperCase();
-            folderEl.appendChild(folderTitle);const fileCount = document.createElement('p');
+            folderEl.appendChild(folderTitle); const fileCount = document.createElement('p');
             fileCount.className = 'text-gray-600 text-sm mb-4 text-center';
             const count = data[folder].length;
             if (count === 0) {
