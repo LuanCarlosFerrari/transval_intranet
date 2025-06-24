@@ -216,24 +216,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                         lastModified: file.updated_at || file.created_at,
                         bucketName: bucket.name,
                         fullPath: file.name
-                    }));
+                    }));                    console.log(`📁 Arquivos processados do bucket ${bucket.name}:`, fileItems);
 
-                    console.log(`📁 Arquivos processados do bucket ${bucket.name}:`, fileItems);
-
+                    // Sempre incluir o bucket, mesmo se parecer vazio
+                    // Isso permite que o usuário explore buckets que podem ter subpastas
                     if (fileItems.length > 0) {
                         bucketsData[bucket.name] = fileItems;
                     } else {
+                        // Incluir bucket "vazio" com placeholder para exploração
+                        bucketsData[bucket.name] = []; 
                         console.warn(`⚠️ Bucket ${bucket.name} tem ${files.length} itens, mas nenhum passou no filtro de arquivos`);
 
                         // Se há itens mas nenhum passou no filtro, mostrar detalhes
                         if (files.length > 0) {
                             console.log(`🔍 Itens que não passaram no filtro:`, files);
-                            loadingIndicator.innerHTML = `
-                                <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-4">
-                                    <strong>Bucket "${bucket.name}":</strong> Encontrados ${files.length} itens, mas podem ser pastas ou ter problemas de filtro.
-                                    <br>Verifique o console para detalhes.
-                                </div>
-                            `;
                         }
                     }
                 } catch (error) {
@@ -414,10 +410,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             `;
         }
-    }
-
-    async function openModal(folderName, files) {
-        modalTitle.textContent = `${folderName} (${files.length} arquivo${files.length !== 1 ? 's' : ''})`;
+    }    async function openModal(folderName, files) {
+        modalTitle.textContent = `${folderName.toUpperCase()} (${files.length} arquivo${files.length !== 1 ? 's' : ''})`;
         modalContent.innerHTML = ''; // Limpa o conteúdo anterior
 
         const fileListContainer = document.createElement('div');
@@ -500,17 +494,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             const folderIcon = document.createElement('div');
             folderIcon.className = 'mb-4';
             folderIcon.innerHTML = '<i class="fas fa-folder text-blue-500 text-4xl"></i>';
-            folderEl.appendChild(folderIcon);
-
-            const folderTitle = document.createElement('h2');
+            folderEl.appendChild(folderIcon);            const folderTitle = document.createElement('h2');
             folderTitle.className = 'text-xl font-bold text-gray-800 mb-2 text-center';
-            folderTitle.textContent = folder;
-            folderEl.appendChild(folderTitle);
-
-            const fileCount = document.createElement('p');
+            folderTitle.textContent = folder.toUpperCase();
+            folderEl.appendChild(folderTitle);const fileCount = document.createElement('p');
             fileCount.className = 'text-gray-600 text-sm mb-4 text-center';
             const count = data[folder].length;
-            fileCount.textContent = `${count} arquivo${count !== 1 ? 's' : ''}`;
+            if (count === 0) {
+                fileCount.textContent = 'Explorar pasta';
+            } else {
+                fileCount.textContent = `${count} arquivo${count !== 1 ? 's' : ''}`;
+            }
             folderEl.appendChild(fileCount);
 
             const openButton = document.createElement('button');
