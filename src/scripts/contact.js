@@ -45,17 +45,65 @@ export function initContact() {
 
     titleEl.textContent = contactContent.title;
     descriptionEl.textContent = contactContent.description;
-    buttonEl.textContent = contactContent.buttonTextOpen;
-
-    buttonEl.addEventListener('click', () => {
+    buttonEl.textContent = contactContent.buttonTextOpen; buttonEl.addEventListener('click', () => {
         const isHidden = formContainerEl.classList.contains('hidden');
         if (isHidden) {
             formContainerEl.innerHTML = contactContent.formHtml;
             formContainerEl.classList.remove('hidden');
+
+            // Adicionar event listener para o formulário
+            const form = document.getElementById('cotacao-form');
+            if (form) {
+                form.addEventListener('submit', handleFormSubmit);
+            }
         } else {
             formContainerEl.innerHTML = '';
             formContainerEl.classList.add('hidden');
         }
         buttonEl.textContent = isHidden ? contactContent.buttonTextClose : contactContent.buttonTextOpen;
     });
+}
+
+function handleFormSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const nome = formData.get('nome');
+    const email = formData.get('email');
+    const telefone = formData.get('telefone');
+    const mensagem = formData.get('mensagem');
+
+    // Criar mensagem para WhatsApp
+    const whatsappMessage = `*Solicitação de Cotação - Transval*
+
+*Nome:* ${nome}
+*Email:* ${email}
+*Telefone:* ${telefone || 'Não informado'}
+
+*Mensagem:*
+${mensagem}`;
+
+    // Número do WhatsApp da Transval
+    const whatsappNumber = '+55 18 98185-0214';
+
+    // Encode da mensagem para URL
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+
+    // Criar URL do WhatsApp
+    const whatsappURL = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+
+    // Abrir WhatsApp
+    window.open(whatsappURL, '_blank');
+
+    // Limpar formulário
+    e.target.reset();
+
+    // Fechar formulário
+    const formContainer = document.getElementById('contact-form-container');
+    const button = document.getElementById('contact-button');
+    if (formContainer && button) {
+        formContainer.innerHTML = '';
+        formContainer.classList.add('hidden');
+        button.textContent = contactContent.buttonTextOpen;
+    }
 }
