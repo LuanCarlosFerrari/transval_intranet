@@ -493,11 +493,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Criar container para grid de duas colunas
         const gridContainer = document.createElement('div');
-        gridContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-6';
-
-        for (const folder in data) {
+        gridContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-6'; for (const folder in data) {
             const folderEl = document.createElement('div');
-            folderEl.className = 'bg-white p-6 rounded-lg shadow-md flex flex-col items-center hover:shadow-lg transition-shadow duration-300';
+            folderEl.className = 'bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex flex-col items-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer';
 
             const folderIcon = document.createElement('div');
             folderIcon.className = 'mb-4';
