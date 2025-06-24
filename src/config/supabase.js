@@ -133,3 +133,162 @@ export const onAuthStateChange = async (callback) => {
 
     return client.auth.onAuthStateChange(callback);
 }
+
+// STORAGE FUNCTIONS - Para acessar buckets e arquivos
+
+// Função para listar todos os buckets
+export const listBuckets = async () => {
+    await waitForSupabase();
+    const client = getSupabaseClient();
+    if (!client) {
+        throw new Error('Supabase não configurado');
+    }
+
+    try {
+        console.log('🔍 Tentando listar buckets...');
+        const { data, error } = await client.storage.listBuckets();
+
+        if (error) {
+            console.error('❌ Erro ao listar buckets:', error);
+            throw error;
+        }
+
+        console.log('✅ Buckets listados com sucesso:', data);
+        return data;
+    } catch (error) {
+        console.error('❌ Erro ao listar buckets:', error);
+
+        // Se for erro de autenticação, fornecer mais detalhes
+        if (error.message?.includes('not authenticated') || error.status === 401) {
+            throw new Error('Usuário não autenticado. Faça login novamente.');
+        }
+
+        // Se for erro de permissão
+        if (error.message?.includes('permission') || error.status === 403) {
+            throw new Error('Sem permissão para acessar buckets. Verifique as políticas RLS no Supabase.');
+        }
+
+        throw error;
+    }
+}
+
+// Função para listar arquivos em um bucket específico
+export const listFilesInBucket = async (bucketName, path = '') => {
+    await waitForSupabase();
+    const client = getSupabaseClient();
+    if (!client) {
+        throw new Error('Supabase não configurado');
+    }
+
+    try {
+        console.log(`🔍 Tentando listar arquivos no bucket: ${bucketName}, path: ${path}`);
+
+        const { data, error } = await client.storage
+            .from(bucketName)
+            .list(path, {
+                limit: 100,
+                offset: 0,
+                sortBy: { column: 'name', order: 'asc' }
+            });
+
+        if (error) {
+            console.error(`❌ Erro ao listar arquivos no bucket ${bucketName}:`, error);
+            throw error;
+        }
+
+        console.log(`✅ Arquivos listados no bucket ${bucketName}:`, data);
+        return data;
+    } catch (error) {
+        console.error(`❌ Erro ao listar arquivos no bucket ${bucketName}:`, error);
+
+        // Se for erro de autenticação
+        if (error.message?.includes('not authenticated') || error.status === 401) {
+            throw new Error('Usuário não autenticado. Faça login novamente.');
+        }
+
+        // Se for erro de permissão
+        if (error.message?.includes('permission') || error.status === 403) {
+            throw new Error(`Sem permissão para acessar bucket '${bucketName}'. Verifique as políticas RLS.`);
+        }
+
+        // Se bucket não existir
+        if (error.message?.includes('not found') || error.status === 404) {
+            throw new Error(`Bucket '${bucketName}' não encontrado.`);
+        }
+
+        throw error;
+    }
+}
+
+// Função para obter URL pública de um arquivo
+export const getPublicUrl = (bucketName, filePath) => {
+    const client = getSupabaseClient();
+    if (!client) {
+        throw new Error('Supabase não configurado');
+    }
+
+    const { data } = client.storage
+        .from(bucketName)
+        .getPublicUrl(filePath);
+
+    return data.publicUrl;
+}
+
+// Função para obter URL assinada (para buckets privados)
+export const getSignedUrl = async (bucketName, filePath, expiresIn = 3600) => {
+    await waitForSupabase();
+    const client = getSupabaseClient();
+    if (!client) {
+        throw new Error('Supabase não configurado');
+    }
+
+    try {
+        const { data, error } = await client.storage
+            .from(bucketName)
+            .createSignedUrl(filePath, expiresIn, {
+                download: true // Força download ao invés de visualização
+            });
+
+        if (error) {
+            throw error;
+        }
+        return data.signedUrl;
+    } catch (error) {
+        console.error(`Erro ao obter URL assinada para ${filePath}:`, error);
+        throw error;
+    }
+}
+
+// Função para fazer download de um arquivo
+export const downloadFile = async (bucketName, filePath) => {
+    await waitForSupabase();
+    const client = getSupabaseClient();
+    if (!client) {
+        throw new Error('Supabase não configurado');
+    }
+
+    try {
+        const { data, error } = await client.storage
+            .from(bucketName)
+            .download(filePath);
+
+        if (error) {
+            throw error;
+        }
+        return data;
+    } catch (error) {
+        console.error(`Erro ao fazer download do arquivo ${filePath}:`, error);
+        throw error;
+    }
+}
+
+// Função para verificar se um bucket existe
+export const bucketExists = async (bucketName) => {
+    try {
+        const buckets = await listBuckets();
+        return buckets.some(bucket => bucket.name === bucketName);
+    } catch (error) {
+        console.error(`Erro ao verificar se o bucket ${bucketName} existe:`, error);
+        return false;
+    }
+}
