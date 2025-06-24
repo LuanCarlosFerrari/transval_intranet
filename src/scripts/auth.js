@@ -61,31 +61,7 @@ function setupLogoutButton() {
     logoutButtons.forEach(button => {
         button.addEventListener('click', handleLogout);
     });
-
-    // Se não houver botão de logout, criar um
-    if (logoutButtons.length === 0) {
-        createLogoutButton();
-    }
 }
-
-// Função para criar um botão de logout se não existir
-function createLogoutButton() {
-    const logoutButton = document.createElement('button');
-    logoutButton.id = 'logout-btn';
-    logoutButton.className = 'bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors duration-200';
-    logoutButton.innerHTML = '<i class="fas fa-sign-out-alt mr-2"></i>Sair';
-    logoutButton.addEventListener('click', handleLogout);
-
-    // Tentar adicionar o botão em um local apropriado
-    const header = document.querySelector('header');
-    const nav = document.querySelector('nav');
-    const container = header || nav || document.body;
-
-    if (container) {
-        container.appendChild(logoutButton);
-    }
-}
-
 // Função para lidar com o logout
 async function handleLogout(event) {
     event.preventDefault();
