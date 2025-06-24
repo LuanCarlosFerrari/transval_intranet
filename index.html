@@ -41,15 +41,16 @@
         class="md:hidden text-white text-2xl focus:outline-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <i class="fas fa-bars"></i>
       </button>
-    </div>
-    <!-- Mobile Menu Dropdown -->
+    </div> <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden bg-blue-950 text-white px-6 py-4 space-y-4">
       <a href="#sobre" class="block hover:text-[#ff5d29]">Sobre nós</a>
       <a href="#cobertura" class="block hover:text-[#ff5d29]">Cobertura</a>
       <a href="#clientes" class="block hover:text-[#ff5d29]">Clientes</a>
       <a href="#segmentos" class="block hover:text-[#ff5d29]">Segmentos</a>
-      <a href="#contato" class="block hover:text-[#ff5d29]">Contato</a> <a href="Assets/lgpd.pdf" download="lgpd.pdf"
-        class="block hover:text-[#ff5d29]">LGPD</a> <a href="#login" id="login-btn-mobile"
+      <a href="#contato" class="block hover:text-[#ff5d29]">Contato</a>
+      <a href="Assets/lgpd.pdf" download="lgpd.pdf" class="block hover:text-[#ff5d29]">LGPD</a>
+
+      <a href="#login" id="login-btn-mobile"
         class="block bg-[#01a1ef] hover:bg-[#008bd1] text-white px-6 py-3 rounded-full text-center font-bold w-[90px] h-[44px] flex items-center justify-center mx-auto">Login</a>
     </div>
     <script>
@@ -59,6 +60,7 @@
     </script>
   </header>
   <!-- HEADER END -->
+
   <!-- BANNER START -->
   <img src="Assets/banner.svg" alt="Banner Decorativo" class="absolute top-0 right-0 z-[900] hidden sm:block
          max-w-[16rem] md:max-w-[20rem] lg:max-w-[24rem] xl:max-w-[28rem] 2xl:max-w-[32rem]
@@ -83,8 +85,7 @@
       </h1>
       <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 animate-fadeIn delay-150">
         Conectando regiões, impulsionando o seu negócio
-      </p>
-      <a href="#contato"
+      </p> <a href="#contato"
         class="inline-block bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600
              text-white font-semibold px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg shadow-lg transition-all duration-300">
         Solicitar Cotação
@@ -131,30 +132,66 @@
   <section id="contato" class="py-20 px-6 bg-gray-100 text-center">
     <div class="max-w-3xl mx-auto">
       <h2 id="contact-title" class="text-4xl font-bold mb-4 text-gray-800"></h2>
-      <p id="contact-description" class="text-lg mb-6 text-gray-700"></p>
-      <button id="contact-button"
+      <p id="contact-description" class="text-lg mb-6 text-gray-700"></p> <button id="contact-button"
         class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold px-8 py-4 rounded-full text-lg shadow-lg transition-all duration-300"></button>
+      <!-- System Buttons -->
+      <div class="mt-6 grid grid-cols-3 gap-4 max-w-md mx-auto">
+        <!-- CF à esquerda -->
+        <a href="https://websaf.intersite.com.br:8182/emonitorws/valida/cf/" target="_blank" rel="noopener noreferrer"
+          class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-3 py-2 rounded-full font-semibold transition-all duration-300 text-xs shadow-lg text-center">
+          Validação CF
+        </a>
+
+        <!-- CH no centro (alinhado com Solicitar Cotação) -->
+        <a href="https://websaf.intersite.com.br:8182/emonitorws/valida/ch/" target="_blank" rel="noopener noreferrer"
+          class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-3 py-2 rounded-full font-semibold transition-all duration-300 text-xs shadow-lg text-center">
+          Validação CH
+        </a>
+
+        <!-- SiteSat à direita -->
+        <a href="http://sitesat.transval.net.br:54321/sitesat2/logins.jsf?dswid=9363" target="_blank"
+          rel="noopener noreferrer"
+          class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-3 py-2 rounded-full font-semibold transition-all duration-300 text-xs shadow-lg text-center">
+          SiteSat
+        </a>
+      </div>
+
       <div id="contact-form-container" class="hidden mt-8"></div>
     </div>
   </section>
-  <!-- CONTACT SECTION END -->
-
-  <!-- METRICS SECTION START -->
+  <!-- CONTACT SECTION END --> <!-- METRICS SECTION START -->
   <section id="metricas" class="py-20 px-6 bg-blue-950 text-white">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-10 tracking-wide">Indicadores e Certificações</h2>
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <p class="text-2xl font-bold">+200 Caminhões</p>
+
+      <!-- Certificações -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold mb-8 text-gray-300">Nossas Certificações</h3>
+        <div class="flex justify-center items-center gap-12 flex-wrap">
+          <div class="bg-white rounded-lg p-2 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <img src="Assets/GMP+.png" alt="GMP+ Certificação" class="h-40 w-auto mx-auto object-contain">
+          </div>
+          <div class="bg-white rounded-lg p-2 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <img src="Assets/Sassmaq.png" alt="Sassmaq Certificação" class="h-40 w-auto mx-auto object-contain">
+          </div>
         </div>
-        <div>
-          <p class="text-2xl font-bold">+10.000 Veículos</p>
-        </div>
-        <div>
-          <p class="text-2xl font-bold">12 Estados</p>
-        </div>
-        <div>
-          <p class="text-2xl font-bold">+600 Colaboradores</p>
+      </div>
+
+      <!-- Indicadores -->
+      <div class="border-t border-blue-800 pt-12">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <p class="text-2xl font-bold">+200 Caminhões</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold">+10.000 Veículos</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold">12 Estados</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold">+600 Colaboradores</p>
+          </div>
         </div>
       </div>
     </div>
