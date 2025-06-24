@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Transval</title>
+    <link rel="icon" type="image/png" href="Assets/logo-branca-transval.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body class="font-sans text-base text-gray-800 bg-gray-100 pt-16 md:pt-20">
+    <!-- HEADER START -->
+    <header
+        class="fixed top-0 left-0 w-full z-[702] bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-95 shadow-lg">
+        <!-- Logout Button (Left) -->
+        <div class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 pl-4 z-50">
+            <a href="index.html"
+                class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full font-bold transition-all duration-300 w-[90px] h-[44px] flex items-center justify-center">
+                <i class="fas fa-sign-out-alt mr-1"></i>Sair
+            </a>
+        </div>
+
+        <div class="container mx-auto flex justify-center items-center py-4 px-6 relative"> <!-- Logo/Title (Center) -->
+            <div class="flex items-center">
+                <span class="text-white text-3xl font-bold">Dashboard Transval</span>
+            </div>
+
+            <!-- Hamburger Menu Button (Mobile) -->
+            <button id="mobile-menu-btn"
+                class="md:hidden text-white text-2xl focus:outline-none absolute right-4 top-1/2 -translate-y-1/2">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div> <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-950 text-white px-6 py-4">
+            <div class="flex items-center justify-center mb-4">
+                <span class="text-white text-2xl font-bold">Dashboard Transval</span>
+            </div>
+            <a href="index.html"
+                class="block bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full text-center font-bold transition-all duration-300">
+                <i class="fas fa-sign-out-alt mr-2"></i>Sair
+            </a>
+        </div>
+    </header>
+    <!-- HEADER END -->
+
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Formulários da Plataforma Weeke</h1>
+            <p class="text-gray-600">Selecione um formulário para abrir um ticket no sistema da plataforma Weeke</p>
+        </div><!-- CARDS GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            <!-- JURÍDICO -->
+            <a href="https://manager.s33.weeke.app/transval/token/d35f4537f057e74c7184db88a1545bc6&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-gavel text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">JURÍDICO</h3>
+                    <p class="text-sm text-gray-600">Gestão de documentos e processos jurídicos</p>
+                </div>
+            </a>
+
+            <!-- OFICINA RINÓPOLIS -->
+            <a href="https://manager.s33.weeke.app/transval/token/3976b26d2c107569c0a5941f8b0f46f1&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-tools text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">OFICINA RINÓPOLIS</h3>
+                    <p class="text-sm text-gray-600">Manutenção e reparos de veículos</p>
+                </div>
+            </a>
+
+            <!-- GARAGEM RINÓPOLIS -->
+            <a href="https://manager.s33.weeke.app/transval/token/ba8197f33b0457d2f05bd24d79f4aba5&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-warehouse text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">GARAGEM RINÓPOLIS</h3>
+                    <p class="text-sm text-gray-600">Controle da frota e estacionamento</p>
+                </div>
+            </a>
+
+            <!-- ESTADIA -->
+            <a href="https://manager.s33.weeke.app/transval/token/2aee044c528885e488d729598f94c665&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-clock text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">ESTADIA</h3>
+                    <p class="text-sm text-gray-600">Controle de tempo e permanência</p>
+                </div>
+            </a>
+
+            <!-- OPERAÇÃO PA -->
+            <a href="https://manager.s33.weeke.app/transval/token/840e7e3bb6d385159b9ec45e1bb40572&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-shipping-fast text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">OPERAÇÃO PA</h3>
+                    <p class="text-sm text-gray-600">Operações no Pará</p>
+                </div>
+            </a>
+
+            <!-- RH RECRUTAMENTO -->
+            <a href="https://manager.s33.weeke.app/transval/token/15ffdf6ed9544dbfbd1b91d20a82ce78&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">RH RECRUTAMENTO</h3>
+                    <p class="text-sm text-gray-600">Recursos humanos e contratações</p>
+                </div>
+            </a>
+
+            <!-- AJUSTES SAT -->
+            <a href="https://manager.s33.weeke.app/transval/token/0148fd33ebf803a918a8fd8e6547bf23&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-satellite text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">AJUSTES SAT</h3>
+                    <p class="text-sm text-gray-600">Configurações do sistema de rastreamento</p>
+                </div>
+            </a>
+
+            <!-- CADASTRO CLIENTES -->
+            <a href="https://manager.s33.weeke.app/transval/token/e58a8083ec4e816762668812579f6c58&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-user-plus text-teal-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">CADASTRO CLIENTES</h3>
+                    <p class="text-sm text-gray-600">Gestão de clientes e cadastros</p>
+                </div>
+            </a>
+
+            <!-- PAGAMENTOS -->
+            <a href="https://manager.s33.weeke.app/transval/token/57f3665dd258ffbe0e9ff3bf3bcd4b7f&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-credit-card text-emerald-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">PAGAMENTOS</h3>
+                    <p class="text-sm text-gray-600">Pedágio, frete, CIOT e carta frete</p>
+                </div>
+            </a>
+
+            <!-- QUITAÇÃO DE FRETE -->
+            <a href="https://manager.s33.weeke.app/transval/token/4c1f4c02531d23a2645d091ce3c826f8&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-cyan-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-receipt text-cyan-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">QUITAÇÃO DE FRETE</h3>
+                    <p class="text-sm text-gray-600">Controle de pagamentos de frete</p>
+                </div>
+            </a>
+
+            <!-- CANCELAMENTO DE CHEQUE -->
+            <a href="https://manager.s33.weeke.app/transval/token/baf98073f0d3b2eee618ba64b5a0351a&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-rose-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-ban text-rose-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">CANCELAMENTO DE CHEQUE</h3>
+                    <p class="text-sm text-gray-600">Cancelamento e controle de cheques</p>
+                </div>
+            </a>
+
+            <!-- PEDIDO -->
+            <a href="https://manager.s33.weeke.app/transval/token/62d15ce820710c74436e7b36436e0264&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-truck text-amber-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">PEDIDO</h3>
+                    <p class="text-sm text-gray-600">Gestão de pedidos e solicitações</p>
+                </div>
+            </a>
+
+            <!-- SUPORTE TI -->
+            <a href="https://manager.s33.weeke.app/transval/token/fc7156077d156d87dcbeec80600a6e64&op=cadastrar"
+                target="_blank"
+                class="bg-white rounded-xl shadow-md card-hover transition-all duration-300 p-6 border border-gray-200 block text-decoration-none">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-laptop text-slate-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">SUPORTE TI</h3>
+                    <p class="text-sm text-gray-600">Suporte técnico e sistemas</p>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- QUICK ACCESS SECTION -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Acesso Rápido</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Documents Access -->
+                <a href="documents.html"
+                    class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
+                    <div class="flex items-center">
+                        <i class="fas fa-folder-open text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold">Documentos</h3>
+                            <p class="text-blue-100">Acesso aos arquivos e documentos</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- System Links -->
+                <a href="https://websaf.intersite.com.br:8182/emonitorws/valida/ch/" target="_blank"
+                    class="bg-gradient-to-r from-orange-500 to-red-500 rounded-xl shadow-lg p-6 text-white hover:from-orange-600 hover:to-red-600 transition-all duration-300 transform hover:scale-105">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold">Validação CH</h3>
+                            <p class="text-orange-100">Sistema de validação</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- SiteSat -->
+                <a href="http://sitesat.transval.net.br:54321/sitesat2/logins.jsf?dswid=9363" target="_blank"
+                    class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl shadow-lg p-6 text-white hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105">
+                    <div class="flex items-center">
+                        <i class="fas fa-satellite-dish text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold">SiteSat</h3>
+                            <p class="text-green-100">Sistema de rastreamento</p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </main> <!-- SCRIPTS -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

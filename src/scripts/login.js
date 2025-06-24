@@ -94,13 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === loginModal) {
             closeModal();
         }
-    });
-
-    // Handle login form submission
+    });    // Handle login form submission
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault(); // Impede o envio padrão do formulário
-        console.log('Redirecionando para documents.html');
+        console.log('Redirecionando para dashboard.html');
         // Adicione aqui a lógica de validação de usuário e senha, se necessário
-        window.location.href = 'documents.html'; // Redireciona para a página de documentos
+        window.location.href = 'dashboard.html'; // Redireciona para a página do dashboard
     });
 });
