@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Storage - Transval</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Teste de Storage do Supabase</h1>
+
+        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-bold mb-4">Status da Conexão</h2>
+            <div id="connection-status" class="mb-4">
+                <p class="text-gray-600">Verificando conexão...</p>
+            </div>
+            <button id="test-connection" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Testar Conexão
+            </button>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-bold mb-4">Teste de Autenticação</h2>
+            <div id="auth-status" class="mb-4">
+                <p class="text-gray-600">Verificando autenticação...</p>
+            </div>
+            <button id="test-auth" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                Testar Autenticação
+            </button>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-bold mb-4">Teste de Buckets</h2>
+            <div id="buckets-status" class="mb-4">
+                <p class="text-gray-600">Clique para testar...</p>
+            </div>
+            <button id="test-buckets" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
+                Listar Buckets
+            </button>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Logs Detalhados</h2>
+            <div id="detailed-logs" class="bg-gray-100 p-4 rounded text-sm font-mono max-h-96 overflow-y-auto">
+                <p>Logs aparecerão aqui...</p>
+            </div>
+            <button id="clear-logs" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                Limpar Logs
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        import {
+            listBuckets,
+            listFilesInBucket,
+            isAuthenticated,
+            getCurrentUser
+        } from './src/config/supabase.js';
+
+        const connectionStatus = document.getElementById('connection-status');
+        const authStatus = document.getElementById('auth-status');
+        const bucketsStatus = document.getElementById('buckets-status');
+        const detailedLogs = document.getElementById('detailed-logs');
+
+        // Função para adicionar log
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = {
+                info: 'text-blue-600',
+                success: 'text-green-600',
+                error: 'text-red-600',
+                warning: 'text-yellow-600'
+            };
+
+            const logEntry = document.createElement('div');
+            logEntry.className = colors[type];
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            detailedLogs.appendChild(logEntry);
+            detailedLogs.scrollTop = detailedLogs.scrollHeight;
+        }
+
+        // Teste de conexão
+        document.getElementById('test-connection').addEventListener('click', async () => {
+            try {
+                connectionStatus.innerHTML = '<p class="text-blue-600">Testando conexão...</p>';
+                addLog('Testando conexão com Supabase...', 'info');
+
+                if (window.supabase) {
+                    connectionStatus.innerHTML = '<p class="text-green-600">✅ Supabase carregado com sucesso!</p>';
+                    addLog('✅ Biblioteca Supabase carregada', 'success');
+                } else {
+                    connectionStatus.innerHTML = '<p class="text-red-600">❌ Erro: Supabase não carregado</p>';
+                    addLog('❌ Biblioteca Supabase não encontrada', 'error');
+                }
+            } catch (error) {
+                connectionStatus.innerHTML = `<p class="text-red-600">❌ Erro: ${error.message}</p>`;
+                addLog(`❌ Erro de conexão: ${error.message}`, 'error');
+            }
+        });
+
+        // Teste de autenticação
+        document.getElementById('test-auth').addEventListener('click', async () => {
+            try {
+                authStatus.innerHTML = '<p class="text-blue-600">Verificando autenticação...</p>';
+                addLog('Verificando status de autenticação...', 'info');
+
+                const isAuth = await isAuthenticated();
+                const user = await getCurrentUser();
+
+                if (isAuth && user) {
+                    authStatus.innerHTML = `
+                        <div class="text-green-600">
+                            <p>✅ Usuário autenticado!</p>
+                            <p class="text-sm mt-1">Email: ${user.email}</p>
+                            <p class="text-sm">ID: ${user.id}</p>
+                        </div>
+                    `;
+                    addLog(`✅ Usuário autenticado: ${user.email}`, 'success');
+                } else {
+                    authStatus.innerHTML = '<p class="text-red-600">❌ Usuário não autenticado</p>';
+                    addLog('❌ Usuário não autenticado', 'error');
+                }
+            } catch (error) {
+                authStatus.innerHTML = `<p class="text-red-600">❌ Erro: ${error.message}</p>`;
+                addLog(`❌ Erro de autenticação: ${error.message}`, 'error');
+            }
+        });
+
+        // Teste de buckets
+        document.getElementById('test-buckets').addEventListener('click', async () => {
+            try {
+                bucketsStatus.innerHTML = '<p class="text-blue-600">Listando buckets...</p>';
+                addLog('Tentando listar buckets...', 'info');
+
+                const buckets = await listBuckets();
+
+                if (buckets && buckets.length > 0) {
+                    const bucketsList = buckets.map(b => `<li class="ml-4">• ${b.name} (${b.public ? 'Público' : 'Privado'})</li>`).join('');
+                    bucketsStatus.innerHTML = `
+                        <div class="text-green-600">
+                            <p>✅ ${buckets.length} bucket(s) encontrado(s):</p>
+                            <ul class="mt-2">${bucketsList}</ul>
+                        </div>
+                    `;
+                    addLog(`✅ ${buckets.length} buckets encontrados`, 'success');
+
+                    // Testar cada bucket
+                    for (const bucket of buckets) {
+                        try {
+                            addLog(`Testando bucket: ${bucket.name}`, 'info');
+                            const files = await listFilesInBucket(bucket.name);
+                            addLog(`✅ Bucket ${bucket.name}: ${files.length} itens encontrados`, 'success');
+                        } catch (error) {
+                            addLog(`❌ Erro no bucket ${bucket.name}: ${error.message}`, 'error');
+                        }
+                    }
+                } else {
+                    bucketsStatus.innerHTML = '<p class="text-yellow-600">⚠️ Nenhum bucket encontrado</p>';
+                    addLog('⚠️ Nenhum bucket encontrado', 'warning');
+                }
+            } catch (error) {
+                bucketsStatus.innerHTML = `<p class="text-red-600">❌ Erro: ${error.message}</p>`;
+                addLog(`❌ Erro ao listar buckets: ${error.message}`, 'error');
+            }
+        });
+
+        // Limpar logs
+        document.getElementById('clear-logs').addEventListener('click', () => {
+            detailedLogs.innerHTML = '<p>Logs limpos...</p>';
+        });
+
+        // Executar testes automaticamente ao carregar
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('test-connection').click();
+                setTimeout(() => {
+                    document.getElementById('test-auth').click();
+                }, 1000);
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,3 +1,7 @@
+import { signIn, signOut, isAuthenticated, getCurrentUser, onAuthStateChange } from '../config/supabase.js';
+
+console.log('Login script carregado');
+
 // Função para criar o modal de login dinamicamente
 function createLoginModal() {
     const modalHTML = `
@@ -16,34 +20,40 @@ function createLoginModal() {
                         </svg>
                     </button>
                 </div>
-                <form id="login-form" class="space-y-6">
-                    <div>
-                        <label for="username" class="block text-gray-700 text-sm font-semibold mb-2">Usuário</label>
+                <form id="login-form" class="space-y-6">                    <div>
+                        <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">E-mail</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-user text-gray-400"></i>
+                                <i class="fas fa-envelope text-gray-400"></i>
                             </div>
-                            <input type="text" id="username" name="username"
+                            <input type="email" id="email" name="email" required
                                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
-                                placeholder="Digite seu usuário">
+                                placeholder="Digite seu e-mail">
                         </div>
                     </div>
                     <div>
-                        <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Senha</label>
-                        <div class="relative">
+                        <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Senha</label>                        <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-lock text-gray-400"></i>
                             </div>
-                            <input type="password" id="password" name="password"
+                            <input type="password" id="password" name="password" required
                                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
                                 placeholder="Digite sua senha">
                         </div>
-                    </div>
-                    <button type="submit"
-                        class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                        <i class="fas fa-sign-in-alt mr-2"></i>
-                        Entrar
+                    </div>                    <button type="submit" id="login-submit-btn"
+                        class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span id="login-button-text">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Entrar
+                        </span>
+                        <span id="login-button-loading" class="hidden">
+                            <i class="fas fa-spinner fa-spin mr-2"></i>
+                            Entrando...
+                        </span>
                     </button>
+                    <div id="login-error" class="hidden mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+                        <!-- Mensagens de erro aparecerão aqui -->
+                    </div>
                 </form>
                 <div class="mt-6 text-center">
                     <p class="text-xs text-gray-500">Acesso exclusivo para funcionários autorizados</p>
@@ -56,49 +66,144 @@ function createLoginModal() {
 }
 
 // Criar o modal quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', () => {
-    createLoginModal();
+document.addEventListener('DOMContentLoaded', async () => {
+    console.log('DOM carregado, iniciando sistema de login');
 
-    // Agora que o modal foi criado, podemos selecionar os elementos
-    const loginBtnDesktop = document.getElementById('login-btn-desktop');
-    const loginBtnMobile = document.getElementById('login-btn-mobile');
-    const loginModal = document.getElementById('login-modal');
-    const closeModalBtn = document.getElementById('close-modal-btn'); const loginForm = document.getElementById('login-form');
+    try {
+        createLoginModal();
+        console.log('Modal de login criado');
 
-    const openModal = () => {
-        loginModal.classList.remove('hidden');
-        loginModal.classList.add('flex');
-    };
-
-    const closeModal = () => {
-        loginModal.classList.add('hidden');
-        loginModal.classList.remove('flex');
-    };
-
-    loginBtnDesktop.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
-    });
-
-    loginBtnMobile.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
-    });
-
-    closeModalBtn.addEventListener('click', () => {
-        closeModal();
-    });
-
-    // Optional: Close modal by clicking outside of it
-    loginModal.addEventListener('click', (e) => {
-        if (e.target === loginModal) {
-            closeModal();
+        // Verificar se o usuário já está autenticado
+        try {
+            const authenticated = await isAuthenticated();
+            if (authenticated) {
+                console.log('Usuário já está autenticado');
+                // Opcional: redirecionar automaticamente para o dashboard
+                // window.location.href = 'dashboard.html';
+            }
+        } catch (error) {
+            console.log('Erro ao verificar autenticação (pode ser normal se Supabase não estiver configurado):', error);
+        }        // Listener para mudanças no estado de autenticação
+        try {
+            const authListener = await onAuthStateChange((event, session) => {
+                console.log('Mudança no estado de autenticação:', event);
+                if (event === 'SIGNED_IN') {
+                    console.log('Usuário logado:', session.user);
+                    closeModal();
+                    window.location.href = 'dashboard.html';
+                } else if (event === 'SIGNED_OUT') {
+                    console.log('Usuário deslogado');
+                }
+            });
+        } catch (error) {
+            console.log('Erro ao configurar listener de autenticação:', error);
         }
-    });    // Handle login form submission
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Impede o envio padrão do formulário
-        console.log('Redirecionando para dashboard.html');
-        // Adicione aqui a lógica de validação de usuário e senha, se necessário
-        window.location.href = 'dashboard.html'; // Redireciona para a página do dashboard
-    });
+
+        // Agora que o modal foi criado, podemos selecionar os elementos
+        const loginBtnDesktop = document.getElementById('login-btn-desktop');
+        const loginBtnMobile = document.getElementById('login-btn-mobile');
+        const loginModal = document.getElementById('login-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const loginForm = document.getElementById('login-form');
+        const loginSubmitBtn = document.getElementById('login-submit-btn');
+        const loginButtonText = document.getElementById('login-button-text');
+        const loginButtonLoading = document.getElementById('login-button-loading');
+        const loginError = document.getElementById('login-error'); const openModal = () => {
+            loginModal.classList.remove('hidden');
+            loginModal.classList.add('flex');
+            // Limpar erros anteriores
+            hideError();
+        };
+
+        const closeModal = () => {
+            loginModal.classList.add('hidden');
+            loginModal.classList.remove('flex');
+            // Limpar formulário
+            loginForm.reset();
+            hideError();
+        };
+
+        const showError = (message) => {
+            loginError.textContent = message;
+            loginError.classList.remove('hidden');
+        };
+
+        const hideError = () => {
+            loginError.classList.add('hidden');
+        };
+
+        const setLoading = (isLoading) => {
+            if (isLoading) {
+                loginSubmitBtn.disabled = true;
+                loginButtonText.classList.add('hidden');
+                loginButtonLoading.classList.remove('hidden');
+            } else {
+                loginSubmitBtn.disabled = false;
+                loginButtonText.classList.remove('hidden');
+                loginButtonLoading.classList.add('hidden');
+            }
+        };
+
+        loginBtnDesktop.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        loginBtnMobile.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            closeModal();
+        });
+
+        // Optional: Close modal by clicking outside of it
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                closeModal();
+            }
+        });    // Handle login form submission
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                showError('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            setLoading(true);
+            hideError();
+
+            try {
+                const { user } = await signIn(email, password);
+                console.log('Login realizado com sucesso:', user);
+                // O redirecionamento será feito pelo listener onAuthStateChange
+            } catch (error) {
+                console.error('Erro no login:', error);
+
+                let errorMessage = 'Erro ao fazer login. Tente novamente.';
+
+                if (error.message.includes('Invalid login credentials')) {
+                    errorMessage = 'E-mail ou senha incorretos.';
+                } else if (error.message.includes('Email not confirmed')) {
+                    errorMessage = 'Por favor, confirme seu e-mail antes de fazer login.';
+                } else if (error.message.includes('Too many requests')) {
+                    errorMessage = 'Muitas tentativas de login. Tente novamente mais tarde.';
+                }
+
+                showError(errorMessage);
+            } finally {
+                setLoading(false);
+            }
+        });
+
+    } catch (error) {
+        console.error('Erro ao inicializar sistema de login:', error);
+        // Se houver erro na inicialização, ainda assim criar um sistema básico
+        alert('Erro ao carregar sistema de autenticação. Verifique a configuração do Supabase.');
+    }
 });
