@@ -91,42 +91,68 @@
 <body class="font-sans text-base text-gray-800 bg-gray-100">
     <!-- HEADER START -->
     <header
-        class="fixed top-0 left-0 w-full z-[702] bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-95 shadow-lg">
+        class="fixed top-0 left-0 w-full z-[702] bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-90 shadow-lg">
         <!-- Logout Button (Left) -->
         <div class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 pl-4 z-50">
             <button data-logout
-                class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-bold transition-all duration-300 w-[90px] h-[44px] flex items-center justify-center">
-                <i class="fas fa-sign-out-alt mr-1"></i>Sair
+                class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-bold transition-all duration-300 w-[90px] h-[44px] flex items-center justify-center"
+                aria-label="Sair do sistema Transval" title="Fazer logout">
+                <i class="fas fa-sign-out-alt mr-1" aria-hidden="true"></i>Sair
             </button>
         </div>
-        <!-- User Info (Right edge, maximum right like logout button on left) -->
+        <div class="container mx-auto flex justify-center items-center py-4 px-6 relative
+                    px-[10rem] md:px-[14rem] lg:px-[18rem] xl:px-[22rem] 2xl:px-[26rem]">
+            <!-- Navigation Menu (Center) -->
+            <nav class="hidden md:flex justify-center items-center" role="navigation" aria-label="Menu principal">
+                <span class="text-white text-xl font-bold">Dashboard Transval</span>
+            </nav>
+            <!-- Hamburger Menu Button (Mobile, Centered) -->
+            <button id="mobile-menu-btn"
+                class="md:hidden text-white text-2xl focus:outline-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="mobile-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+        <!-- User Info (Right edge) -->
         <div class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 pr-4 z-50">
             <div class="text-white text-sm">
-                <i class="fas fa-user mr-2"></i>
+                <i class="fas fa-user mr-2" aria-hidden="true"></i>
                 <span data-user-email>Carregando...</span>
             </div>
         </div>
-        <div class="container mx-auto flex justify-center items-center py-4 px-6 relative">
-
-            <!-- Logo/Title (Center) -->
-            <div class="flex items-center">
-                <span class="text-white text-3xl font-bold">Dashboard Transval</span>
-            </div>
-
-            <!-- Hamburger Menu Button (Mobile) -->
-            <button id="mobile-menu-btn"
-                class="md:hidden text-white text-2xl focus:outline-none absolute right-4 top-1/2 -translate-y-1/2">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div> <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden bg-blue-950 text-white px-6 py-4">
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-950 text-white px-6 py-4" role="navigation"
+            aria-label="Menu móvel">
             <div class="flex items-center justify-center mb-4">
-                <span class="text-white text-2xl font-bold">Dashboard Transval</span>
-            </div> <button data-logout
-                class="block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-center font-bold transition-all duration-300">
-                <i class="fas fa-sign-out-alt mr-2"></i>Sair
+                <span class="text-white text-lg font-bold">Dashboard Transval</span>
+            </div>
+            <button data-logout
+                class="block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-center font-bold w-[90px] h-[44px] flex items-center justify-center mx-auto"
+                aria-label="Sair do sistema Transval" title="Fazer logout">
+                <i class="fas fa-sign-out-alt mr-1" aria-hidden="true"></i>Sair
             </button>
         </div>
+        <script>
+            document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+                const menu = document.getElementById('mobile-menu');
+                const isHidden = menu.classList.contains('hidden');
+
+                menu.classList.toggle('hidden');
+
+                // Atualizar aria-expanded para acessibilidade
+                this.setAttribute('aria-expanded', !isHidden);
+
+                // Alterar ícone
+                const icon = this.querySelector('i');
+                if (isHidden) {
+                    icon.className = 'fas fa-times';
+                    this.setAttribute('aria-label', 'Fechar menu de navegação');
+                } else {
+                    icon.className = 'fas fa-bars';
+                    this.setAttribute('aria-label', 'Abrir menu de navegação');
+                }
+            });
+        </script>
     </header>
     <!-- HEADER END --> <!-- MAIN CONTENT -->
     <main class="container mx-auto px-4 py-8">
