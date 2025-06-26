@@ -31,32 +31,54 @@ export const contactContent = {
 };
 
 export function initContact() {
-    const titleEl = document.getElementById('contact-title');
+    const titleEl = document.getElementById('contato-heading');
     const descriptionEl = document.getElementById('contact-description');
     const buttonEl = document.getElementById('contact-button');
     const formContainerEl = document.getElementById('contact-form-container');
 
     if (!titleEl || !descriptionEl || !buttonEl || !formContainerEl) {
+        console.error('Elementos de contato não encontrados:', {
+            titleEl: !!titleEl,
+            descriptionEl: !!descriptionEl,
+            buttonEl: !!buttonEl,
+            formContainerEl: !!formContainerEl
+        });
         return;
     }
 
     titleEl.textContent = contactContent.title;
     descriptionEl.textContent = contactContent.description;
-    buttonEl.textContent = contactContent.buttonTextOpen; buttonEl.addEventListener('click', () => {
+    buttonEl.textContent = contactContent.buttonTextOpen;
+
+    console.log('Configurando elemento de contato...', {
+        title: contactContent.title,
+        description: contactContent.description,
+        buttonText: contactContent.buttonTextOpen
+    });
+
+    buttonEl.addEventListener('click', () => {
+        console.log('Botão de contato clicado');
         const isHidden = formContainerEl.classList.contains('hidden');
         if (isHidden) {
             formContainerEl.innerHTML = contactContent.formHtml;
-            formContainerEl.classList.remove('hidden');            // Adicionar event listener para o formulário
+            formContainerEl.classList.remove('hidden');
+
+            console.log('Formulário exibido');
+
+            // Adicionar event listener para o formulário
             const form = document.getElementById('cotacao-form');
             if (form) {
                 form.addEventListener('submit', handleFormSubmit);
+                console.log('Event listener do formulário adicionado');
 
                 // Aplicar máscaras aos campos
                 applyMasks();
+                console.log('Máscaras aplicadas');
             }
         } else {
             formContainerEl.innerHTML = '';
             formContainerEl.classList.add('hidden');
+            console.log('Formulário ocultado');
         }
         buttonEl.textContent = isHidden ? contactContent.buttonTextClose : contactContent.buttonTextOpen;
     });

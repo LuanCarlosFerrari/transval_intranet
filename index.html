@@ -62,6 +62,49 @@
   <link rel="preload" as="image" href="Assets/background_Image.jpg" fetchpriority="high">
 
   <link rel="icon" type="image/png" href="Assets/logo-branca-transval.png">
+
+  <!-- Estilos para acessibilidade -->
+  <style>
+    /* Classe para textos visíveis apenas para leitores de tela */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Melhorar foco para acessibilidade */
+    a:focus,
+    button:focus {
+      outline: 2px solid #fbbf24 !important;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* Garantir que links de redes sociais sejam focalizáveis */
+    .social-link:focus {
+      transform: scale(1.1);
+      outline: 3px solid #fbbf24;
+      outline-offset: 3px;
+    }
+
+    /* Melhorar contraste em estados de hover */
+    .social-link:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Transições suaves para melhor UX */
+    .social-link {
+      transition: all 0.3s ease;
+    }
+  </style>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -158,45 +201,86 @@
     <!-- Login Button (Left) -->
     <div class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 pl-4 z-50">
       <a href="#login" id="login-btn-desktop"
-        class="bg-[#01a1ef] hover:bg-[#008bd1] text-white px-6 py-3 rounded-full font-bold transition-all duration-300 w-[90px] h-[44px] flex items-center justify-center">
-        <i class="fas fa-sign-in-alt mr-1"></i>Entrar
+        class="bg-[#01a1ef] hover:bg-[#008bd1] text-white px-6 py-3 rounded-full font-bold transition-all duration-300 w-[90px] h-[44px] flex items-center justify-center"
+        aria-label="Fazer login no sistema Transval" title="Acesso ao sistema">
+        <i class="fas fa-sign-in-alt mr-1" aria-hidden="true"></i>Entrar
       </a>
     </div>
     <div class="container mx-auto flex justify-center items-center py-4 px-6 relative
                 px-[10rem] md:px-[14rem] lg:px-[18rem] xl:px-[22rem] 2xl:px-[26rem]">
       <!-- Navigation Menu (Center) -->
-      <nav class="hidden md:flex justify-center space-x-8">
-        <a href="#sobre" class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">Sobre nós</a>
-        <a href="#cobertura"
-          class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">Cobertura</a>
-        <a href="#clientes"
-          class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">Clientes</a>
-        <a href="#segmentos"
-          class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">Segmentos</a>
-        <a href="#contato" class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">Contato</a>
+      <nav class="hidden md:flex justify-center space-x-8" role="navigation" aria-label="Menu principal">
+        <a href="#sobre" class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors"
+          aria-label="Ir para seção Sobre nós">Sobre nós</a>
+        <a href="#cobertura" class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors"
+          aria-label="Ir para seção Cobertura Nacional">Cobertura</a>
+        <a href="#clientes" class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors"
+          aria-label="Ir para seção Nossos Clientes">Clientes</a>
+        <a href="#segmentos" class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors"
+          aria-label="Ir para seção Segmentos Atendidos">Segmentos</a>
+        <a href="#contato" class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors"
+          aria-label="Ir para seção de Contato">Contato</a>
         <a href="Assets/lgpd.pdf" download="lgpd.pdf"
-          class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors">LGPD</a>
+          class="text-white hover:text-[#ff5d29] text-base font-semibold transition-colors"
+          aria-label="Baixar documento LGPD em PDF" title="Lei Geral de Proteção de Dados">LGPD</a>
       </nav>
       <!-- Hamburger Menu Button (Mobile, Centered) -->
       <button id="mobile-menu-btn"
-        class="md:hidden text-white text-2xl focus:outline-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <i class="fas fa-bars"></i>
+        class="md:hidden text-white text-2xl focus:outline-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="mobile-menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
       </button>
     </div> <!-- Mobile Menu Dropdown -->
-    <div id="mobile-menu" class="hidden md:hidden bg-blue-950 text-white px-6 py-4 space-y-4">
-      <a href="#sobre" class="block hover:text-[#ff5d29]">Sobre nós</a>
-      <a href="#cobertura" class="block hover:text-[#ff5d29]">Cobertura</a>
-      <a href="#clientes" class="block hover:text-[#ff5d29]">Clientes</a>
-      <a href="#segmentos" class="block hover:text-[#ff5d29]">Segmentos</a>
-      <a href="#contato" class="block hover:text-[#ff5d29]">Contato</a> <a href="Assets/lgpd.pdf" download="lgpd.pdf"
-        class="block hover:text-[#ff5d29]">LGPD</a> <a href="#login" id="login-btn-mobile"
-        class="block bg-[#01a1ef] hover:bg-[#008bd1] text-white px-6 py-3 rounded-full text-center font-bold w-[90px] h-[44px] flex items-center justify-center mx-auto">
-        <i class="fas fa-sign-in-alt mr-1"></i>Entrar
+    <div id="mobile-menu" class="hidden md:hidden bg-blue-950 text-white px-6 py-4 space-y-4" role="navigation"
+      aria-label="Menu móvel">
+      <a href="#sobre" class="block hover:text-[#ff5d29]" aria-label="Ir para seção Sobre nós">Sobre nós</a>
+      <a href="#cobertura" class="block hover:text-[#ff5d29]"
+        aria-label="Ir para seção Cobertura Nacional">Cobertura</a>
+      <a href="#clientes" class="block hover:text-[#ff5d29]" aria-label="Ir para seção Nossos Clientes">Clientes</a>
+      <a href="#segmentos" class="block hover:text-[#ff5d29]"
+        aria-label="Ir para seção Segmentos Atendidos">Segmentos</a>
+      <a href="#contato" class="block hover:text-[#ff5d29]" aria-label="Ir para seção de Contato">Contato</a>
+      <a href="Assets/lgpd.pdf" download="lgpd.pdf" class="block hover:text-[#ff5d29]"
+        aria-label="Baixar documento LGPD em PDF" title="Lei Geral de Proteção de Dados">LGPD</a>
+      <a href="#login" id="login-btn-mobile"
+        class="block bg-[#01a1ef] hover:bg-[#008bd1] text-white px-6 py-3 rounded-full text-center font-bold w-[90px] h-[44px] flex items-center justify-center mx-auto"
+        aria-label="Fazer login no sistema Transval" title="Acesso ao sistema">
+        <i class="fas fa-sign-in-alt mr-1" aria-hidden="true"></i>Entrar
       </a>
     </div>
     <script>
       document.getElementById('mobile-menu-btn').addEventListener('click', function () {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
+        const menu = document.getElementById('mobile-menu');
+        const isHidden = menu.classList.contains('hidden');
+
+        menu.classList.toggle('hidden');
+
+        // Atualizar aria-expanded para acessibilidade
+        this.setAttribute('aria-expanded', !isHidden);
+
+        // Alterar ícone
+        const icon = this.querySelector('i');
+        if (isHidden) {
+          icon.className = 'fas fa-times';
+          this.setAttribute('aria-label', 'Fechar menu de navegação');
+        } else {
+          icon.className = 'fas fa-bars';
+          this.setAttribute('aria-label', 'Abrir menu de navegação');
+        }
+      });
+
+      // Fechar menu ao clicar em qualquer link
+      document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', function () {
+          const menu = document.getElementById('mobile-menu');
+          const button = document.getElementById('mobile-menu-btn');
+          const icon = button.querySelector('i');
+
+          menu.classList.add('hidden');
+          button.setAttribute('aria-expanded', 'false');
+          button.setAttribute('aria-label', 'Abrir menu de navegação');
+          icon.className = 'fas fa-bars';
+        });
       });
     </script>
   </header>
@@ -219,15 +303,16 @@
       class="absolute inset-0 w-full h-full object-cover opacity-60 z-0" fetchpriority="high" loading="eager"
       decoding="async" />
     <!-- Hero Content centralizado -->
-    <div class="relative z-[20] text-center container mx-auto
-           px-[10rem] md:px-[14rem] lg:px-[18rem] xl:px-[22rem] 2xl:px-[26rem]">
+    <div
+      class="relative z-[20] text-center container mx-auto px-4 sm:px-8 md:px-[14rem] lg:px-[18rem] xl:px-[22rem] 2xl:px-[26rem]">
 
       <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 animate-fadeIn">
         Excelência em Transporte e Logística
       </h1>
       <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 animate-fadeIn delay-150">
         Conectando regiões, impulsionando o seu negócio
-      </p> <a href="#contato"
+      </p>
+      <a href="#contato"
         class="inline-block bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600
              text-white font-semibold px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg shadow-lg transition-all duration-300">
         Solicitar Cotação
@@ -237,14 +322,15 @@
 
 
   <!-- ABOUT SECTION START -->
-  <section id="sobre" class="py-20 px-6 bg-blue-950 text-white">
+  <section id="sobre" class="py-20 px-6 bg-blue-950 text-white" aria-labelledby="sobre-heading">
     <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-10 tracking-wide">Sobre a Transval</h2>
-      <div id="timeline-container" class="mb-10"></div>
+      <h2 id="sobre-heading" class="text-4xl font-bold mb-10 tracking-wide">Sobre a Transval</h2>
+      <div id="timeline-container" class="mb-10" role="region" aria-label="Linha do tempo da empresa"></div>
       <button id="toggle-sobre-content"
-        class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold px-8 py-4 rounded-full text-lg shadow-lg transition-all duration-300">Leia
+        class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold px-8 py-4 rounded-full text-lg shadow-lg transition-all duration-300"
+        aria-expanded="false" aria-controls="expandable-transval-content">Leia
         mais sobre a Transval</button>
-      <div id="expandable-transval-content" class="hidden mt-6"></div>
+      <div id="expandable-transval-content" class="hidden mt-6" role="region" aria-live="polite"></div>
     </div>
   </section>
   <!-- ABOUT SECTION END -->
@@ -271,29 +357,37 @@
   <!-- CLIENTS SECTION END -->
 
   <!-- CONTACT SECTION START -->
-  <section id="contato" class="py-20 px-6 bg-gray-100 text-center">
+  <section id="contato" class="py-20 px-6 bg-gray-100 text-center" aria-labelledby="contato-heading">
     <div class="max-w-3xl mx-auto">
-      <h2 id="contact-title" class="text-4xl font-bold mb-4 text-gray-800"></h2>
-      <p id="contact-description" class="text-lg mb-6 text-gray-700"></p> <button id="contact-button"
-        class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold px-8 py-4 rounded-full text-lg shadow-lg transition-all duration-300"></button>
+      <h2 id="contato-heading" class="text-4xl font-bold mb-4 text-gray-800"></h2>
+      <p id="contact-description" class="text-lg mb-6 text-gray-700"></p>
+      <button id="contact-button"
+        class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold px-8 py-4 rounded-full text-lg shadow-lg transition-all duration-300"
+        aria-label="Solicitar cotação de frete"></button>
       <!-- System Buttons -->
       <div class="mt-6 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
         <!-- CF à esquerda -->
         <a href="https://websaf.intersite.com.br:8182/emonitorws/valida/cf/" target="_blank" rel="noopener noreferrer"
-          class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-3 rounded-full font-semibold transition-all duration-300 text-base shadow-lg text-center">
+          class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-3 rounded-full font-semibold transition-all duration-300 text-base shadow-lg text-center"
+          aria-label="Acessar sistema de Validação CF - Conhecimento de Frete"
+          title="Sistema de Validação de Conhecimento de Frete">
           Validação CF
         </a>
 
         <!-- CH no centro (alinhado com Solicitar Cotação) -->
         <a href="https://websaf.intersite.com.br:8182/emonitorws/valida/ch/" target="_blank" rel="noopener noreferrer"
-          class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-3 rounded-full font-semibold transition-all duration-300 text-base shadow-lg text-center">
+          class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-3 rounded-full font-semibold transition-all duration-300 text-base shadow-lg text-center"
+          aria-label="Acessar sistema de Validação CH - Conhecimento de Transporte"
+          title="Sistema de Validação de Conhecimento de Transporte">
           Validação CH
         </a>
 
         <!-- SiteSat à direita -->
         <a href="http://sitesat.transval.net.br:54321/sitesat2/logins.jsf?dswid=9363" target="_blank"
           rel="noopener noreferrer"
-          class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-3 rounded-full font-semibold transition-all duration-300 text-base shadow-lg text-center">
+          class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-3 rounded-full font-semibold transition-all duration-300 text-base shadow-lg text-center"
+          aria-label="Acessar SiteSat - Sistema de Rastreamento Transval"
+          title="SiteSat - Sistema de Rastreamento e Monitoramento">
           SiteSat
         </a>
       </div>
@@ -361,10 +455,10 @@
   </section>
   <!-- SEGMENTS SECTION END --> <!-- SCRIPTS START -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script type="module" src="src/scripts/main.js?v=3"></script>
+  <script type="module" src="src/scripts/main.js?v=4"></script>
   <!-- SCRIPTS END -->
 
-  <footer class="bg-blue-950 text-gray-300 py-6">
+  <footer class="bg-blue-950 text-gray-300 py-6" role="contentinfo">
     <div class="container mx-auto grid md:grid-cols-3 gap-6 px-4 text-center">
       <div>
         <h3 class="text-xl font-bold mb-2">Sobre nós</h3>
@@ -372,30 +466,43 @@
       </div>
       <div>
         <h3 class="text-xl font-bold mb-2">Contato</h3>
-        <p>Rua Luiz Wolff, 7 – Rinópolis/SP</p>
-        <p>(18) 3583-1016</p>
-        <p>contato@transval.com.br</p>
+        <address class="not-italic">
+          <p>Rua Luiz Wolff, 7 – Rinópolis/SP</p>
+          <p><a href="tel:+551835831016" class="hover:text-white" aria-label="Ligar para (18) 3583-1016">(18)
+              3583-1016</a></p>
+          <p><a href="mailto:contato@transval.com.br" class="hover:text-white"
+              aria-label="Enviar email para contato@transval.com.br">contato@transval.com.br</a></p>
+        </address>
       </div>
       <div>
         <h3 class="text-xl font-bold mb-2">Redes Sociais</h3>
         <div class="flex justify-center space-x-4">
           <a href="https://www.facebook.com/p/Transval-Transp-Valmir-100022314004814/" target="_blank"
             rel="noopener noreferrer"
-            class="bg-[#1877F2] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#166FE5]">
-            <i class="fab fa-facebook-f text-white"></i>
+            class="social-link bg-[#1877F2] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#166FE5]"
+            aria-label="Visite nossa página no Facebook - Transval Transportes" title="Facebook - Transval Transportes">
+            <i class="fab fa-facebook-f text-white" aria-hidden="true"></i>
+            <span class="sr-only">Facebook</span>
           </a>
           <a href="https://www.instagram.com/transvaltransp/" target="_blank" rel="noopener noreferrer"
-            class="bg-[#E4405F] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#DD2A7B]">
-            <i class="fab fa-instagram text-white"></i>
+            class="social-link bg-[#E4405F] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#DD2A7B]"
+            aria-label="Siga-nos no Instagram @transvaltransp" title="Instagram - @transvaltransp">
+            <i class="fab fa-instagram text-white" aria-hidden="true"></i>
+            <span class="sr-only">Instagram</span>
           </a>
           <a href="https://www.linkedin.com/company/transval-transportadora-valmir-ltda/" target="_blank"
             rel="noopener noreferrer"
-            class="bg-[#0A66C2] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#004182]">
-            <i class="fab fa-linkedin-in text-white"></i>
+            class="social-link bg-[#0A66C2] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#004182]"
+            aria-label="Conecte-se conosco no LinkedIn - Transval Transportadora Valmir LTDA"
+            title="LinkedIn - Transval Transportadora">
+            <i class="fab fa-linkedin-in text-white" aria-hidden="true"></i>
+            <span class="sr-only">LinkedIn</span>
           </a>
           <a href="https://api.whatsapp.com/send?phone=5518997105537" target="_blank" rel="noopener noreferrer"
-            class="bg-[#25D366] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#1DA851]">
-            <i class="fab fa-whatsapp text-white"></i>
+            class="social-link bg-[#25D366] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#1DA851]"
+            aria-label="Entre em contato via WhatsApp - (18) 99710-5537" title="WhatsApp - (18) 99710-5537">
+            <i class="fab fa-whatsapp text-white" aria-hidden="true"></i>
+            <span class="sr-only">WhatsApp</span>
           </a>
         </div>
       </div>
