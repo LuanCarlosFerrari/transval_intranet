@@ -201,6 +201,47 @@
       box-shadow: none !important;
     }
 
+    /* Prevenir piscar no header - Solução completa */
+    header {
+      -webkit-backface-visibility: hidden !important;
+      backface-visibility: hidden !important;
+      -webkit-transform: translateZ(0) !important;
+      transform: translateZ(0) !important;
+      will-change: auto !important;
+      /* Garantir posicionamento estável */
+      contain: layout style paint !important;
+      /* Evitar reflow */
+      overflow: hidden !important;
+    }
+
+    /* Remover TODAS as transições do header e seus elementos */
+    header,
+    header *,
+    header *::before,
+    header *::after {
+      -webkit-transition: none !important;
+      transition: none !important;
+      -webkit-animation: none !important;
+      animation: none !important;
+      will-change: auto !important;
+    }
+
+    /* Aplicar transições específicas apenas em hover/focus para botões e links */
+    header a:hover,
+    header a:focus,
+    header button:hover,
+    header button:focus {
+      -webkit-transition: background-color 0.15s ease !important;
+      transition: background-color 0.15s ease !important;
+    }
+
+    /* Garantir que o header seja renderizado em uma camada própria */
+    header {
+      isolation: isolate !important;
+      -webkit-transform: translate3d(0, 0, 0) !important;
+      transform: translate3d(0, 0, 0) !important;
+    }
+
     /* Garantir que links de redes sociais sejam focalizáveis */
     .social-link:focus {
       transform: scale(1.1);
@@ -248,6 +289,35 @@
         margin-left: auto !important;
         margin-right: auto !important;
         max-width: calc(100% - 6rem) !important;
+      }
+    }
+  </style>
+
+  <!-- CSS crítico inline para evitar piscar do header -->
+  <style>
+    /* CSS crítico aplicado imediatamente para evitar piscar */
+    header {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      z-index: 702 !important;
+      background: linear-gradient(to right, #1e3a8a, #1e40af, #374151) !important;
+      background-color: rgba(30, 58, 138, 0.9) !important;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+      -webkit-transform: translate3d(0, 0, 0) !important;
+      transform: translate3d(0, 0, 0) !important;
+      contain: layout style paint !important;
+    }
+
+    /* Garantir que o body tenha padding-top suficiente desde o início */
+    body {
+      padding-top: 2.5rem !important;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding-top: 3rem !important;
       }
     }
   </style>
@@ -341,10 +411,10 @@
   </script>
 </head>
 
-<body class="font-sans text-base text-gray-800 bg-blue-950 pt-8 md:pt-10 relative">
+<body class="font-sans text-base text-gray-800 bg-blue-950 relative">
   <!-- HEADER START -->
   <header
-    class="fixed top-0 left-0 w-full z-[702] bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-90 shadow-lg transition-all duration-300">
+    class="fixed top-0 left-0 w-full z-[702] bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-90 shadow-lg">
     <!-- Login Button (Left) -->
     <div class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 pl-4 z-50">
       <a href="#login" id="login-btn-desktop"
@@ -442,7 +512,7 @@
   <!-- BANNER END -->
 
   <section class="relative flex items-center justify-center overflow-hidden
-         min-h-[500px] md:min-h-[600px] lg:min-h-[700px] xl:min-h-[800px]
+         min-h-[400px] md:min-h-[450px] lg:min-h-[550px] xl:min-h-[650px]
          bg-gradient-to-r from-blue-800 via-blue-900 to-gray-900 px-4">
 
     <!-- Background Image - LCP Optimized -->
