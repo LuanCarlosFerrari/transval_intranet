@@ -1,4 +1,4 @@
-import { signOut, isAuthenticated, getCurrentUser, onAuthStateChange } from '../config/supabase.js';
+import { signOut, isAuthenticated, getCurrentUser, onAuthStateChange } from '../../config/supabase.js';
 
 // Verificar autenticação ao carregar a página
 document.addEventListener('DOMContentLoaded', async () => {

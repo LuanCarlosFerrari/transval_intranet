@@ -30,11 +30,13 @@ export function initFiliaisMap() {
         controls.className = 'coverage-filters flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2 mb-4 w-full sm:w-auto justify-center items-center px-4 sm:px-0';
         controls.setAttribute('role', 'group');
         controls.setAttribute('aria-label', 'Filtros de cobertura');
+
         const selectsConfig = [
             { id: 'regiao', label: 'Selecione a região', placeholder: 'Região' },
             { id: 'estado', label: 'Selecione o estado', placeholder: 'Estado' },
             { id: 'unidade', label: 'Selecione a unidade', placeholder: 'Unidade' }
         ];
+
         selectsConfig.forEach(config => {
             const select = document.createElement('select');
             select.id = config.id;
@@ -43,6 +45,7 @@ export function initFiliaisMap() {
             select.innerHTML = `<option value="">${config.placeholder}</option>`;
             controls.appendChild(select);
         });
+
         mapContainer.parentNode.insertBefore(controls, mapContainer);
     }
 
@@ -125,10 +128,12 @@ export function initFiliaisMap() {
         'Sudeste': ['SP', 'RJ', 'MG', 'ES'],
         'Sul': ['PR', 'SC', 'RS']
     };
+
     function getEstadoFromTitle(title) {
         const match = title.match(/-([A-Z]{2})$/);
         return match ? match[1] : '';
     }
+
     function getRegiaoFromEstado(uf) {
         for (const reg in regioes) {
             if (regioes[reg].includes(uf)) return reg;
@@ -142,20 +147,26 @@ export function initFiliaisMap() {
         const uf = getEstadoFromTitle(f.title);
         estadosSet.add(uf);
         regioesSet.add(getRegiaoFromEstado(uf));
-    }); const filtroRegiao = document.getElementById('regiao');
+    });
+
+    const filtroRegiao = document.getElementById('regiao');
     const filtroEstado = document.getElementById('estado');
     const filtroUnidade = document.getElementById('unidade');
+
     regioesSet.forEach(r => {
         if (r) filtroRegiao.innerHTML += `<option value="${r}">${r}</option>`;
     });
+
     Array.from(estadosSet).sort().forEach(uf => {
         if (uf) filtroEstado.innerHTML += `<option value="${uf}">${uf}</option>`;
     });
+
     filiais.forEach(f => {
         filtroUnidade.innerHTML += `<option value="${f.title}">${f.title}</option>`;
     });
 
     var map = L.map('map', { zoomControl: false, attributionControl: false }).setView([-15.793889, -47.882778], 5);
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     }).addTo(map);
 
@@ -173,19 +184,24 @@ export function initFiliaisMap() {
         if (markerClusterGroup) markerClusterGroup.clearLayers();
         markers.forEach(m => map.removeLayer(m));
         markers = [];
+
         (markerClusterGroup ? markerClusterGroup : map).eachLayer(function (layer) {
             if (layer instanceof L.Marker) map.removeLayer(layer);
         });
+
         filiaisFiltradas.forEach(f => {
             const marker = L.marker([f.lat, f.lng]);
             marker.bindPopup(createPopupContent(f));
             marker.on('click', function () {
                 map.setView([f.lat, f.lng], 12);
             });
+
             if (markerClusterGroup) markerClusterGroup.addLayer(marker);
             else marker.addTo(map);
+
             markers.push(marker);
         });
+
         if (markerClusterGroup && !map.hasLayer(markerClusterGroup)) map.addLayer(markerClusterGroup);
     }
 
@@ -193,17 +209,23 @@ export function initFiliaisMap() {
         const regiao = filtroRegiao.value;
         const estado = filtroEstado.value;
         const unidade = filtroUnidade.value;
+
         let filtradas = filiais;
+
         if (regiao) {
             filtradas = filtradas.filter(f => getRegiaoFromEstado(getEstadoFromTitle(f.title)) === regiao);
         }
+
         if (estado) {
             filtradas = filtradas.filter(f => getEstadoFromTitle(f.title) === estado);
         }
+
         if (unidade) {
             filtradas = filtradas.filter(f => f.title === unidade);
         }
+
         renderMarkers(filtradas);
+
         if (unidade && filtradas.length === 1) {
             const f = filtradas[0];
             map.setView([f.lat, f.lng], 10);
@@ -214,33 +236,41 @@ export function initFiliaisMap() {
             ajustarVisualizacaoParaTodosMarcadores();
         }
     }
+
     filtroRegiao.addEventListener('change', function () {
         filtroEstado.value = '';
         filtroUnidade.value = '';
         filtrar();
     });
+
     filtroEstado.addEventListener('change', function () {
         filtroRegiao.value = '';
         filtroUnidade.value = '';
         filtrar();
     });
+
     filtroUnidade.addEventListener('change', function () {
         filtroRegiao.value = '';
         filtroEstado.value = '';
         filtrar();
     });
+
     function ajustarVisualizacaoParaTodosMarcadores() {
         if (filiais.length === 0) return;
+
         var bounds = L.latLngBounds();
         filiais.forEach(function (filial) {
             bounds.extend([filial.lat, filial.lng]);
         });
+
         map.fitBounds(bounds, {
             padding: [30, 30],
             maxZoom: 12
         });
     }
+
     renderMarkers(filiais);
+
     setTimeout(function () {
         ajustarVisualizacaoParaTodosMarcadores();
     }, 300);

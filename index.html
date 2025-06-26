@@ -333,6 +333,17 @@
   </style>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'transval-blue': '#01a1ef',
+          }
+        }
+      }
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     crossorigin="anonymous" media="print" onload="this.media='all'" />
@@ -681,7 +692,7 @@
   </section>
   <!-- SEGMENTS SECTION END --> <!-- SCRIPTS START -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script type="module" src="src/scripts/main.js?v=4"></script>
+  <script type="module" src="src/scripts/core/main.js?v=6"></script>
   <!-- SCRIPTS END -->
 
   <footer class="bg-blue-950 text-gray-300 py-6" role="contentinfo">

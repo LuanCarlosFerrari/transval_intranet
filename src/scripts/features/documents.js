@@ -7,7 +7,7 @@ import {
     downloadFile,
     bucketExists,
     isAuthenticated
-} from '../config/supabase.js';
+} from '../../config/supabase.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('Documents script loaded successfully!');

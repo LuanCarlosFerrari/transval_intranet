@@ -1,8 +1,8 @@
-import { initFiliaisMap } from './branch-map.js';
-import { generateClientCards } from './clients.js';
-import { initPresentation } from './presentation.js';
-import { initContact } from './contact.js';
-import './login.js';
+import { initFiliaisMap } from '../features/branch-map.js';
+import { generateClientCards } from '../ui/clients.js';
+import { initPresentation } from '../ui/presentation.js';
+import { initContact } from '../ui/contact.js';
+import '../auth/login.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM carregado, iniciando scripts...');

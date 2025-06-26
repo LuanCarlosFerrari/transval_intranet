@@ -1,4 +1,4 @@
-import { signIn, signOut, isAuthenticated, getCurrentUser, onAuthStateChange } from '../config/supabase.js';
+import { signIn, signOut, isAuthenticated, getCurrentUser, onAuthStateChange } from '../../config/supabase.js';
 
 console.log('Login script carregado');
 
