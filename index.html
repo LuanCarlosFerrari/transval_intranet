@@ -342,18 +342,16 @@
       -webkit-transform: translate3d(0, 0, 0) !important;
       transform: translate3d(0, 0, 0) !important;
       contain: layout style paint !important;
-    }
+    }        /* Garantir que o body tenha padding-top suficiente desde o início */
+        body {
+            padding-top: 2.8rem !important;
+        }
 
-    /* Garantir que o body tenha padding-top suficiente desde o início */
-    body {
-      padding-top: 2.5rem !important;
-    }
-
-    @media (min-width: 768px) {
-      body {
-        padding-top: 3rem !important;
-      }
-    }
+        @media (min-width: 768px) {
+            body {
+                padding-top: 3.3rem !important;
+            }
+        }
   </style>
 
   <script src="https://cdn.tailwindcss.com"></script>
