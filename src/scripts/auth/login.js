@@ -1,4 +1,4 @@
-import { signIn, signOut, isAuthenticated, getCurrentUser, onAuthStateChange } from '../../config/supabase.js';
+import { signIn, signOut, isAuthenticated, getCurrentUser, onAuthStateChange } from '../../config/projectsend.js';
 
 console.log('Login script carregado');
 
@@ -22,14 +22,14 @@ function createLoginModal() {
                 </div>
                 <form id="login-form" class="space-y-6">
                     <div>
-                        <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">E-mail</label>
+                        <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Usuário</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-envelope text-gray-400"></i>
+                                <i class="fas fa-user text-gray-400"></i>
                             </div>
-                            <input type="email" id="email" name="email" required
+                            <input type="text" id="email" name="email" required
                                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
-                                placeholder="Digite seu e-mail">
+                                placeholder="Digite seu usuário">
                         </div>
                     </div>
                     <div>
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // window.location.href = 'pages/dashboard.html';
             }
         } catch (error) {
-            console.log('Erro ao verificar autenticação (pode ser normal se Supabase não estiver configurado):', error);
+            console.log('Erro ao verificar autenticação (pode ser normal se ProjectSend não estiver configurado):', error);
         }        // Listener para mudanças no estado de autenticação
         try {
             const authListener = await onAuthStateChange((event, session) => {

@@ -1,4 +1,4 @@
-// Importar funções do Supabase
+// Importar funções do ProjectSend
 import {
     listBuckets,
     listFilesInBucket,
@@ -6,8 +6,9 @@ import {
     getSignedUrl,
     downloadFile,
     bucketExists,
-    isAuthenticated
-} from '../../config/supabase.js';
+    isAuthenticated,
+    fileService
+} from '../../config/projectsend.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('Documents script loaded successfully!');
@@ -42,84 +43,69 @@ document.addEventListener('DOMContentLoaded', async () => {
         listBuckets: async () => {
             try {
                 const buckets = await listBuckets();
-                console.log('Debug - Buckets:', buckets);
+                console.log('Debug - Categorias:', buckets);
                 return buckets;
             } catch (error) {
-                console.error('Debug - Erro ao listar buckets:', error);
+                console.error('Debug - Erro ao listar categorias:', error);
                 return null;
             }
         },
-        listFiles: async (bucketName) => {
+        listFiles: async (categoryName) => {
             try {
-                const files = await listFilesInBucket(bucketName);
-                console.log(`Debug - Arquivos no bucket ${bucketName}:`, files);
+                const files = await listFilesInBucket(categoryName);
+                console.log(`Debug - Arquivos na categoria ${categoryName}:`, files);
                 return files;
             } catch (error) {
-                console.error(`Debug - Erro ao listar arquivos do bucket ${bucketName}:`, error);
+                console.error(`Debug - Erro ao listar arquivos da categoria ${categoryName}:`, error);
                 return null;
             }
-        }, testDownload: async (bucketName, fileName) => {
+        }, testDownload: async (categoryName, fileName) => {
             try {
-                console.log(`🧪 Testando download: ${bucketName}/${fileName}`);
+                console.log(`🧪 Testando download: ${categoryName}/${fileName}`);
 
-                // Testar URL pública
-                try {
-                    const publicUrl = getPublicUrl(bucketName, fileName);
-                    console.log('📍 URL Pública:', publicUrl);
-                } catch (error) {
-                    console.log('❌ URL Pública falhou:', error.message);
-                }
+                // Para ProjectSend, usar o ID do arquivo diretamente
+                const downloadUrl = fileService.getDownloadUrl(fileName);
+                console.log('📍 URL de Download:', downloadUrl);
 
-                // Testar URL assinada
+                // Testar se a URL funciona
                 try {
-                    const signedUrl = await getSignedUrl(bucketName, fileName, 60);
-                    console.log('📍 URL Assinada:', signedUrl);
+                    const response = await fetch(downloadUrl, { method: 'HEAD' });
+                    console.log('✅ URL válida, status:', response.status);
                 } catch (error) {
-                    console.log('❌ URL Assinada falhou:', error.message);
-                }
-
-                // Testar download direto
-                try {
-                    const fileBlob = await downloadFile(bucketName, fileName);
-                    console.log('📍 Download direto:', fileBlob);
-                } catch (error) {
-                    console.log('❌ Download direto falhou:', error.message);
+                    console.log('❌ URL inválida:', error.message);
                 }
 
             } catch (error) {
                 console.error('Debug - Erro no teste de download:', error);
             }
         },
-        forceDownload: async (bucketName, fileName) => {
+        forceDownload: async (categoryName, fileId) => {
             try {
-                console.log(`💾 Forçando download: ${bucketName}/${fileName}`);
+                console.log(`💾 Forçando download: ${categoryName}/${fileId}`);
 
-                // Usar download direto via blob
-                const fileBlob = await downloadFile(bucketName, fileName);
-                const blobUrl = URL.createObjectURL(fileBlob);
+                // Para ProjectSend, usar a URL direta de download
+                const downloadUrl = fileService.getDownloadUrl(fileId);
 
                 const link = document.createElement('a');
-                link.href = blobUrl;
-                link.download = fileName;
+                link.href = downloadUrl;
+                link.download = ''; // O servidor definirá o nome
                 link.style.display = 'none';
 
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
 
-                setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-
-                console.log('✅ Download forçado executado!');
+                console.log('✅ Download iniciado!');
                 return true;
             } catch (error) {
-                console.error('❌ Erro no download forçado:', error);
+                console.error('❌ Erro no download:', error);
                 return false;
             }
         }
     };
 
-    // Variável para armazenar os dados dos buckets
-    let bucketsData = {};
+    // Variável para armazenar os dados das categorias
+    let categoriesData = {};
 
     // Função para mostrar erros
     function showError(message) {
@@ -130,10 +116,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             `;
         }
-    }    // Função para carregar buckets do Supabase
-    async function loadBucketsFromSupabase() {
+    }    // Função para carregar categorias do ProjectSend
+    async function loadCategoriesFromProjectSend() {
         try {
-            loadingIndicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Carregando buckets...';
+            loadingIndicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Carregando categorias...';
 
             // Primeiro, vamos testar a autenticação
             console.log('🔍 Verificando autenticação...');
@@ -144,9 +130,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw new Error('Usuário não está autenticado');
             }
 
-            console.log('🔍 Tentando listar buckets...');
-            const buckets = await listBuckets();
-            console.log('✅ Buckets encontrados:', buckets);
+            console.log('🔍 Tentando listar categorias...');
+            const categories = await listBuckets();
+            console.log('✅ Categorias encontradas:', categories);
 
             // Limpar dados anteriores
             bucketsData = {};
@@ -162,94 +148,66 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return bucketsData;
             }
 
-            // Para cada bucket, carregar os arquivos
-            for (const bucket of buckets) {
+            // Para cada categoria, carregar os arquivos
+            for (const category of categories) {
                 try {
-                    loadingIndicator.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Carregando arquivos do bucket: ${bucket.name}...`;
-                    console.log(`🔍 Carregando arquivos do bucket: ${bucket.name}`);
-                    const files = await listFilesInBucket(bucket.name);
-                    console.log(`✅ Arquivos encontrados no bucket ${bucket.name}:`, files);
+                    loadingIndicator.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Carregando arquivos da categoria: ${category.name}...`;
+                    console.log(`🔍 Carregando arquivos da categoria: ${category.name}`);
+                    const files = await listFilesInBucket(category.name);
+                    console.log(`✅ Arquivos encontrados na categoria ${category.name}:`, files);
 
                     // Debug: mostrar cada item em detalhes
                     files.forEach((item, index) => {
                         console.log(`Item ${index}:`, {
                             name: item.name,
                             id: item.id,
-                            size: item.metadata?.size,
+                            size: item.size,
                             isFile: item.id !== null,
-                            metadata: item.metadata
+                            metadata: item
                         });
                     });
 
-                    // Primeiro, vamos tentar sem filtro para ver todos os itens
-                    const allItems = files.map(file => ({
-                        name: file.name,
-                        type: file.id !== null ? 'file' : 'folder',
-                        size: file.metadata?.size || 0,
-                        lastModified: file.updated_at || file.created_at,
-                        bucketName: bucket.name,
-                        fullPath: file.name,
-                        originalId: file.id
+                    // Processar arquivos do ProjectSend
+                    const fileItems = files.map(file => ({
+                        name: file.name || file.filename,
+                        type: 'file',
+                        size: file.size || 0,
+                        lastModified: file.upload_date || file.created_at,
+                        categoryName: category.name,
+                        fullPath: file.name || file.filename,
+                        originalId: file.id,
+                        description: file.description || '',
+                        downloadUrl: fileService.getDownloadUrl(file.id)
                     }));
 
-                    console.log(`📁 Todos os itens do bucket ${bucket.name}:`, allItems);
+                    console.log(`📁 Arquivos processados da categoria ${category.name}:`, fileItems);
 
-                    // Filtrar apenas arquivos (diferentes critérios)
-                    const fileItems = files.filter(item => {
-                        // Testar diferentes condições
-                        const hasId = item.id !== null;
-                        const notFolder = !item.name.endsWith('/');
-                        const hasSize = item.metadata && item.metadata.size > 0;
-
-                        console.log(`Filtro para ${item.name}:`, {
-                            hasId,
-                            notFolder,
-                            hasSize,
-                            shouldInclude: hasId && notFolder
-                        });
-
-                        return hasId && notFolder; // Arquivo deve ter ID e não terminar com /
-                    }).map(file => ({
-                        name: file.name,
-                        type: 'file',
-                        size: file.metadata?.size || 0,
-                        lastModified: file.updated_at || file.created_at,
-                        bucketName: bucket.name,
-                        fullPath: file.name
-                    })); console.log(`📁 Arquivos processados do bucket ${bucket.name}:`, fileItems);
-
-                    // Sempre incluir o bucket, mesmo se parecer vazio
-                    // Isso permite que o usuário explore buckets que podem ter subpastas
+                    // Sempre incluir a categoria
                     if (fileItems.length > 0) {
-                        bucketsData[bucket.name] = fileItems;
+                        categoriesData[category.name] = fileItems;
                     } else {
-                        // Incluir bucket "vazio" com placeholder para exploração
-                        bucketsData[bucket.name] = [];
-                        console.warn(`⚠️ Bucket ${bucket.name} tem ${files.length} itens, mas nenhum passou no filtro de arquivos`);
-
-                        // Se há itens mas nenhum passou no filtro, mostrar detalhes
-                        if (files.length > 0) {
-                            console.log(`🔍 Itens que não passaram no filtro:`, files);
-                        }
+                        // Incluir categoria "vazia"
+                        categoriesData[category.name] = [];
+                        console.warn(`⚠️ Categoria ${category.name} está vazia`);
                     }
                 } catch (error) {
-                    console.error(`❌ Erro ao carregar arquivos do bucket ${bucket.name}:`, error);
+                    console.error(`❌ Erro ao carregar arquivos da categoria ${category.name}:`, error);
 
-                    // Mostrar erro específico para este bucket
+                    // Mostrar erro específico para esta categoria
                     loadingIndicator.innerHTML = `
                         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                            <strong>Erro no bucket "${bucket.name}":</strong> ${error.message}
+                            <strong>Erro na categoria "${category.name}":</strong> ${error.message}
                         </div>
                     `;
 
-                    // Continua com os outros buckets mesmo se um falhar
+                    // Continua com as outras categorias mesmo se uma falhar
                 }
             }
 
-            console.log('📊 Dados finais dos buckets:', bucketsData);
-            return bucketsData;
+            console.log('📊 Dados finais das categorias:', categoriesData);
+            return categoriesData;
         } catch (error) {
-            console.error('❌ Erro ao carregar buckets:', error);
+            console.error('❌ Erro ao carregar categorias:', error);
             showError(`Erro ao carregar documentos: ${error.message}`);
             throw error;
         }
@@ -289,128 +247,67 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (!bucket) {
                 throw new Error(`Bucket "${file.bucketName}" não encontrado`);
-            }
+                // Função para download de arquivo do ProjectSend
+                async function downloadFileFromProjectSend(file) {
+                    try {
+                        console.log('� Iniciando download de arquivo:', file.name);
 
-            console.log(`📁 Bucket encontrado: ${bucket.name} (público: ${bucket.public})`);
+                        // Para ProjectSend, usar a URL direta de download
+                        const downloadUrl = file.downloadUrl || fileService.getDownloadUrl(file.originalId);
 
-            let downloadUrl = null;
+                        console.log('🔗 URL de download:', downloadUrl);
 
-            // Estratégia 1: Se for bucket público, usar URL pública
-            if (bucket.public) {
-                try {
-                    console.log('🌐 Tentando URL pública...');
-                    downloadUrl = getPublicUrl(file.bucketName, file.fullPath);
-                    console.log('✅ URL pública obtida:', downloadUrl);
-                } catch (error) {
-                    console.warn('⚠️ Erro ao obter URL pública:', error);
-                }
-            }
-
-            // Estratégia 2: Se não conseguiu URL pública ou bucket é privado, usar URL assinada
-            if (!downloadUrl) {
-                try {
-                    console.log('🔐 Tentando URL assinada...');
-                    downloadUrl = await getSignedUrl(file.bucketName, file.fullPath, 3600);
-                    console.log('✅ URL assinada obtida:', downloadUrl);
-                } catch (error) {
-                    console.error('❌ Erro ao obter URL assinada:', error);
-                    throw new Error(`Não foi possível obter URL de download: ${error.message}`);
-                }
-            }
-
-            // Estratégia 3: Se tudo falhar, tentar download direto
-            if (!downloadUrl) {
-                try {
-                    console.log('📦 Tentando download direto...');
-                    const fileBlob = await downloadFile(file.bucketName, file.fullPath);
-
-                    // Criar URL do blob
-                    downloadUrl = URL.createObjectURL(fileBlob);
-                    console.log('✅ Download direto obtido');
-                } catch (error) {
-                    console.error('❌ Erro no download direto:', error);
-                    throw new Error(`Falha em todas as estratégias de download: ${error.message}`);
-                }
-            }
-            // Executar o download
-            if (downloadUrl) {
-                console.log('🚀 Executando download com URL:', downloadUrl);
-
-                // Para forçar download ao invés de abrir em nova aba
-                try {
-                    // Método 1: Tentar fetch + blob para forçar download
-                    const response = await fetch(downloadUrl);
-                    if (response.ok) {
-                        const blob = await response.blob();
-                        const blobUrl = URL.createObjectURL(blob);
-
+                        // Executar o download
                         const link = document.createElement('a');
-                        link.href = blobUrl;
+                        link.href = downloadUrl;
                         link.download = file.name;
                         link.style.display = 'none';
 
+                        // Adicionar atributos para forçar download
+                        link.setAttribute('target', '_blank');
+                        link.setAttribute('rel', 'noopener noreferrer');
+
                         document.body.appendChild(link);
-                        link.click();
+
+                        // Simular clique do usuário
+                        const clickEvent = new MouseEvent('click', {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window
+                        });
+                        link.dispatchEvent(clickEvent);
+
                         document.body.removeChild(link);
 
-                        // Limpar o blob URL após um tempo
-                        setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+                        console.log(`✅ Download iniciado para: ${file.name}`);
 
-                        console.log(`✅ Download forçado iniciado para: ${file.name}`);
-                    } else {
-                        throw new Error('Falha na resposta fetch');
+                    } catch (error) {
+                        console.error('❌ Erro no download:', error);
+                        alert(`Erro ao fazer download do arquivo: ${error.message}`);
                     }
-                } catch (fetchError) {
-                    console.warn('⚠️ Fetch falhou, tentando método alternativo:', fetchError);
-
-                    // Método 2: Link direto com headers para forçar download
-                    const link = document.createElement('a');
-                    link.href = downloadUrl;
-                    link.download = file.name;
-                    link.style.display = 'none';
-
-                    // Adicionar atributos para forçar download
-                    link.setAttribute('target', '_blank');
-                    link.setAttribute('rel', 'noopener noreferrer');
-
-                    document.body.appendChild(link);
-
-                    // Simular clique do usuário
-                    const clickEvent = new MouseEvent('click', {
-                        bubbles: true,
-                        cancelable: true,
-                        view: window
-                    });
-                    link.dispatchEvent(clickEvent);
-
-                    document.body.removeChild(link);
-
-                    console.log(`✅ Download alternativo iniciado para: ${file.name}`);
                 }
-
-                // Se foi criado um blob URL original, limpar
-                if (downloadUrl.startsWith('blob:') && !downloadUrl.includes('blob:http')) {
-                    setTimeout(() => URL.revokeObjectURL(downloadUrl), 1000);
-                }
-
-                loadingIndicator.innerHTML = '<i class="fas fa-check text-green-500"></i> Download iniciado!';
-
-                setTimeout(() => {
-                    loadingIndicator.style.display = 'none';
-                }, 2000);
+                setTimeout(() => URL.revokeObjectURL(downloadUrl), 1000);
             }
 
-        } catch (error) {
-            console.error('❌ Erro no download:', error);
-            showError(`Erro ao fazer download do arquivo "${file.name}": ${error.message}`);
+            loadingIndicator.innerHTML = '<i class="fas fa-check text-green-500"></i> Download iniciado!';
 
-            loadingIndicator.innerHTML = `
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                    <strong>Erro no download:</strong> ${error.message}
-                </div>
-            `;
+            setTimeout(() => {
+                loadingIndicator.style.display = 'none';
+            }, 2000);
         }
-    } async function openModal(folderName, files) {
+
+        } catch (error) {
+        console.error('❌ Erro no download:', error);
+        alert(`Erro ao fazer download do arquivo: ${error.message}`);
+    }
+}
+
+    // Função para lidar com download de arquivo (compatibilidade)
+    async function handleFileDownload(file) {
+        await downloadFileFromProjectSend(file);
+    }
+
+    async function openModal(folderName, files) {
         modalTitle.textContent = `${folderName.toUpperCase()} (${files.length} arquivo${files.length !== 1 ? 's' : ''})`;
         modalContent.innerHTML = ''; // Limpa o conteúdo anterior
 
@@ -465,7 +362,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     function closeModal() {
         folderModal.classList.add('hidden');
         folderModal.classList.remove('flex');
-    } function renderBrowser(data) {
+    }
+
+    function renderBrowser(data) {
         // Remove o indicador de carregamento
         if (loadingIndicator) {
             loadingIndicator.style.display = 'none';
@@ -524,19 +423,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Event listeners
     closeModalBtn.addEventListener('click', closeModal);
-    folderModal.addEventListener('click', (e) => {
-        if (e.target === folderModal) {
-            closeModal();
-        }
-    });
-
-    // Carregar e renderizar dados dos buckets
-    try {
-        await loadBucketsFromSupabase();
-        renderBrowser(bucketsData);
-    } catch (error) {
-        console.error('Erro ao carregar documentos:', error);
-        // renderBrowser será chamado com dados vazios se houver erro
-        renderBrowser({});
+folderModal.addEventListener('click', (e) => {
+    if (e.target === folderModal) {
+        closeModal();
     }
+});
+
+// Carregar e renderizar dados das categorias
+try {
+    await loadCategoriesFromProjectSend();
+    renderBrowser(categoriesData);
+} catch (error) {
+    console.error('Erro ao carregar documentos:', error);
+    // renderBrowser será chamado com dados vazios se houver erro
+    renderBrowser({});
+}
 });

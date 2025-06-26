@@ -1,4 +1,4 @@
-import { signOut, isAuthenticated, getCurrentUser, onAuthStateChange } from '../../config/supabase.js';
+import { signOut, isAuthenticated, getCurrentUser, onAuthStateChange } from '../../config/projectsend.js';
 
 // Verificar autenticação ao carregar a página
 document.addEventListener('DOMContentLoaded', async () => {
@@ -47,7 +47,7 @@ function updateUserInterface(user) {
     });
 
     // Se houver nome no metadata do usuário
-    const userName = user.user_metadata?.full_name || user.email.split('@')[0];
+    const userName = user.user_metadata?.full_name || user.name || user.username || user.email?.split('@')[0] || 'Usuário';
     userNameElements.forEach(element => {
         element.textContent = userName;
     });
