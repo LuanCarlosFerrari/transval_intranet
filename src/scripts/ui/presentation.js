@@ -120,24 +120,26 @@ export const aboutContent = {
     ],
     generateTimelineEventsHtml(isCarousel = true) {
         return this._eventsData.map((event, idx) => {
-            const eventDetailsOuterClass = `${event.bgColor} p-3 rounded-lg shadow-lg mx-auto min-h-[160px]`;
+            const eventDetailsOuterClass = `${event.bgColor} p-4 rounded-lg shadow-lg mx-auto h-[220px] flex flex-col justify-center`;
             const eventDetailsInnerClass = isCarousel
                 ? 'w-full'
-                : 'sm:w-44 md:w-48';
-            const titleClass = `text-md sm:text-lg font-semibold ${event.titleColor || event.textColor}`;
-            const detailsPClass = `text-xs ${event.detailsColor || event.textColor} mt-1`;
+                : 'sm:w-48 md:w-52';
+            const titleClass = `text-md sm:text-lg font-semibold ${event.titleColor || event.textColor} mb-2`;
+            const detailsPClass = `text-xs ${event.detailsColor || event.textColor} leading-relaxed`;
             const yearPClass = `text-xl font-bold ${event.yearColor}`;
             const iconColorClass = event.iconColor || event.textColor;
-            const iconHtml = event.icon ? `<i class="${event.icon} ${iconColorClass} text-2xl mb-2"></i><br>` : '';
+            const iconHtml = event.icon ? `<i class="${event.icon} ${iconColorClass} text-2xl mb-3"></i>` : '';
             if (isCarousel) {
                 return `
                     <div class="flex-shrink-0 w-full p-2 timeline-event-carousel-item">
                         <div class="${eventDetailsOuterClass} ${eventDetailsInnerClass} ${event.textColor} text-center">
                             ${iconHtml}
-                            <h3 class="${titleClass}">${event.title}</h3>
-                            <p class="${detailsPClass}">${event.details}</p>
+                            <div class="flex-1 flex flex-col justify-center">
+                                <h3 class="${titleClass}">${event.title}</h3>
+                                <p class="${detailsPClass}">${event.details}</p>
+                            </div>
                         </div>
-                        <div class="mt-2 text-center">
+                        <div class="mt-3 text-center">
                             <p class="${yearPClass}">${event.year}</p>
                         </div>
                     </div>
@@ -150,8 +152,10 @@ export const aboutContent = {
                         ${!event.contentAbove ? '<div class="hidden sm:block absolute top-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 -translate-y-full"></div>' : ''}
                         <div class="${eventDetailsOuterClass} ${eventDetailsInnerClass} ${event.textColor} text-center">
                             ${iconHtml}
-                            <h3 class="${titleClass}">${event.title}</h3>
-                            <p class="${detailsPClass}">${event.details}</p>
+                            <div class="flex-1 flex flex-col justify-center">
+                                <h3 class="${titleClass}">${event.title}</h3>
+                                <p class="${detailsPClass}">${event.details}</p>
+                            </div>
                         </div>
                         ${event.contentAbove ? '<div class="hidden sm:block absolute bottom-0 left-1/2 w-px h-4 bg-blue-500 transform -translate-x-1/2 translate-y-full"></div>' : ''}
                     </div>
