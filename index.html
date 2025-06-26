@@ -86,6 +86,121 @@
       border-radius: 4px;
     }
 
+    /* Prevenir mudanças de forma nos botões */
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+    }
+
+    /* Manter formas originais em todos os estados */
+    button:focus,
+    button:active,
+    button:hover,
+    input[type="button"]:focus,
+    input[type="button"]:active,
+    input[type="button"]:hover,
+    input[type="submit"]:focus,
+    input[type="submit"]:active,
+    input[type="submit"]:hover,
+    input[type="reset"]:focus,
+    input[type="reset"]:active,
+    input[type="reset"]:hover {
+      outline: none !important;
+      box-shadow: none !important;
+      transform: none !important;
+      border-radius: inherit !important;
+      border: inherit !important;
+    }
+
+    /* Manter cores laranja nos botões com gradiente quando focados/ativos */
+    .bg-gradient-to-r.from-orange-500:focus,
+    .bg-gradient-to-r.from-orange-500:active {
+      background-image: linear-gradient(to right, #f97316, #dc2626) !important;
+    }
+
+    /* Garantir que botões de contato mantenham cor laranja */
+    #contact-button:focus,
+    #contact-button:active,
+    button[type="submit"]:focus,
+    button[type="submit"]:active {
+      background-image: linear-gradient(to right, #f97316, #dc2626) !important;
+      color: white !important;
+    }
+
+    /* Estilos específicos para manter formas dos botões Tailwind */
+    .rounded-full:focus,
+    .rounded-full:active,
+    .rounded-full:hover {
+      border-radius: 9999px !important;
+    }
+
+    .rounded-lg:focus,
+    .rounded-lg:active,
+    .rounded-lg:hover {
+      border-radius: 0.5rem !important;
+    }
+
+    /* Garantir que botões com gradiente mantenham suas propriedades */
+    .bg-gradient-to-r:focus,
+    .bg-gradient-to-r:active {
+      background-image: inherit !important;
+    }
+
+    /* Estilos específicos para manter cores laranja em botões importantes */
+    .bg-orange-500:focus,
+    .bg-orange-500:active,
+    .hover\\:bg-orange-600:focus,
+    .hover\\:bg-orange-600:active {
+      background-color: #f97316 !important;
+      color: white !important;
+    }
+
+    /* Manter gradiente laranja para botões principais */
+    .from-orange-500:focus,
+    .from-orange-500:active,
+    .to-red-500:focus,
+    .to-red-500:active {
+      background-image: linear-gradient(to right, #f97316, #dc2626) !important;
+      color: white !important;
+    }
+
+    /* Garantir que focus ring seja laranja para botões importantes */
+    .focus\\:ring-orange-500:focus {
+      --tw-ring-color: #f97316 !important;
+      --tw-ring-opacity: 0.5 !important;
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.5) !important;
+    }
+
+    /* Remover bordas específicas dos botões de sistema */
+    #login-btn-desktop,
+    #login-btn-mobile,
+    .logout-btn,
+    .back-btn,
+    .system-btn {
+      border: none !important;
+      outline: none !important;
+    }
+
+    /* Estados de foco para botões de sistema sem bordas */
+    #login-btn-desktop:focus,
+    #login-btn-desktop:active,
+    #login-btn-mobile:focus,
+    #login-btn-mobile:active,
+    .logout-btn:focus,
+    .logout-btn:active,
+    .back-btn:focus,
+    .back-btn:active,
+    .system-btn:focus,
+    .system-btn:active {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
     /* Garantir que links de redes sociais sejam focalizáveis */
     .social-link:focus {
       transform: scale(1.1);
@@ -102,6 +217,38 @@
     /* Transições suaves para melhor UX */
     .social-link {
       transition: all 0.3s ease;
+    }
+
+    /* Estilos para garantir visibilidade dos botões da timeline no mobile */
+    @media (max-width: 640px) {
+      #timeline-carousel-container button[id*="slide"] {
+        opacity: 1 !important;
+        visibility: visible !important;
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        /* Posicionar mais acima do centro */
+        top: 40% !important;
+        transform: translateY(-50%) !important;
+      }
+
+      #timeline-carousel-container button[id*="slide"]:hover {
+        background-color: rgba(0, 0, 0, 0.9) !important;
+        transform: translateY(-50%) scale(1.05) !important;
+      }
+
+      #timeline-carousel-container button[id*="slide"]:active {
+        transform: translateY(-50%) scale(0.95) !important;
+      }
+
+      /* Aumentar padding interno dos cards da timeline no mobile */
+      #timeline-carousel-container .timeline-event-carousel-item>div {
+        padding-left: 3rem !important;
+        padding-right: 3rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: calc(100% - 6rem) !important;
+      }
     }
   </style>
 

@@ -9,6 +9,31 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Remover bordas dos botões de voltar */
+        .back-btn,
+        a[href="dashboard.html"] {
+            border: none !important;
+            outline: none !important;
+        }
+
+        .back-btn:focus,
+        .back-btn:active,
+        a[href="dashboard.html"]:focus,
+        a[href="dashboard.html"]:active {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background-color: #01a1ef !important;
+            color: white !important;
+        }
+
+        .back-btn:hover,
+        a[href="dashboard.html"]:hover {
+            background-color: #008bd1 !important;
+            border: none !important;
+        }
+    </style>
 </head>
 
 <body class="font-sans text-base text-gray-800 bg-white pt-16 md:pt-20 relative">

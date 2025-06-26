@@ -9,7 +9,7 @@ function injectStyles(css, id) {
     document.head.appendChild(style);
 }
 
-// Injetar estilos específicos para animações de fadeIn
+// Injetar estilos específicos para animações de fadeIn e botões da timeline
 injectStyles(`
     @keyframes fadeIn {
         0% {
@@ -25,7 +25,84 @@ injectStyles(`
     .animate-fadeIn {
         animation: fadeIn 1s ease-out forwards;
     }
-`, 'fadeIn-styles');
+
+    /* Estilos específicos para botões de navegação da timeline no mobile */
+    @media (max-width: 640px) {
+        #timeline-carousel-container #prev-slide,
+        #timeline-carousel-container #next-slide {
+            opacity: 1 !important;
+            visibility: visible !important;
+            background-color: rgba(0, 0, 0, 0.7) !important;
+            backdrop-filter: blur(4px);
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+            z-index: 30 !important;
+            /* Posicionar mais acima do centro e muito próximo das laterais */
+            top: 40% !important;
+            transform: translateY(-50%) !important;
+            left: 2px !important;
+            right: auto !important;
+            /* Prevenir mudanças de forma */
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            appearance: none !important;
+        }
+        
+        #timeline-carousel-container #next-slide {
+            left: auto !important;
+            right: 2px !important;
+        }
+        
+        /* Manter forma original em todos os estados */
+        #timeline-carousel-container #prev-slide:focus,
+        #timeline-carousel-container #next-slide:focus,
+        #timeline-carousel-container #prev-slide:active,
+        #timeline-carousel-container #next-slide:active {
+            outline: none !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            transform: translateY(-50%) !important;
+            background-color: rgba(0, 0, 0, 0.7) !important;
+            color: white !important;
+        }
+        
+        #timeline-carousel-container #prev-slide:hover,
+        #timeline-carousel-container #next-slide:hover {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            transform: translateY(-50%) scale(1.05) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+            color: white !important;
+        }
+        
+        /* Aumentar padding interno dos cards no mobile para compensar os botões */
+        .timeline-event-carousel-item > div {
+            padding-left: 3rem !important;
+            padding-right: 3rem !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+    }
+        
+        #timeline-carousel-container #prev-slide:hover,
+        #timeline-carousel-container #next-slide:hover {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            transform: translateY(-50%) scale(1.05) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+        }
+        
+        #timeline-carousel-container #prev-slide:active,
+        #timeline-carousel-container #next-slide:active {
+            transform: translateY(-50%) scale(0.95) !important;
+            background-color: rgba(0, 0, 0, 0.8) !important;
+        }
+        
+        /* Garantir que os ícones SVG também sejam visíveis */
+        #timeline-carousel-container #prev-slide svg,
+        #timeline-carousel-container #next-slide svg {
+            color: white !important;
+            stroke: white !important;
+        }
+    }
+`, 'fadeIn-and-timeline-styles');
 
 const baseUrl = window.location.hostname === 'luancarlosferrari.github.io'
     ? '/transval-intranet-New'
@@ -95,14 +172,14 @@ export const aboutContent = {
         <div class="container mx-auto px-2 py-4 sm:px-4">
             <div class="relative">
                 <div class="hidden sm:block absolute top-1/2 left-0 right-0 h-1 bg-blue-500 transform -translate-y-1/2"></div>
-                <div id="timeline-carousel-container" class="sm:hidden relative overflow-hidden w-full group">
+                <div id="timeline-carousel-container" class="sm:hidden relative overflow-hidden w-full">
                     <div id="timeline-carousel-track" class="flex">
                         ${this.generateTimelineEventsHtml(true)}
                     </div>
-                    <button id="prev-slide" aria-label="Anterior" class="absolute top-1/2 left-1 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 rounded-full z-20 hover:bg-opacity-50 transition-opacity opacity-0 group-hover:opacity-100">
+                    <button id="prev-slide" aria-label="Anterior" class="absolute left-0.5 bg-black bg-opacity-50 text-white p-2 rounded-full z-20 hover:bg-opacity-70 transition-all duration-300 shadow-lg" style="top: 40%; transform: translateY(-50%);">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
                     </button>
-                    <button id="next-slide" aria-label="Próximo" class="absolute top-1/2 right-1 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 rounded-full z-20 hover:bg-opacity-50 transition-opacity opacity-0 group-hover:opacity-100">
+                    <button id="next-slide" aria-label="Próximo" class="absolute right-0.5 bg-black bg-opacity-50 text-white p-2 rounded-full z-20 hover:bg-opacity-70 transition-all duration-300 shadow-lg" style="top: 40%; transform: translateY(-50%);">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                     </button>
                 </div>
