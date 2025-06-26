@@ -38,7 +38,7 @@ export function initFiliaisMap() {
         selectsConfig.forEach(config => {
             const select = document.createElement('select');
             select.id = config.id;
-            select.className = 'w-full sm:w-auto p-2 border rounded bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500';
+            select.className = 'w-full sm:w-auto p-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm';
             select.setAttribute('aria-label', config.label);
             select.innerHTML = `<option value="">${config.placeholder}</option>`;
             controls.appendChild(select);
@@ -163,8 +163,8 @@ export function initFiliaisMap() {
     var markers = [];
 
     function createPopupContent(filial) {
-        return `<div class="p-2 bg-white rounded shadow-lg">
-                    <strong class="text-lg font-semibold text-gray-800">${filial.title}</strong><br>
+        return `<div class="p-3 bg-white rounded-lg shadow-lg border border-gray-200 max-w-xs">
+                    <strong class="text-lg font-semibold text-gray-800 block mb-1">${filial.title}</strong>
                     <span class="text-sm text-gray-600">Lat: ${filial.lat.toFixed(4)}, Lng: ${filial.lng.toFixed(4)}</span>
                 </div>`;
     }

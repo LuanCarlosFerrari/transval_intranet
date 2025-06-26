@@ -14,13 +14,14 @@ function createLoginModal() {
                         </div>
                         <h2 class="text-2xl font-bold text-gray-800">Acesso Restrito</h2>
                     </div>
-                    <button id="close-modal-btn" class="w-8 h-8 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors duration-200">
+                    <button id="close-modal-btn" class="w-8 h-8 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
-                <form id="login-form" class="space-y-6">                    <div>
+                <form id="login-form" class="space-y-6">
+                    <div>
                         <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">E-mail</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -32,7 +33,8 @@ function createLoginModal() {
                         </div>
                     </div>
                     <div>
-                        <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Senha</label>                        <div class="relative">
+                        <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Senha</label>
+                        <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-lock text-gray-400"></i>
                             </div>
@@ -40,8 +42,9 @@ function createLoginModal() {
                                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
                                 placeholder="Digite sua senha">
                         </div>
-                    </div>                    <button type="submit" id="login-submit-btn"
-                        class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                    </div>
+                    <button type="submit" id="login-submit-btn"
+                        class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2">
                         <span id="login-button-text">
                             <i class="fas fa-sign-in-alt mr-2"></i>
                             Entrar
@@ -79,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (authenticated) {
                 console.log('Usuário já está autenticado');
                 // Opcional: redirecionar automaticamente para o dashboard
-                // window.location.href = 'dashboard.html';
+                // window.location.href = 'pages/dashboard.html';
             }
         } catch (error) {
             console.log('Erro ao verificar autenticação (pode ser normal se Supabase não estiver configurado):', error);
@@ -90,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (event === 'SIGNED_IN') {
                     console.log('Usuário logado:', session.user);
                     closeModal();
-                    window.location.href = 'dashboard.html';
+                    window.location.href = 'pages/dashboard.html';
                 } else if (event === 'SIGNED_OUT') {
                     console.log('Usuário deslogado');
                 }

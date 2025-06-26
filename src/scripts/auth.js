@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!authenticated) {
             // Se não estiver autenticado, redirecionar para a página inicial
             console.log('Usuário não autenticado, redirecionando...');
-            window.location.href = 'index.html';
+            window.location.href = '../index.html';
             return;
         }
 
@@ -24,14 +24,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (error) {
         console.error('Erro ao verificar autenticação:', error);
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     }
 
     // Listener para mudanças no estado de autenticação
     onAuthStateChange((event, session) => {
         if (event === 'SIGNED_OUT') {
             console.log('Usuário deslogado, redirecionando...');
-            window.location.href = 'index.html';
+            window.location.href = '../index.html';
         }
     });
 });

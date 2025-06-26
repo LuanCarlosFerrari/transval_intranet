@@ -65,11 +65,11 @@ export function generateClientCards() {
 
     const createCard = (logo) => {
         const card = document.createElement('div');
-        card.className = 'bg-white p-8 shadow rounded mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center';
+        card.className = 'bg-white p-8 shadow-md rounded-lg mx-2 inline-block min-w-[300px] min-h-[120px] flex items-center justify-center border border-gray-100 hover:shadow-lg transition-shadow duration-300';
         const img = document.createElement('img');
         img.src = `Assets/clients/${logo}`;
         img.alt = `${logo.split('.')[0]} Logo`;
-        img.className = 'max-h-24 max-w-[230px]';
+        img.className = 'max-h-24 max-w-[230px] object-contain transition-all duration-300';
         card.appendChild(img);
         return card;
     };

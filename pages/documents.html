@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentos - Transval</title>
-    <link rel="icon" type="image/png" href="Assets/logo-branca-transval.png">
+    <link rel="icon" type="image/png" href="../Assets/logo-branca-transval.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -72,21 +72,10 @@
             -webkit-transition: background-color 0.15s ease !important;
             transition: background-color 0.15s ease !important;
         }
-
-        /* Garantir que o body tenha padding-top suficiente desde o início */
-        body {
-            padding-top: 4rem !important;
-        }
-
-        @media (min-width: 768px) {
-            body {
-                padding-top: 5rem !important;
-            }
-        }
     </style>
 </head>
 
-<body class="font-sans text-base text-gray-800 bg-white relative">
+<body class="font-sans text-base text-gray-800 bg-white relative pt-16 md:pt-20">
     <!-- HEADER START -->
     <header
         class="fixed top-0 left-0 w-full z-[702] bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-90 shadow-lg">
@@ -189,8 +178,8 @@
             </div>
         </div>
     </div>
-    <script type="module" src="src/scripts/auth.js"></script>
-    <script type="module" src="src/scripts/documents.js"></script>
+    <script type="module" src="../src/scripts/auth.js"></script>
+    <script type="module" src="../src/scripts/documents.js"></script>
 </body>
 
 </html>

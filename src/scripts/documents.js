@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         files.forEach(file => {
             const fileItem = document.createElement('div');
-            fileItem.className = 'bg-white p-4 rounded-lg shadow-sm flex items-center justify-between hover:bg-blue-50 transition-colors duration-200';
+            fileItem.className = 'bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center justify-between hover:bg-blue-50 hover:shadow-md transition-all duration-200';
 
             const fileInfo = document.createElement('div');
             fileInfo.className = 'flex items-center space-x-4 flex-1';
@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             fileMetadata.textContent = `${sizeText}${dateText ? ' • ' + dateText : ''}`;
 
             const downloadBtn = document.createElement('button');
-            downloadBtn.className = 'bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200 text-sm';
+            downloadBtn.className = 'bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-all duration-200 text-sm font-medium shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-1';
             downloadBtn.innerHTML = '<i class="fas fa-download"></i><span>Download</span>';
             downloadBtn.addEventListener('click', async (e) => {
                 e.stopPropagation();
@@ -489,10 +489,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const gridContainer = document.createElement('div');
         gridContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-6'; for (const folder in data) {
             const folderEl = document.createElement('div');
-            folderEl.className = 'bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex flex-col items-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer';
+            folderEl.className = 'bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex flex-col items-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group';
 
             const folderIcon = document.createElement('div');
-            folderIcon.className = 'mb-4';
+            folderIcon.className = 'mb-4 group-hover:scale-110 transition-transform duration-300';
             folderIcon.innerHTML = '<i class="fas fa-folder text-blue-500 text-4xl"></i>';
             folderEl.appendChild(folderIcon); const folderTitle = document.createElement('h2');
             folderTitle.className = 'text-xl font-bold text-gray-800 mb-2 text-center';
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             folderEl.appendChild(fileCount);
 
             const openButton = document.createElement('button');
-            openButton.className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 w-full max-w-xs';
+            openButton.className = 'bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 w-full max-w-xs shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2';
             openButton.innerHTML = '<i class="fas fa-folder-open mr-2"></i>Abrir Pasta';
             openButton.addEventListener('click', () => {
                 openModal(folder, data[folder]);

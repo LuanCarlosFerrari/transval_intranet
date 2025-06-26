@@ -65,19 +65,6 @@
 
   <!-- Estilos para acessibilidade -->
   <style>
-    /* Classe para textos visíveis apenas para leitores de tela */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
     /* Melhorar foco para acessibilidade */
     a:focus,
     button:focus {
@@ -343,17 +330,6 @@
       transform: translate3d(0, 0, 0) !important;
       contain: layout style paint !important;
     }
-
-    /* Garantir que o body tenha padding-top suficiente desde o início */
-    body {
-      padding-top: 2.8rem !important;
-    }
-
-    @media (min-width: 768px) {
-      body {
-        padding-top: 3.3rem !important;
-      }
-    }
   </style>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -388,7 +364,6 @@
       "@type": "ContactPoint",
       "telephone": "+55-18-3583-1016",
       "contactType": "customer service",
-      "email": "contato@transval.com.br",
       "areaServed": "BR"
     },
     "sameAs": [
@@ -445,7 +420,7 @@
   </script>
 </head>
 
-<body class="font-sans text-base text-gray-800 bg-blue-950 relative">
+<body class="font-sans text-base text-gray-800 bg-blue-950 relative pt-11 md:pt-12">
   <!-- HEADER START -->
   <header
     class="fixed top-0 left-0 w-full z-[702] bg-gradient-to-r from-blue-900 via-blue-950 to-gray-900 bg-opacity-90 shadow-lg">
@@ -721,8 +696,6 @@
           <p>Rua Luiz Wolff, 7 – Rinópolis/SP</p>
           <p><a href="tel:+551835831016" class="hover:text-white" aria-label="Ligar para (18) 3583-1016">(18)
               3583-1016</a></p>
-          <p><a href="mailto:contato@transval.com.br" class="hover:text-white"
-              aria-label="Enviar email para contato@transval.com.br">contato@transval.com.br</a></p>
         </address>
       </div>
       <div>

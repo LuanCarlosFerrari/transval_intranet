@@ -1,5 +1,5 @@
-import { initFiliaisMap } from './mapa-filiais.js';
-import { generateClientCards } from './clientes.js';
+import { initFiliaisMap } from './branch-map.js';
+import { generateClientCards } from './clients.js';
 import { initPresentation } from './presentation.js';
 import { initContact } from './contact.js';
 import './login.js';
