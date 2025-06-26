@@ -32,11 +32,12 @@ injectStyles(`
         #timeline-carousel-container #next-slide {
             opacity: 1 !important;
             visibility: visible !important;
-            background-color: rgba(0, 0, 0, 0.7) !important;
+            background-color: rgba(255, 255, 255, 0.9) !important;
             backdrop-filter: blur(4px);
-            border: 2px solid rgba(255, 255, 255, 0.3) !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
             z-index: 30 !important;
+            color: #1e3a8a !important;
             /* Posicionar mais acima do centro e muito próximo das laterais */
             top: 40% !important;
             transform: translateY(-50%) !important;
@@ -59,18 +60,18 @@ injectStyles(`
         #timeline-carousel-container #prev-slide:active,
         #timeline-carousel-container #next-slide:active {
             outline: none !important;
-            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            border: none !important;
             transform: translateY(-50%) !important;
-            background-color: rgba(0, 0, 0, 0.7) !important;
-            color: white !important;
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            color: #1e3a8a !important;
         }
         
         #timeline-carousel-container #prev-slide:hover,
         #timeline-carousel-container #next-slide:hover {
-            background-color: rgba(0, 0, 0, 0.9) !important;
+            background-color: rgba(255, 255, 255, 1) !important;
             transform: translateY(-50%) scale(1.05) !important;
-            border-color: rgba(255, 255, 255, 0.5) !important;
-            color: white !important;
+            border: none !important;
+            color: #1e3a8a !important;
         }
         
         /* Aumentar padding interno dos cards no mobile para compensar os botões */
@@ -98,8 +99,8 @@ injectStyles(`
         /* Garantir que os ícones SVG também sejam visíveis */
         #timeline-carousel-container #prev-slide svg,
         #timeline-carousel-container #next-slide svg {
-            color: white !important;
-            stroke: white !important;
+            color: #1e3a8a !important;
+            stroke: #1e3a8a !important;
         }
     }
 `, 'fadeIn-and-timeline-styles');
