@@ -54,6 +54,9 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://unpkg.com">
 
+  <!-- Preload LCP image for faster loading -->
+  <link rel="preload" as="image" href="Assets/background_Image.jpg" fetchpriority="high">
+
   <link rel="icon" type="image/png" href="Assets/logo-branca-transval.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -193,20 +196,21 @@
   <!-- HEADER END -->
 
   <!-- BANNER START -->
-  <img src="Assets/banner.svg" alt="Banner Decorativo" class="absolute top-0 right-0 z-[900] hidden sm:block
+  <img src="Assets/banner.svg" alt="Banner Decorativo Transval" class="absolute top-0 right-0 z-[900] hidden sm:block
          max-w-[16rem] md:max-w-[20rem] lg:max-w-[24rem] xl:max-w-[28rem] 2xl:max-w-[32rem]
          h-auto object-contain 
          pointer-events-none 
-         transition-all duration-500" />
+         transition-all duration-500" loading="lazy" decoding="async" />
   <!-- BANNER END -->
 
   <section class="relative flex items-center justify-center overflow-hidden
          min-h-[500px] md:min-h-[600px] lg:min-h-[700px] xl:min-h-[800px]
          bg-gradient-to-r from-blue-800 via-blue-900 to-gray-900 px-4">
 
-    <!-- Background Image -->
-    <img src="Assets/background_Image.jpg" alt="Background"
-      class="absolute inset-0 w-full h-full object-cover opacity-60 z-0" />
+    <!-- Background Image - LCP Optimized -->
+    <img src="Assets/background_Image.jpg" alt="Transval Logística - Transporte e Soluções em Logística"
+      class="absolute inset-0 w-full h-full object-cover opacity-60 z-0" fetchpriority="high" loading="eager"
+      decoding="async" />
     <!-- Hero Content centralizado -->
     <div class="relative z-[20] text-center container mx-auto
            px-[10rem] md:px-[14rem] lg:px-[18rem] xl:px-[22rem] 2xl:px-[26rem]">
